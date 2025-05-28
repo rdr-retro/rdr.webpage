@@ -1,31 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>rdr-creative</title>
-<script>
-    // Función para detectar si el dispositivo es móvil
-    function isMobileDevice() {
-        return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="0;url=indexpc.html">
+  <script>
+    // Función para detectar si es un dispositivo móvil
+    function esMovil() {
+      return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
     }
 
-    // Función para redirigir según el tipo de dispositivo
-    function redirectBasedOnDevice() {
-        if (isMobileDevice()) {
-            // Redirigir si es un dispositivo móvil
-            window.location.href = 'indextlf.html';
-        } else {
-            // Redirigir si es un ordenador
-            window.location.href = 'indexpc.html';
-        }
-    }
-
-    // Llamar a la función de redirección cuando se cargue la página
-    window.onload = redirectBasedOnDevice;
-</script>
+    // Redirigir según el dispositivo
+    window.onload = function() {
+      if (esMovil()) {
+        window.location.href = "indextlf.html";
+      } else {
+        window.location.href = "indexpc.html";
+      }
+    };
+  </script>
+  <title>Redirigiendo...</title>
 </head>
 <body>
-<!-- Contenido opcional -->
+  <p>Redirigiendo...</p>
 </body>
 </html>
