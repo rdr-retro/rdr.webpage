@@ -1,345 +1,233 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Página Web</title>
-    <style>
-    body {
-        margin: 0;
-        height: 240vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #f2f2f2; /* Color de fondo de la página */
-        background-size: cover; /* Ajusta el tamaño de la imagen de fondo */
-        background-position: center; /* Centra la imagen de fondo */
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Raúl Díaz Gutiérrez</title>
 
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+      background-size: cover;
+      background-position: center;
+      font-family: "Lato", sans-serif;
     }
+
+    .lato-light { font-family: "Lato", sans-serif; font-weight: 300; }
+    .lato-bold { font-family: "Lato", sans-serif; font-weight: 700; }
+    .pt-serif-bold { font-family: "PT Serif", serif; font-weight: 700; }
 
     .container {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding-top: 20px;
-            text-align: center;
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .profile-image {
-            width: 150px;
-            height: 150px;
-            border-radius: 75px;
-            overflow: hidden;
-            margin-bottom: 20px;
-        }
-
-      
-        .profile-image img {
-            width: 100%;
-            height: auto;
-        }
-
-        .rectangle, .square, .horizontal-square {
-            height: 150px;
-            margin-bottom: 20px;
-            box-sizing: border-box;
-            border-radius: 20px;
-            position: relative; /* Para posicionar el título */
-        }
-
-        .rectangle {
-            width: 70%;
-        }
-
-        .square {
-            width: 250px;
-            height: 250px;
-            border-radius: 20px;
-            margin-bottom: 20px;
-        }
-
-        .apps-square {
-            width: 60px;
-            height: 60px;
-            margin: 10px;
-            border-radius: 13px;
-            display: inline-block;
-            background-size: cover; /* Ajusta el tamaño de la imagen */
-            background-position: center; /* Centra la imagen */
-            z-index: 99; /* Asegura que el cuadrado ampliado esté superpuesto */
-
-        }
-     
-        .apps-container {
-           position: fixed;
-           bottom: 10px;
-           left: 50%;
-           transform: translateX(-50%);
-           background-color: rgba(32, 39, 56, 0.966);
-           border-radius: 35px;
-           width: 350px;
-           padding: 3px;
-           z-index: 99; /* Asegura que el cuadrado ampliado esté superpuesto */
-
-        }
-        .horizontal-square2 {
-            width: 125px;
-            height: 125px;
-            margin: 5px;
-            border-radius: 17px;
-            display: inline-block;
-            position: relative; /* Para posicionar el título */
-        }
-        .transparent-container2 {
-            border-radius: 25px;
-            width: 80%;
-            padding: 10px;
-        }
-
-
-        .title-container {
-            width: 67%;
-            background-color: rgba(255, 255, 255, 0.349); /* Color de fondo translúcido */
-            padding: 2px; /* Espaciado interno */
-            border-radius: 50px; /* Bordes redondeados */
-            }
-
-        .title {
-        color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 auto;
+      padding: 40px 20px;
+      max-width: 600px;
     }
 
-    iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
-        border-radius: 20px; /* Añadir bordes redondeados */
+    .profile-image {
+      width: 200px;
+      height: 200px;
+      border-radius: 100px;
+      overflow: hidden;
+      margin-bottom: 30px;
+      border: 4px solid white;
     }
 
+    .profile-image img {
+      width: 100%;
+      height: auto;
+    }
 
+    .title-container {
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.6);
+      padding: 10px 30px;
+      border-radius: 50px;
+      margin-bottom: 30px;
+    }
 
+    .title {
+      font-size: 32px;
+      color: white;
+      margin: 0;
+    }
 
+    .info-container {
+      width: 100%;
+      background-color: rgba(255, 105, 180, 0.4);
+      border-radius: 26px; /* 20px * 1.3 = 26px (30% más redondeado) */
+      padding: 20px;
+      margin-bottom: 20px;
+    }
 
+    .info-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
 
+    .emoji {
+      font-size: 32px;
+      margin-right: 12px;
+    }
 
+    .info-text {
+      font-size: 20px;
+      color: white;
+    }
 
+    .subtitle {
+      font-size: 16px;
+      color: white;
+      opacity: 0.85;
+      margin-left: 44px;
+      margin-bottom: 10px;
+    }
 
+   .blender-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: rgba(255, 165, 0, 0.4);
+    border-radius: 26px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
 
-/* CSS de la animacion y dock */
-        .cuadrado {
-    width: 60px;
-    height: 60px;
-    margin: 10px;
-    border-radius: 13px;
-    bottom: 15px;
-    z-index: 999;
+  .blender-icon {
+    width: 60px;   /* AUMENTADO */
+    height: 60px;  /* AUMENTADO */
+    margin-right: 20px;
+    object-fit: contain;
+  }
+
+  .blender-content {
+    display: flex;
+    align-items: center;
+  }
+
+  .blender-button {
+    background-color: white;
+    color: rgb(255, 145, 0);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+    font-weight: bold;
     cursor: pointer;
-    transition: all 0.6s ease;
-    position: fixed; /* Cambio de absolute a fixed */
-    background-size: cover; /* Ajusta el tamaño de la imagen */
-    background-position: center; /* Centra la imagen */
-}
-.cuadrado:nth-child(1) {
-    background-image: url('info.png');
-    left: calc(50% - 172px); /* Ajuste del valor hacia la izquierda */
-}
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-.cuadrado:nth-child(2) {
-    background-image: url('w.png');
-    left: calc(50% - 84px); /* Ajuste del valor hacia la izquierda */
-}
-
-.cuadrado:nth-child(3) {
-    background-image: url('papelera.png');
-    left: calc(50% + 4px); /* Ajuste del valor hacia la izquierda */
-}
-
-.cuadrado:nth-child(4) {
-    background-image: url('options.png');
-    left: calc(50% + 92px); /* Ajuste del valor hacia la izquierda */
-}
-
-
-
-
-    .cuadrado.ampliado {
-        width: 95%; /* Ancho del 100% */
-        height: 95%; /* Alto del 100% */
-        border-radius: 1; /* Redondez a 0 para que sea rectangular */
-        left: 50%; /* Centra el cuadrado ampliado horizontalmente */
-        transform: translateX(-52.5%); /* Centra el cuadrado ampliado horizontalmente */
-        z-index: 9999; /* Asegura que el cuadrado ampliado esté superpuesto */
+    .blender-button:hover {
+      background-color: orange;
+      color: white;
+      transform: scale(1.1);
     }
 
-    .cuadrado.ampliado iframe {
-        border-radius: 50; /* Redondez a 0 para que sea rectangular */
-        width: 100%;
-        height: 100%;
-        border: none; /* Elimina el borde del iframe */
+    p {
+      font-size: 18px;
+      color: white;
+      margin-left: 44px;
     }
-
-    .boton-cerrar:before {
-        color: rgb(15, 17, 133);
-        border-radius: 13px;
-
-    }
-
-    .boton-cerrar {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background-color: rgb(255, 166, 0);
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 99999; /* Asegura que el botón esté por encima del cuadrado ampliado */
-    }
-    </style>
+  </style>
 </head>
-<body>
-    <div class="cuadrado" onclick="ampliarCuadrado1(this)"></div>
-    <div class="cuadrado" onclick="ampliarCuadrado2(this)"></div>
-    <div class="cuadrado" onclick="ampliarCuadrado3(this)"></div>
-    <div class="cuadrado" onclick="ampliarCuadrado4(this)"></div>
 
+<body class="lato-light">
 
-    <div class="container">
-        <div class="profile-image">
-            <img src="rdr.png" alt="Imagen de perfil">
-        </div>
-        <div class="title-container"> <!-- Contenedor para el título con color translúcido -->
-            <h2 class="title">Raúl Díaz Gutiérrez</h2> <!-- Título -->
-        </div>
+  <div class="container">
 
-          <!-- PANEL 1 -->
-        <div class="transparent-container2">
-            <div class="horizontal-square2">
-                <iframe src="panel 1.html"></iframe>
-            </div>
-            <!-- PANEL 2 -->
-            <div class="horizontal-square2">
-                <iframe src="panel 2.html"></iframe>
-            </div>
-        </div>
-         <!-- PANEL 3 -->
-        <div class="rectangle">
-            <iframe src="panel 3.html"></iframe>
-        </div>
-          <!-- PANEL 4 -->
-        <div class="rectangle">
-            <iframe src="https://www.example.com"></iframe>
-        </div>
-              <!-- PANEL 5 -->
-        <div class="transparent-container2">
-            <div class="horizontal-square2">
-                <iframe src="https://www.example.com"></iframe>
-            </div>
-              <!-- PANEL 6 -->
-            <div class="horizontal-square2">
-                <iframe src="https://www.example.com"></iframe>
-            </div>
-        </div>
-                <!-- PANEL 7 -->
-        <div class="rectangle">
-            <iframe src="https://www.example.com"></iframe>
-        </div>
-          <!-- PANEL 8 -->
-        <div class="square">
-            <iframe src="https://www.example.com"></iframe> <!-- Adding iframe to square -->
-        </div> 
-      
+    <div class="profile-image">
+      <img src="rdr.png" alt="Imagen de perfil" />
     </div>
 
-    <div class="apps-container">
-        <div class="apps-square"></div>
-        <div class="apps-square"></div>
-        <div class="apps-square"></div>
-        <div class="apps-square"></div>
+    <div class="title-container">
+      <h2 class="title pt-serif-bold">Raúl Díaz Gutiérrez</h2>
     </div>
 
-    <script>
-        // Array de nombres de archivo de las imágenes
-        var images = ['1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.png', '10.png'];
+    <div class="info-container">
+      <div class="info-row">
+        <span class="emoji">🎓</span>
+        <span class="info-text lato-bold">Técnico en Sistemas Microinformáticos y Redes</span>
+      </div>
+      <div class="subtitle lato-light">Brianda de Mendoza</div>
+    </div>
 
-        // Seleccionar aleatoriamente una imagen
-        var randomImage = images[Math.floor(Math.random() * images.length)];
+    <div class="blender-container">
+      <div class="blender-content">
+        <img src="blender.png" alt="Blender Logo" class="blender-icon" />
+        <span class="info-text lato-bold">Nivel avanzado en Blender</span>
+      </div>
+      <a href="https://www.blender.org/" target="_blank" title="Visitar Blender">
+        <button class="blender-button">⮞</button>
+      </a>
+    </div>
 
-        // Establecer la imagen de fondo del cuerpo del documento
-        document.body.style.backgroundImage = 'url(' + randomImage + ')';
-    </script>
+    <div class="info-container" style="background-color: rgba(135, 206, 250, 0.4);">
+      <div class="info-row">
+        <span class="emoji">💻</span>
+        <span class="info-text lato-bold">Experto en programacion en leguaje natural (Vibecoders)</span>
+      </div>
+      <div class="subtitle lato-light">Algunos trabajos realizados recientemente</div>
+      <p class="lato-light">
+        He desarrollado diversas aplicaciones con tecnologías en c, c++ y java. Uno de mis proyectos recientes es una app visual interactiva que genera una clave única a partir de una animación y una captura en tiempo real.
+      </p>
+    </div>
 
-    <script>
-        function ampliarCuadrado1(cuadrado) {
-            if (cuadrado.classList.contains('ampliado')) {
-                cuadrado.style.backgroundImage = "url('info.png')"; // Vuelve a la imagen original
-                cuadrado.classList.remove('ampliado');
-            } else {
-                cuadrado.classList.add('ampliado');
-                setTimeout(function() {
-                    cuadrado.style.backgroundImage = "url('2.png')"; // Cambia a otra imagen
-                }, 400); // Cambia la imagen después de 0.1 segundos
-            }
-        }
-    </script>
+    <div class="info-container" style="background-color: rgba(144, 238, 144, 0.4);">
+      <div class="info-row">
+        <span class="emoji">📷</span>
+        <span class="info-text lato-bold">Amante de la fotografia</span>
+      </div>
+      <div class="subtitle lato-light">Lo que disfruto hacer en mi tiempo libre:</div>
+      <p class="lato-light">
+        Me apasiona el arte digital, Tengo una cuenta de instagram donde subo imagenes que me gustan campo/urbano. Utilizo deversos dispositivos antiguos para realizarlas
+       <br><br> <a href="https://www.instagram.com/nsng_pro/">Website</a>
+      </p>
+    </div>
 
-<script>
-    function ampliarCuadrado2(cuadrado) {
-        if (cuadrado.classList.contains('ampliado')) {
-            cuadrado.style.backgroundImage = "url('w.png')"; // Vuelve a la imagen original
-            cuadrado.classList.remove('ampliado');
-        } else {
-            cuadrado.classList.add('ampliado');
-            setTimeout(function() {
-                cuadrado.style.backgroundImage = "url('2.png')"; // Cambia a otra imagen
-            }, 400); // Cambia la imagen después de 0.1 segundos
-        }
-    }
-</script>
+    <div class="info-container" style="background-color: rgba(255, 182, 193, 0.4);">
+      <div class="info-row">
+        <span class="emoji">🛠️</span>
+        <span class="info-text lato-bold">Experiencia Profesional</span>
+      </div>
+      <div class="subtitle lato-light">Dónde he trabajado</div>
+      <p class="lato-light">
+        He colaborado en pequeñas empresas de tecnología y diseño, aportando mis conocimientos en redes, hardware y desarrollo multimedia. También he asistido en la creación de recursos visuales para presentaciones y marketing.
+      </p>
+    </div>
 
-<script>
-    function ampliarCuadrado3(cuadrado) {
-        if (cuadrado.classList.contains('ampliado')) {
-            cuadrado.style.backgroundImage = "url('papelera.png')"; // Vuelve a la imagen original
-            cuadrado.classList.remove('ampliado');
-        } else {
-            cuadrado.classList.add('ampliado');
-            setTimeout(function() {
-                cuadrado.style.backgroundImage = "url('2.png')"; // Cambia a otra imagen
-            }, 400); // Cambia la imagen después de 0.1 segundos
-        }
-    }
-</script>
+    <div class="info-container" style="background-color: rgba(173, 216, 230, 0.4);">
+      <div class="info-row">
+        <span class="emoji">📫</span>
+        <span class="info-text lato-bold">Contacto</span>
+      </div>
+      <div class="subtitle lato-light">¡Conéctate conmigo!</div>
+      <p class="lato-light">
+        Puedes escribirme a <strong>correo@example.com</strong> o seguirme en redes sociales. Estoy abierto a colaborar en proyectos interesantes y creativos.
+      </p>
+    </div>
 
+  </div>
 
+  <script>
+    var images = ['1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.png', '10.png'];
+    var randomImage = images[Math.floor(Math.random() * images.length)];
+    document.body.style.backgroundImage = 'url(' + randomImage + ')';
+  </script>
 
-    <script>
-        function ampliarCuadrado4(cuadrado) {
-            if (cuadrado.classList.contains('ampliado')) {
-                cuadrado.classList.remove('ampliado');
-                cuadrado.innerHTML = ''; // Elimina el contenido del cuadrado (el iframe)
-            } else {
-                cuadrado.classList.add('ampliado');
-                var iframe = document.createElement('iframe');
-                iframe.src = 'https://www.ejemplo.com'; // URL de la página web que deseas cargar
-                cuadrado.appendChild(iframe); // Agrega el iframe al cuadrado ampliado
-
-                // Agrega el botón de cerrar
-                var botonCerrar = document.createElement('div');
-                botonCerrar.classList.add('boton-cerrar');
-                botonCerrar.onclick = function() {
-                    cuadrado.classList.remove('boton-cerrar');
-                    cuadrado.innerHTML = ''; // Elimina el contenido del cuadrado (el iframe)
-                };
-                cuadrado.appendChild(botonCerrar);
-            }
-        }
-    </script>
 </body>
 </html>
