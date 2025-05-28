@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Página Web</title>
+    <style>
+    body {
+        margin: 0;
+        height: 200vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f2f2f2; /* Color de fondo de la página */
+        background-size: cover; /* Ajusta el tamaño de la imagen de fondo */
+        background-position: center; /* Centra la imagen de fondo */
+
+    }
+
+    .container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-top: 20px;
+        text-align: center;
+        width: 100%;
+        max-width: 500px;
+    }
+    .profile-image {
+        width: 150px;
+        height: 150px;
+        border-radius: 75px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    .profile-image img {
+        width: 100%;
+        height: auto;
+    }
+    .rectangle, .square, .horizontal-square {
+        height: 150px;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+        border-radius: 20px;
+        position: relative; /* Para posicionar el título */
+    }
+
+    .rectangle {
+        width: 60%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .square {
+        width: 300px;
+        height: 300px;
+        border-radius: 20px;
+        margin-bottom: 20px;
+    }
+
+        .apps-square {
+            width: 60px;
+            height: 60px;
+            margin: 10px;
+            border-radius: 13px;
+            display: inline-block;
+            background-size: cover; /* Ajusta el tamaño de la imagen */
+            background-position: center; /* Centra la imagen */
+            z-index: 99; /* Asegura que el cuadrado ampliado esté superpuesto */
+
+        }
+     
+        .apps-container {
+           position: fixed;
+           bottom: 10px;
+           left: 50%;
+           transform: translateX(-50%);
+           background-color: rgba(32, 39, 56, 0.966);
+           border-radius: 35px;
+           width: 350px;
+           padding: 3px;
+           z-index: 99; /* Asegura que el cuadrado ampliado esté superpuesto */
+
+        }
+
+        .horizontal-square2 {
+        width: 140px;
+        height: 140px;
+        margin: 5px;
+        border-radius: 17px;
+        display: inline-block;
+        position: relative; /* Para posicionar el título */
+    }
+
+    .transparent-container2 {
+        border-radius: 25px;
+        width: 80%;
+        padding: 10px;
+    }
+
+    .title-container {
+        width: 60%;
+        background-color: rgba(255, 255, 255, 0.349); /* Color de fondo translúcido */
+        padding: 2px; /* Espaciado interno */
+        border-radius: 50px; /* Bordes redondeados */
+    }
+
+    .title {
+        color: white;
+    }
+
+    iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 20px; /* Añadir bordes redondeados */
+    }
+
+
+
+
+
+
+
+
+
+
+/* CSS de la animacion y dock */
+
+        .cuadrado {
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+    border-radius: 13px;
+    bottom: 15px;
+    z-index: 999;
+    cursor: pointer;
+    transition: all 0.6s ease;
+    position: fixed; /* Cambio de absolute a fixed */
+    background-size: cover; /* Ajusta el tamaño de la imagen */
+    background-position: center; /* Centra la imagen */
+}
+.cuadrado:nth-child(1) {
+    background-image: url('info.png');
+    left: calc(50% - 172px); /* Ajuste del valor hacia la izquierda */
+}
+
+.cuadrado:nth-child(2) {
+    background-image: url('w.png');
+    left: calc(50% - 84px); /* Ajuste del valor hacia la izquierda */
+}
+
+.cuadrado:nth-child(3) {
+    background-image: url('papelera.png');
+    left: calc(50% + 4px); /* Ajuste del valor hacia la izquierda */
+}
+
+.cuadrado:nth-child(4) {
+    background-image: url('options.png');
+    left: calc(50% + 92px); /* Ajuste del valor hacia la izquierda */
+}
+
+    .cuadrado.ampliado {
+        width: 95%; /* Ancho del 100% */
+        height: 95%; /* Alto del 100% */
+        border-radius: 1; /* Redondez a 0 para que sea rectangular */
+        left: 50%; /* Centra el cuadrado ampliado horizontalmente */
+        transform: translateX(-50%); /* Centra el cuadrado ampliado horizontalmente */
+        z-index: 9999; /* Asegura que el cuadrado ampliado esté superpuesto */
+    }
+
+    .cuadrado.ampliado iframe {
+        border-radius: 50; /* Redondez a 0 para que sea rectangular */
+        width: 100%;
+        height: 100%;
+        border: none; /* Elimina el borde del iframe */
+    }
+
+    .boton-cerrar:before {
+        border-radius: 13px;
+
+    }
+
+    .boton-cerrar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: rgb(255, 166, 0);
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 99999; /* Asegura que el botón esté por encima del cuadrado ampliado */
+    }
+    </style>
+</head>
+<body>
+    <div class="cuadrado" onclick="ampliarCuadrado1(this)"></div>
+    <div class="cuadrado" onclick="ampliarCuadrado2(this)"></div>
+    <div class="cuadrado" onclick="ampliarCuadrado3(this)"></div>
+    <div class="cuadrado" onclick="ampliarCuadrado4(this)"></div>
+
+
+    <div class="container">
+        <div class="profile-image">
+            <img src="rdr.png" alt="Imagen de perfil">
+        </div>
+        <div class="title-container"> <!-- Contenedor para el título con color translúcido -->
+            <h2 class="title">Raúl Díaz Gutiérrez</h2> <!-- Título -->
+        </div>
+
+          <!-- PANEL 1 -->
+        <div class="transparent-container2">
+            <div class="horizontal-square2">
+                <iframe src="panel 1.html"></iframe>
+            </div>
+            <!-- PANEL 2 -->
+            <div class="horizontal-square2">
+                <iframe src="panel 2.html"></iframe>
+            </div>
+        </div>
+         <!-- PANEL 3 -->
+        <div class="rectangle">
+            <iframe src="panel 3.html"></iframe>
+        </div>
+          <!-- PANEL 4 -->
+        <div class="rectangle">
+            <iframe src="https://www.example.com"></iframe>
+        </div>
+              <!-- PANEL 5 -->
+        <div class="transparent-container2">
+            <div class="horizontal-square2">
+                <iframe src="https://www.example.com"></iframe>
+            </div>
+              <!-- PANEL 6 -->
+            <div class="horizontal-square2">
+                <iframe src="https://www.example.com"></iframe>
+            </div>
+        </div>
+                <!-- PANEL 7 -->
+        <div class="rectangle">
+            <iframe src="https://www.example.com"></iframe>
+        </div>
+          <!-- PANEL 8 -->
+        <div class="square">
+            <iframe src="https://www.example.com"></iframe> <!-- Adding iframe to square -->
+        </div> 
+      
+    </div>
+
+    <div class="apps-container">
+        <div class="apps-square"></div>
+        <div class="apps-square"></div>
+        <div class="apps-square"></div>
+        <div class="apps-square"></div>
+    </div>
+
+    <script>
+        // Array de nombres de archivo de las imágenes
+        var images = ['1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.png', '10.png'];
+
+        // Seleccionar aleatoriamente una imagen
+        var randomImage = images[Math.floor(Math.random() * images.length)];
+
+        // Establecer la imagen de fondo del cuerpo del documento
+        document.body.style.backgroundImage = 'url(' + randomImage + ')';
+    </script>
+
+<script>
+    function ampliarCuadrado1(cuadrado) {
+        if (cuadrado.classList.contains('ampliado')) {
+            cuadrado.style.backgroundImage = "url('info.png')"; // Vuelve a la imagen original
+            cuadrado.classList.remove('ampliado');
+        } else {
+            cuadrado.classList.add('ampliado');
+            setTimeout(function() {
+                cuadrado.style.backgroundImage = "url('2.png')"; // Cambia a otra imagen
+            }, 400); // Cambia la imagen después de 0.1 segundos
+        }
+    }
+</script>
+
+<script>
+    function ampliarCuadrado2(cuadrado) {
+        if (cuadrado.classList.contains('ampliado')) {
+            cuadrado.style.backgroundImage = "url('w.png')"; // Vuelve a la imagen original
+            cuadrado.classList.remove('ampliado');
+        } else {
+            cuadrado.classList.add('ampliado');
+            setTimeout(function() {
+                cuadrado.style.backgroundImage = "url('2.png')"; // Cambia a otra imagen
+            }, 400); // Cambia la imagen después de 0.1 segundos
+        }
+    }
+</script>
+
+<script>
+    function ampliarCuadrado3(cuadrado) {
+        if (cuadrado.classList.contains('ampliado')) {
+            cuadrado.style.backgroundImage = "url('papelera.png')"; // Vuelve a la imagen original
+            cuadrado.classList.remove('ampliado');
+        } else {
+            cuadrado.classList.add('ampliado');
+            setTimeout(function() {
+                cuadrado.style.backgroundImage = "url('2.png')"; // Cambia a otra imagen
+            }, 400); // Cambia la imagen después de 0.1 segundos
+        }
+    }
+</script>
+
+    <script>
+        function ampliarCuadrado4(cuadrado) {
+            if (cuadrado.classList.contains('ampliado')) {
+                cuadrado.classList.remove('ampliado');
+                cuadrado.innerHTML = ''; // Elimina el contenido del cuadrado (el iframe)
+            } else {
+                cuadrado.classList.add('ampliado');
+                var iframe = document.createElement('iframe');
+                iframe.src = 'https://www.example.com'; // URL de la página web que deseas cargar
+                cuadrado.appendChild(iframe); // Agrega el iframe al cuadrado ampliado
+
+                // Agrega el botón de cerrar
+                var botonCerrar = document.createElement('div');
+                botonCerrar.classList.add('boton-cerrar');
+                botonCerrar.onclick = function() {
+                    cuadrado.classList.remove('boton-cerrar');
+                    cuadrado.innerHTML = ''; // Elimina el contenido del cuadrado (el iframe)
+                };
+                cuadrado.appendChild(botonCerrar);
+            }
+        }
+    </script>
+</body>
+</html>

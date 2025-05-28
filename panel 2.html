@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fondos Aleatorios</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            transition: opacity 8s ease-in-out;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <script>
+          const backgrounds = [
+              "1-.png",
+              "2-.png",
+              "3-.png",
+              "4-.png",
+              "5-.png",
+              "6-.png",
+              "7-.png",
+              "8-.png",
+              "9-.png",
+              "10-.png",
+              "11-.png",
+              "12-.png",
+              "0-.png"
+          ];
+        
+        function changeBackground() {
+            const randomIndex = Math.floor(Math.random() * backgrounds.length);
+            const selectedBackground = backgrounds[randomIndex];
+            document.body.style.opacity = 0; // Cambiar opacidad a 0
+            setTimeout(() => {
+                document.body.style.backgroundImage = `url('${selectedBackground}')`;
+                document.body.style.opacity = 1; // Restaurar opacidad a 1
+            }, 1000); // Esperar 1 segundo antes de cambiar la imagen
+        }
+        
+        setInterval(changeBackground, 5000); // Cambiar cada 5 segundos
+    </script>
+</body>
+</html>

@@ -1,228 +1,31 @@
 <!DOCTYPE html>
-<html lang="es">
-  <head>
-    <title>Árbol – tree_lib</title>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>rdr-creative</title>
+<script>
+    // Función para detectar si el dispositivo es móvil
+    function isMobileDevice() {
+        return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+    }
 
-    <meta charset="utf-8" />
-    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+    // Función para redirigir según el tipo de dispositivo
+    function redirectBasedOnDevice() {
+        if (isMobileDevice()) {
+            // Redirigir si es un dispositivo móvil
+            window.location.href = 'indextlf.html';
+        } else {
+            // Redirigir si es un ordenador
+            window.location.href = 'indexpc.html';
+        }
+    }
 
-    <meta name="description" content="tree_lib – Biblioteca de generación de entropía segura en C++ usando OpenCV." />
-    <meta property="og:description" content="tree_lib – Biblioteca C++ de generador aleatorio usando entropía basada en cámara." />
-    <meta name="author" content="Proyecto Tree" />
-
-    <link rel="stylesheet" href="material-kit.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500|Material+Icons+Outlined" />
-
-    <link rel="alternate" type="application/rss+xml" title="Tree - tree_lib" href="/feed.xml" />
-    <link rel="shortcut icon" href="logo.webp">
-  </head>
-
-  <body id="page-top">
-    <nav class="navbar fixed-top navbar-expand-lg bg-white">
-      <div class="container">
-        <div class="navbar-translate">
-          <a class="navbar-brand" href="/">
-            <img src="tree.png" alt="Logo" height="45">
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Alternar navegación">
-            <span class="sr-only">Alternar navegación</span>
-            <span class="navbar-toggler-icon"></span>
-            <span class="navbar-toggler-icon"></span>
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </div>
-        <div id="navbarNav" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="#about">Documentacion</a></li>
-            <li class="nav-item"><a class="nav-link" href="#usage">Uso</a></li>
-            <li class="nav-item"><a class="nav-link" href="#compile">Compilar</a></li>
-            <li class="nav-item"><a class="nav-link" href="#download">Descargar</a></li>
-            <li class="nav-item"><a class="nav-link" href="https://github.com/redrujose/Tree-2" target="_blank">GitHub</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    <div id="main" role="main">
-      <noscript>
-        <div class="no-script">
-          <div class="container">
-            Para la funcionalidad completa de este sitio es necesario habilitar JavaScript.
-            Aquí están las <a href="http://www.enable-javascript.com/" target="_blank">instrucciones para habilitar JavaScript en tu navegador web</a>.
-          </div>
-        </div>
-      </noscript>
-
-      <div class="jumbotron welcome" style="background-image: url('back.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-  <div class="container">
-    <div class="row justify-content-between align-items-bottom">
-      <div class="col-lg-5 text-center text-lg-left pb-10">
-        <h1>Biblioteca Tree</h1>
-        <p>Una biblioteca C++ liviana y eficiente para generar números aleatorios de 1024 dígitos con alta entropía usando OpenCV y tu cámara.</p>
-        <a class="btn btn-primary text-primary" href="https://github.com/redrujose/Tree-2">Obtener tree_lib</a>
-        <a class="btn btn-link text-white" href="#about">Saber más</a>
-      </div>
-      <img alt="Inicio" src="peek_device.webp" class="welcome-image">
-    </div>
-  </div>
-</div>
-
-
-      <section class="blog bg-primary-lighter" id="about">
-        <div class="container">
-          <div class="post text-lg-left">
-            <h2>Últimas Actualizaciones</h2>
-            <h3><a class="fg-primary-dark" href="https://github.com/redrujose/Tree-2">tree_lib v1.0 lanzado</a></h3>
-            <h6>Ahora disponible para todos los desarrolladores de Ubuntu.</h6>
-            <p><i class="material-icons-outlined post-icons">calendar_today</i> Mayo 2025
-              <i class="material-icons-outlined post-icons">person_outline</i> José Redruejo & Raul Díaz</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="tweaks" id="usage">
-        <div class="container">
-          <div class="row justify-content-between align-items-center">
-            <div id="tweaks" class="col-lg-4">
-              <img alt="Ilustración de la biblioteca" src="styles.webp" class="img-fluid text-center h-auto">
-            </div>
-            <div class="col-lg-7 text-center text-lg-left">
-              <h2>Cómo Funciona</h2>
-              <p class="feature">
-                tree_lib captura un fotograma de la cámara del sistema, extrae entropía de los datos de píxeles centrales y la utiliza para generar una cadena numérica pseudoaleatoria de 1024 dígitos (0–9).
-                <br><br>
-                Todo en memoria, sin acceso a archivos ni hilos. Ideal para dispositivos embebidos y aplicaciones seguras.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="security bg-dark">
-        <div class="container">
-          <div class="row justify-content-between align-items-center">
-            <div class="col-lg-7 order-lg-last">
-              <img alt="Entropía basada en seguridad" src="security.webp" class="img-fluid text-center h-auto">
-            </div>
-            <div class="col-lg-4 text-center text-lg-left text-white">
-              <h2>Resumen de la API</h2>
-              <p class="feature">
-                <code>tree_lib::Generator</code><br>
-                <strong>generate()</strong> → Captura un fotograma de la cámara y devuelve un número de 1024 dígitos.<br>
-                <strong>getLast()</strong> → Devuelve el último valor generado.
-              </p>
-              <p>
-                Ejemplo:
-                <pre><code>#include "tree_lib.hpp"
-#include &lt;iostream&gt;
-int main() {
-  tree_lib::Generator g;
-  std::cout &lt;&lt; g.generate() &lt;&lt; std::endl;
-}</code></pre>
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="longevity" id="compile">
-        <div class="container">
-          <div class="row justify-content-between align-items-center">
-            <div class="col-lg-6">
-              <img alt="Compatibilidad del código C++" src="longevity.webp" class="img-fluid text-center" id="rotate-on-scroll">
-            </div>
-            <div class="col-lg-5 text-center text-lg-left">
-              <h2>Compilación Manual</h2>
-              <p class="feature">
-                Para compilar tree_lib en Ubuntu:
-                <pre><code>g++ -c tree_lib.cpp -o tree_lib.o `pkg-config --cflags opencv4`
-g++ main.cpp tree_lib.o -o mi_programa `pkg-config --cflags --libs opencv4`
-./mi_programa</code></pre>
-                Requisitos: Ubuntu + GCC + OpenCV 4.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="tools bg-dark section-background-image parallax">
-        <div class="container">
-          <div class="row justify-content-between align-items-center">
-            <div class="col-lg-7 order-lg-last">
-              <div class="img-fluid text-center">
-                <img alt="Estructura de código de tree_lib" src="icons.webp" class="img-fluid text-center h-auto">
-              </div>
-            </div>
-            <div class="col-lg-4 text-center text-lg-left text-white">
-              <h2>Poderosa Entropia</h2>
-              <p class="feature">
-                tree es ideal para:
-                <br>- Semillas seguras
-                <br>- Sistemas embebidos
-                <br>- Generación de IDs aleatorios
-                <br><br>
-                Funciona inmediatamente. Sin sistemas de construcción complejos. Solo C++, OpenCV y tu cámara.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="download bg-primary" id="download" style="margin-bottom: -3rem;">
-        <div class="container">
-          <div class="text-center">
-            <div class="logo">
-              <a class="navbar-brand" href="/">
-                <img src="tree2.png" alt="Logo" height="60">
-              </a>
-            </div>
-            <h2>¿Listo? <br> ¡Obtén tree ahora!</h2>
-            <p class="feature">
-              Visita la página de GitHub para obtener el código fuente completo, documentación y ejemplos.
-              <br>Comienza ahora a generar números aleatorios seguros.
-            </p>
-            <a class="btn btn-primary" href="https://github.com/redrujose/Tree-2">Visitar Repositorio en GitHub</a>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <footer class="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-md footer-logo">
-            <a class="navbar-brand" href="/">
-              <img src="tree3.png" alt="Logo" height="40">
-            </a>
-            <p class="footer-text">
-              <b>&copy; 2024 - 2025 Proyecto Tree</b><br />
-              Más información en <a target="_blank" href="https://github.com/redrujose/Tree-2">GitHub</a> <br />
-              Apóyanos vía <a target="_blank" href="https://paypal.me/LineageOS">PayPal</a> o <a target="_blank" href="https://patreon.com/LineageOS">Patreon</a> <br />
-              Nota: Este es un proyecto de software libre, no una organización sin fines de lucro.
-            </p>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <script src="jquery-3.3.1.slim.min.js"></script>
-    <script src="material-kit.js"></script>
-    <script>
-      var rotation = 0;
-      var scrollLoc = $(document).scrollTop();
-      $(window).on("scroll", function() {
-        var newLoc = $(document).scrollTop();
-        var diff = (scrollLoc - newLoc) / 3;
-        rotation += diff, scrollLoc = newLoc;
-        var rotationStr = "rotate(" + rotation + "deg)";
-        $("#rotate-on-scroll").css({
-            "-webkit-transform": rotationStr,
-            "-moz-transform": rotationStr,
-            "transform": rotationStr
-        });
-      });
-    </script>
-  </body>
+    // Llamar a la función de redirección cuando se cargue la página
+    window.onload = redirectBasedOnDevice;
+</script>
+</head>
+<body>
+<!-- Contenido opcional -->
+</body>
 </html>
