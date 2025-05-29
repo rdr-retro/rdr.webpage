@@ -45,8 +45,9 @@
       position: absolute;
       top: -16px;
       right: -16px;
-      background: rgba(255, 255, 255, 0.85);
-      color: #ff6900;
+      background: linear-gradient(90deg, #ff6900, #ffdd00, #00e1ff, #8f00ff, #ff6900);
+      background-size: 300% 300%;
+      color: #fff;
       font-weight: bold;
       font-size: 20px;
       padding: 6px 16px;
@@ -54,6 +55,13 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       text-transform: uppercase;
       pointer-events: none;
+      animation: gradient-move 2.5s ease-in-out infinite;
+      border: 2px solid #fff;
+    }
+    @keyframes gradient-move {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
     .profile-image {
       width: 180px;
