@@ -1,4 +1,3 @@
-<!-- indextlf.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,98 +14,156 @@
     body {
       margin: 0;
       padding: 0;
-      background-color: #f2f2f2;
+      background-color: #f6f8fb;
       background-size: cover;
       background-position: center;
       font-family: "Lato", sans-serif;
     }
 
-    .lato-light { font-family: "Lato", sans-serif; font-weight: 300; }
-    .lato-bold { font-family: "Lato", sans-serif; font-weight: 700; }
-    .pt-serif-bold { font-family: "PT Serif", serif; font-weight: 700; }
-
     .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 0 auto;
-      padding: 21.6px 10.8px; /* reducido un 10% */
-      max-width: 324px; /* reducido un 10% */
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding: 18px 4vw;
+  max-width: 340px;
+  background: rgba(255,255,255,0.35);
+  border-radius: 28px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  backdrop-filter: blur(7px);
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 
     .profile-image {
-      width: 108px;  /* reducido un 10% */
-      height: 108px; /* reducido un 10% */
-      border-radius: 54px; /* reducido un 10% */
+      width: 108px;
+      height: 108px;
+      border-radius: 50%;
       overflow: hidden;
-      margin-bottom: 16.2px; /* reducido un 10% */
-      border: 2.16px solid white; /* reducido un 10% */
-      /* Animación de escala continua */
+      margin-bottom: 20px;
+      border: 3px solid white;
       animation: pulse 1.6s ease-in-out infinite;
       cursor: pointer;
-      transition: box-shadow 0.2s;
-    }
-
-    .profile-image:active {
-      box-shadow: 0 0 12px 2px #ff69b4;
+      background: rgba(255,255,255,0.2);
     }
 
     @keyframes pulse {
-      0%   { transform: scale(1);}
-      50%  { transform: scale(1.18);}
-      100% { transform: scale(1);}
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.15); }
+      100% { transform: scale(1); }
     }
 
     .profile-image img {
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
       display: block;
     }
 
     .title-container {
       text-align: center;
-      background-color: rgba(255, 255, 255, 0.6);
-      padding: 5.4px 16.2px; /* reducido un 10% */
-      border-radius: 27px; /* reducido un 10% */
-      margin-bottom: 16.2px; /* reducido un 10% */
+      background: rgba(34, 40, 49, 0.65);
+      padding: 10px 24px;
+      border-radius: 32px;
+      margin-bottom: 24px;
     }
 
     .title {
-      font-size: 17.1px; /* reducido un 10% */
-      color: white;
+      font-size: 22px;
+      color: #fff;
       margin: 0;
+      letter-spacing: 1px;
     }
 
     .info-container {
       width: 100%;
-      background-color: rgba(255, 105, 180, 0.4);
-      border-radius: 14px; /* reducido un 10% */
-      padding: 10.8px; /* reducido un 10% */
-      margin-bottom: 10.8px; /* reducido un 10% */
+      border-radius: 20px;
+      padding: 14px;
+      margin-bottom: 16px;
+      color: #fff;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      backdrop-filter: blur(4px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-container::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.15;
+      pointer-events: none;
+      background: linear-gradient(120deg, #fff 0%, transparent 100%);
+    }
+
+    .info-row,
+    .subtitle, p {
+      position: relative;
+      z-index: 1;
+    }
+
+    .pink {
+      background: linear-gradient(120deg, #a770ef 0%, #f6d365 100%);
+      color: #2d223a;
+    }
+
+    .blue {
+      background: linear-gradient(120deg, #43cea2 0%, #185a9d 100%);
+    }
+
+    .green {
+      background: linear-gradient(120deg, #11998e 0%, #38ef7d 100%);
+    }
+
+    .lightpink {
+      background: linear-gradient(120deg, #f7971e 0%, #ffd200 100%);
+      color: #5c3a00;
+    }
+
+    .lightblue {
+      background: linear-gradient(120deg, #43e97b 0%, #38f9d7 100%);
+      color: #1b2a2f;
     }
 
     .info-row {
       display: flex;
       align-items: center;
-      margin-bottom: 5.4px; /* reducido un 10% */
+      margin-bottom: 8px;
     }
 
     .emoji {
-      font-size: 17.1px; /* reducido un 10% */
-      margin-right: 6.3px; /* reducido un 10% */
+      font-size: 22px;
+      margin-right: 10px;
     }
 
     .info-text {
-      font-size: 10.8px; /* reducido un 10% */
-      color: white;
+      font-size: 14px;
+      font-weight: 700;
     }
 
     .subtitle {
-      font-size: 8.64px; /* reducido un 10% */
-      color: white;
-      opacity: 0.85;
-      margin-left: 23.4px; /* reducido un 10% */
-      margin-bottom: 5.4px; /* reducido un 10% */
+      font-size: 11.5px;
+      opacity: 0.82;
+      margin-left: 32px;
+      margin-bottom: 6px;
+    }
+
+    p {
+      font-size: 12.5px;
+      margin-left: 32px;
+      opacity: 0.95;
+      margin-bottom: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: #222;
     }
 
     .blender-container {
@@ -114,16 +171,17 @@
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      background-color: rgba(255, 165, 0, 0.4);
-      border-radius: 14px; /* reducido un 10% */
-      padding: 10.8px; /* reducido un 10% */
-      margin-bottom: 10.8px; /* reducido un 10% */
+      background-color: #ff6900;
+      border-radius: 20px;
+      padding: 14px;
+      margin-bottom: 16px;
+      color: #fff;
     }
 
     .blender-icon {
-      width: 32.4px; /* reducido un 10% */
-      height: 32.4px; /* reducido un 10% */
-      margin-right: 10.8px; /* reducido un 10% */
+      width: 40px;
+      height: 40px;
+      margin-right: 14px;
       object-fit: contain;
     }
 
@@ -133,31 +191,24 @@
     }
 
     .blender-button {
-      background-color: white;
-      color: rgb(255, 145, 0);
+      background-color: #fff;
+      color: #ff6900;
       border: none;
-      border-radius: 45%; /* ajustado para mantener proporción */
-      width: 21.6px; /* reducido un 10% */
-      height: 21.6px; /* reducido un 10% */
-      font-size: 11.88px; /* reducido un 10% */
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .blender-button:hover {
-      background-color: orange;
-      color: white;
+      background-color: #ff6900;
+      color: #fff;
       transform: scale(1.1);
-    }
-
-    p {
-      font-size: 9.72px; /* reducido un 10% */
-      color: white;
-      margin-left: 23.4px; /* reducido un 10% */
     }
   </style>
 </head>
@@ -173,65 +224,65 @@
       <h2 class="title pt-serif-bold">Raúl Díaz Gutiérrez</h2>
     </div>
 
-    <div class="info-container">
+    <div class="info-container pink">
       <div class="info-row">
         <span class="emoji">🎓</span>
-        <span class="info-text lato-bold">Técnico en Sistemas Microinformáticos y Redes</span>
+        <span class="info-text">Técnico en Sistemas Microinformáticos y Redes</span>
       </div>
-      <div class="subtitle lato-light">Brianda de Mendoza</div>
+      <div class="subtitle">Brianda de Mendoza</div>
     </div>
 
     <div class="blender-container">
       <div class="blender-content">
         <img src="blender.png" alt="Blender Logo" class="blender-icon" />
-        <span class="info-text lato-bold">Nivel avanzado en Blender</span>
+        <span class="info-text">Nivel avanzado en Blender</span>
       </div>
       <a href="https://www.blender.org/" target="_blank" title="Visitar Blender">
         <button class="blender-button">⮞</button>
       </a>
     </div>
 
-    <div class="info-container" style="background-color: rgba(135, 206, 250, 0.4);">
+    <div class="info-container blue">
       <div class="info-row">
         <span class="emoji">💻</span>
-        <span class="info-text lato-bold">Experto en programacion en leguaje natural (Vibecoders)</span>
+        <span class="info-text">Experto en programación en lenguaje natural (Vibecoders)</span>
       </div>
-      <div class="subtitle lato-light">Algunos trabajos realizados recientemente</div>
-      <p class="lato-light">
-        He desarrollado diversas aplicaciones con tecnologías en c, c++ y java. Uno de mis proyectos recientes es una app visual interactiva que genera una clave única a partir de una animación y una captura en tiempo real.
+      <div class="subtitle">Algunos trabajos realizados recientemente</div>
+      <p>
+        He desarrollado diversas aplicaciones con tecnologías en C, C++ y Java. Uno de mis proyectos recientes es una app visual interactiva que genera una clave única a partir de una animación y una captura en tiempo real.
       </p>
     </div>
 
-    <div class="info-container" style="background-color: rgba(144, 238, 144, 0.4);">
+    <div class="info-container green">
       <div class="info-row">
         <span class="emoji">📷</span>
-        <span class="info-text lato-bold">Amante de la fotografia</span>
+        <span class="info-text">Amante de la fotografía</span>
       </div>
-      <div class="subtitle lato-light">Lo que disfruto hacer en mi tiempo libre:</div>
-      <p class="lato-light">
-        Me apasiona el arte digital, Tengo una cuenta de instagram donde subo imagenes que me gustan campo/urbano. Utilizo deversos dispositivos antiguos para realizarlas
-       <br><br> <a href="https://www.instagram.com/nsng_pro/">Website</a>
+      <div class="subtitle">Lo que disfruto hacer en mi tiempo libre:</div>
+      <p>
+        Me apasiona el arte digital. Tengo una cuenta de Instagram donde subo imágenes que me gustan, campo/urbano. Utilizo diversos dispositivos antiguos para realizarlas.
+        <br><br> <a href="https://www.instagram.com/nsng_pro/">Website</a>
       </p>
     </div>
 
-    <div class="info-container" style="background-color: rgba(255, 182, 193, 0.4);">
+    <div class="info-container lightpink">
       <div class="info-row">
         <span class="emoji">🛠️</span>
-        <span class="info-text lato-bold">Experiencia Profesional</span>
+        <span class="info-text">Experiencia Profesional</span>
       </div>
-      <div class="subtitle lato-light">Dónde he trabajado</div>
-      <p class="lato-light">
+      <div class="subtitle">Dónde he trabajado</div>
+      <p>
         He colaborado en pequeñas empresas de tecnología y diseño, aportando mis conocimientos en redes, hardware y desarrollo multimedia. También he asistido en la creación de recursos visuales para presentaciones y marketing.
       </p>
     </div>
 
-    <div class="info-container" style="background-color: rgba(173, 216, 230, 0.4);">
+    <div class="info-container lightblue">
       <div class="info-row">
         <span class="emoji">📫</span>
-        <span class="info-text lato-bold">Contacto</span>
+        <span class="info-text">Contacto</span>
       </div>
-      <div class="subtitle lato-light">¡Conéctate conmigo!</div>
-      <p class="lato-light">
+      <div class="subtitle">¡Conéctate conmigo!</div>
+      <p>
         Puedes escribirme a <strong>correo@example.com</strong> o seguirme en redes sociales. Estoy abierto a colaborar en proyectos interesantes y creativos.
       </p>
     </div>
@@ -244,11 +295,10 @@
     var randomImage = images[Math.floor(Math.random() * images.length)];
     document.body.style.backgroundImage = 'url(' + randomImage + ')';
 
-    // Abrir 1tlf.html al hacer clic en la imagen de perfil
+    // Abrir 1.html al hacer clic en la imagen de perfil
     document.getElementById('profileImage').addEventListener('click', function() {
       window.location.href = '1.html';
     });
   </script>
-
 </body>
 </html>
