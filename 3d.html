@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <!-- Model Viewer -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
     body {
       margin: 0;
@@ -89,16 +91,16 @@
       letter-spacing: 1.5px;
       text-shadow: 0 2px 8px rgba(20,20,20,0.12);
     }
-    #scene-container {
+    /* Model Viewer styling */
+    model-viewer {
       width: 100%;
-      min-height: 400px;
       height: 400px;
-      margin-top: 20px;
       background: rgba(0,0,0,0.03);
       border-radius: 18px;
       box-shadow: 0 2px 12px rgba(34,40,49,0.09);
-      overflow: hidden;
-      position: relative;
+      margin-top: 20px;
+      margin-bottom: 0;
+      display: block;
     }
     @media (max-width: 700px) {
       .container {
@@ -119,7 +121,7 @@
       .title {
         font-size: 24px;
       }
-      #scene-container {
+      model-viewer {
         height: 280px;
         min-height: 280px;
       }
@@ -127,6 +129,12 @@
   </style>
 </head>
 <body class="lato-light">
+  <script>
+    // Fondo aleatorio
+    const images = ['1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.png', '10.png'];
+    const randomImage = images[Math.floor(Math.random() * images.length)];
+    document.body.style.backgroundImage = 'url(' + randomImage + ')';
+  </script>
   <div class="container">
     <div class="profile-wrapper">
       <div class="label-3d">3D</div>
@@ -137,72 +145,24 @@
     <div class="title-container">
       <h2 class="title pt-serif-bold">Raúl Díaz Gutiérrez</h2>
     </div>
-    <div id="scene-container"></div>
+    <!-- Modelo 3D con Model Viewer -->
+    <model-viewer 
+      src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+      alt="Modelo 3D"
+      camera-controls
+      auto-rotate
+      ar
+      loading="eager"
+      shadow-intensity="1"
+      exposure="1"
+    >
+    </model-viewer>
   </div>
-  <!-- Three.js -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/examples/js/loaders/GLTFLoader.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/examples/js/controls/OrbitControls.js"></script>
   <script>
-    // Fondo aleatorio
-    const images = ['1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.png', '10.png'];
-    const randomImage = images[Math.floor(Math.random() * images.length)];
-    document.body.style.backgroundImage = 'url(' + randomImage + ')';
-
     // Click en imagen
     document.getElementById('profileImage').addEventListener('click', function() {
       window.location.href = '1.html';
     });
-
-    // THREE.JS 3D MODEL
-    const container = document.getElementById('scene-container');
-    let width = container.clientWidth;
-    let height = container.clientHeight;
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-    camera.position.set(0, 1.5, 3);
-
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    container.appendChild(renderer.domElement);
-
-    const controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-
-    const light1 = new THREE.HemisphereLight(0xffffff, 0x444444, 1.2);
-    scene.add(light1);
-
-    const light2 = new THREE.DirectionalLight(0xffffff, 1);
-    light2.position.set(3, 10, 10);
-    scene.add(light2);
-
-    // Ajuste de tamaño al redimensionar
-    window.addEventListener('resize', () => {
-      width = container.clientWidth;
-      height = container.clientHeight;
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
-      renderer.setSize(width, height);
-    });
-
-    // Carga del modelo GLB
-    const loader = new THREE.GLTFLoader();
-    loader.load('canba7.glb', function(gltf) {
-      const model = gltf.scene;
-      model.scale.set(1.5, 1.5, 1.5);
-      scene.add(model);
-      animate();
-    }, undefined, function(error) {
-      console.error('Error cargando GLB:', error);
-    });
-
-    function animate() {
-      requestAnimationFrame(animate);
-      controls.update();
-      renderer.render(scene, camera);
-    }
   </script>
 </body>
 </html>
