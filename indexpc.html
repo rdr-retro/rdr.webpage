@@ -33,6 +33,7 @@
       max-width: 600px;
     }
 
+    /* Imagen de perfil con animación y cursor pointer */
     .profile-image {
       width: 200px;
       height: 200px;
@@ -40,11 +41,19 @@
       overflow: hidden;
       margin-bottom: 30px;
       border: 4px solid white;
+      transition: transform 0.3s cubic-bezier(0.4, 0.2, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .profile-image:hover {
+      transform: scale(1.15);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
     }
 
     .profile-image img {
       width: 100%;
       height: auto;
+      display: block;
     }
 
     .title-container {
@@ -93,44 +102,44 @@
       margin-bottom: 10px;
     }
 
-   .blender-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    background-color: rgba(255, 165, 0, 0.4);
-    border-radius: 26px;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
+    .blender-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background-color: rgba(255, 165, 0, 0.4);
+      border-radius: 26px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
 
-  .blender-icon {
-    width: 60px;   /* AUMENTADO */
-    height: 60px;  /* AUMENTADO */
-    margin-right: 20px;
-    object-fit: contain;
-  }
+    .blender-icon {
+      width: 60px;   /* AUMENTADO */
+      height: 60px;  /* AUMENTADO */
+      margin-right: 20px;
+      object-fit: contain;
+    }
 
-  .blender-content {
-    display: flex;
-    align-items: center;
-  }
+    .blender-content {
+      display: flex;
+      align-items: center;
+    }
 
-  .blender-button {
-    background-color: white;
-    color: rgb(255, 145, 0);
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 22px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+    .blender-button {
+      background-color: white;
+      color: rgb(255, 145, 0);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 22px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
     .blender-button:hover {
       background-color: orange;
@@ -150,7 +159,7 @@
 
   <div class="container">
 
-    <div class="profile-image">
+    <div class="profile-image" id="profileImage">
       <img src="rdr.png" alt="Imagen de perfil" />
     </div>
 
@@ -224,9 +233,15 @@
   </div>
 
   <script>
+    // Fondo aleatorio
     var images = ['1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.png', '10.png'];
     var randomImage = images[Math.floor(Math.random() * images.length)];
     document.body.style.backgroundImage = 'url(' + randomImage + ')';
+
+    // Abrir 1.html al hacer clic en la imagen de perfil
+    document.getElementById('profileImage').addEventListener('click', function() {
+      window.location.href = '1.html';
+    });
   </script>
 
 </body>
