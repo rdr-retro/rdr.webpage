@@ -1,0 +1,74 @@
+
+Manual de Uso: tree_lib
+======================
+
+1. Descripción
+--------------
+tree_lib es una pequeña librería en C++ que utiliza OpenCV para capturar un fotograma de la cámara, calcular una semilla basada en la entropía de píxeles centrales y generar una cadena de 1024 dígitos aleatorios (0-9) basados en esa semilla.
+
+Esta librería no escribe archivos en disco ni usa hilos. Los números se generan bajo demanda y se guardan en memoria.
+
+2. Requisitos
+-------------
+- Ubuntu o sistema compatible con GCC/G++.
+- OpenCV 4 instalado (libopencv-dev).
+- Compilador C++ compatible con C++11 o superior.
+
+3. Archivos de la librería
+--------------------------
+- tree_lib.hpp : Declaración de la clase y funciones.
+- tree_lib.cpp : Implementación.
+- (Opcional) main.cpp : Ejemplo de uso.
+
+4. Funciones principales
+------------------------
+Clase tree_lib::Generator
+
+| Método       | Descripción                                               | Retorno                   |
+|--------------|-----------------------------------------------------------|---------------------------|
+| generate()   | Captura un fotograma, calcula semilla y genera cadena aleatoria | std::string con 1024 dígitos |
+| getLast()    | Devuelve la última cadena generada en memoria             | std::string               |
+
+5. Ejemplo básico de uso
+------------------------
+
+#include "tree_lib.hpp"
+#include <iostream>
+
+int main() {
+    tree_lib::Generator gen;
+
+    // Generar números aleatorios basados en la cámara
+    std::string datos = gen.generate();
+
+    if (!datos.empty()) {
+        std::cout << "Datos generados: " << datos << std::endl;
+    } else {
+        std::cerr << "Error generando datos." << std::endl;
+    }
+
+    return 0;
+}
+
+6. Compilación manual
+---------------------
+Paso 1: Compilar la librería
+
+g++ -c tree_lib.cpp -o tree_lib.o `pkg-config --cflags opencv4`
+
+Paso 2: Compilar el programa principal y enlazar con la librería
+
+g++ main.cpp tree_lib.o -o mi_programa `pkg-config --cflags --libs opencv4`
+
+Paso 3: Ejecutar
+
+./mi_programa
+
+7. Notas importantes
+--------------------
+- La cámara debe estar conectada y accesible.
+- Si la cámara no se abre o el fotograma está vacío, generate() devuelve cadena vacía.
+- Cada llamada a generate() captura un nuevo fotograma y genera números nuevos.
+- La cadena generada tiene siempre 1024 caracteres numéricos (0-9).
+
+Si quieres, puedo ayudarte a crear un Makefile o mejorar la librería con más funciones. ¿Quieres?

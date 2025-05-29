@@ -1,0 +1,1 @@
+g++ -c tree_lib.cpp -o tree_lib.o `pkg-config --cflags opencv4`
