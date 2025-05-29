@@ -45,9 +45,8 @@
       position: absolute;
       top: -16px;
       right: -16px;
-      background: linear-gradient(90deg, #ff6900, #ffdd00, #00e1ff, #8f00ff, #ff6900);
-      background-size: 300% 300%;
-      color: #fff;
+      background: rgba(255, 255, 255, 0.85);
+      color: #ff6900;
       font-weight: bold;
       font-size: 20px;
       padding: 6px 16px;
@@ -55,13 +54,6 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       text-transform: uppercase;
       pointer-events: none;
-      animation: gradient-move 2.5s ease-in-out infinite;
-      border: 2px solid #fff;
-    }
-    @keyframes gradient-move {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
     .profile-image {
       width: 180px;
@@ -99,15 +91,43 @@
       letter-spacing: 1.5px;
       text-shadow: 0 2px 8px rgba(20,20,20,0.12);
     }
-    /* Model Viewer styling */
+    /* Model Container styling */
+    .glb-container {
+      position: relative;
+      width: 100%;
+      margin-top: 20px;
+      margin-bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      background: rgba(255, 136, 0, 0.418);
+      border-radius: 20px;
+      box-shadow: 0 2px 12px rgba(34,40,49,0.09);
+      padding-top: 40px; /* space for label */
+      margin-bottom: 28px;
+    }
+    .model-label {
+      position: absolute;
+      top: 12px;
+      left: 24px;
+      background: #ff6900;
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 20px;
+      padding: 6px 18px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      z-index: 2;
+      text-transform: uppercase;
+      pointer-events: none;
+      letter-spacing: 1px;
+    }
     model-viewer {
       width: 100%;
       height: 400px;
       background: rgba(0,0,0,0.03);
       border-radius: 18px;
       box-shadow: 0 2px 12px rgba(34,40,49,0.09);
-      margin-top: 20px;
-      margin-bottom: 0;
       display: block;
     }
     @media (max-width: 700px) {
@@ -128,6 +148,15 @@
       }
       .title {
         font-size: 24px;
+      }
+      .glb-container {
+        padding-top: 30px;
+      }
+      .model-label {
+        font-size: 14px;
+        padding: 3px 10px;
+        top: 6px;
+        left: 10px;
       }
       model-viewer {
         height: 280px;
@@ -153,18 +182,85 @@
     <div class="title-container">
       <h2 class="title pt-serif-bold">Raúl Díaz Gutiérrez</h2>
     </div>
-    <!-- Modelo 3D con Model Viewer -->
-    <model-viewer 
-      src="cube.glb"
-      alt="Modelo 3D"
-      camera-controls
-      auto-rotate
-      ar
-      loading="eager"
-      shadow-intensity="1"
-      exposure="1"
-    >
-    </model-viewer>
+    <!-- Contenedores GLB con etiqueta naranja -->
+    <div class="glb-container">
+      <div class="model-label">Modelo 3D 1</div>
+      <model-viewer 
+        src="cube.glb"
+        alt="Modelo 3D 1"
+        camera-controls
+        auto-rotate
+        ar
+        loading="eager"
+        shadow-intensity="1"
+        exposure="1"
+      ></model-viewer>
+    </div>
+    <div class="glb-container">
+      <div class="model-label">Modelo 3D 2</div>
+      <model-viewer 
+        src="https://threejs.org/examples/models/gltf/Nefertiti/Nefertiti.glb"
+        alt="Modelo 3D 2"
+        camera-controls
+        auto-rotate
+        ar
+        loading="eager"
+        shadow-intensity="1"
+        exposure="1"
+      ></model-viewer>
+    </div>
+    <div class="glb-container">
+      <div class="model-label">Modelo 3D 3</div>
+      <model-viewer 
+        src="https://threejs.org/examples/models/gltf/RobotExpressive/RobotExpressive.glb"
+        alt="Modelo 3D 3"
+        camera-controls
+        auto-rotate
+        ar
+        loading="eager"
+        shadow-intensity="1"
+        exposure="1"
+      ></model-viewer>
+    </div>
+    <div class="glb-container">
+      <div class="model-label">Modelo 3D 4</div>
+      <model-viewer 
+        src="https://threejs.org/examples/models/gltf/Flower/Flower.glb"
+        alt="Modelo 3D 4"
+        camera-controls
+        auto-rotate
+        ar
+        loading="eager"
+        shadow-intensity="1"
+        exposure="1"
+      ></model-viewer>
+    </div>
+    <div class="glb-container">
+      <div class="model-label">Modelo 3D 5</div>
+      <model-viewer 
+        src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+        alt="Modelo 3D 5"
+        camera-controls
+        auto-rotate
+        ar
+        loading="eager"
+        shadow-intensity="1"
+        exposure="1"
+      ></model-viewer>
+    </div>
+    <div class="glb-container">
+      <div class="model-label">Modelo 3D 6</div>
+      <model-viewer 
+        src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb"
+        alt="Modelo 3D 6"
+        camera-controls
+        auto-rotate
+        ar
+        loading="eager"
+        shadow-intensity="1"
+        exposure="1"
+      ></model-viewer>
+    </div>
   </div>
   <script>
     // Click en imagen
