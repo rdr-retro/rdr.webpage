@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Raúl Díaz Gutiérrez</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f6f8fb;
+      background-size: cover;
+      background-position: center;
+      font-family: "Lato", sans-serif;
+      min-height: 100vh;
+      transition: background 0.6s;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 auto;
+      padding: 70px 80px 40px 80px;
+      max-width: 540px;
+      background: rgba(255,255,255,0.35);
+      border-radius: 35px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      backdrop-filter: blur(7px);
+      margin-top: 40px;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    .profile-wrapper {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 28px;
+    }
+    .label-3d {
+      position: absolute;
+      top: -16px;
+      right: -16px;
+      background: rgba(255, 255, 255, 0.85);
+      color: #ff6900;
+      font-weight: bold;
+      font-size: 20px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+    .profile-image {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 5px solid #fff;
+      box-shadow: 0 4px 24px rgba(80,60,120,0.18);
+      transition: transform 0.3s cubic-bezier(0.4, 0.2, 0.2, 1), box-shadow 0.3s;
+      cursor: pointer;
+      background: rgba(255,255,255,0.2);
+    }
+    .profile-image:hover {
+      transform: scale(1.12) rotate(-2deg);
+      box-shadow: 0 12px 40px rgba(80,60,120,0.25);
+    }
+    .profile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .title-container {
+      text-align: center;
+      background: rgba(34, 40, 49, 0.65);
+      padding: 14px 38px;
+      border-radius: 48px;
+      margin-bottom: 32px;
+      box-shadow: 0 2px 12px rgba(34,40,49,0.12);
+    }
+    .title {
+      font-size: 34px;
+      color: #fff;
+      margin: 0;
+      letter-spacing: 1.5px;
+      text-shadow: 0 2px 8px rgba(20,20,20,0.12);
+    }
+    #scene-container {
+      width: 100%;
+      min-height: 400px;
+      height: 400px;
+      margin-top: 20px;
+      background: rgba(0,0,0,0.03);
+      border-radius: 18px;
+      box-shadow: 0 2px 12px rgba(34,40,49,0.09);
+      overflow: hidden;
+      position: relative;
+    }
+    @media (max-width: 700px) {
+      .container {
+        padding: 18px 4vw;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      .profile-image {
+        width: 120px;
+        height: 120px;
+      }
+      .label-3d {
+        font-size: 16px;
+        padding: 4px 12px;
+        top: -12px;
+        right: -12px;
+      }
+      .title {
+        font-size: 24px;
+      }
+      #scene-container {
+        height: 280px;
+        min-height: 280px;
+      }
+    }
+  </style>
+</head>
+<body class="lato-light">
+  <div class="container">
+    <div class="profile-wrapper">
+      <div class="label-3d">3D</div>
+      <div class="profile-image" id="profileImage">
+        <img src="rdr.png" alt="Imagen de perfil" />
+      </div>
+    </div>
+    <div class="title-container">
+      <h2 class="title pt-serif-bold">Raúl Díaz Gutiérrez</h2>
+    </div>
+    <div id="scene-container"></div>
+  </div>
+  <!-- Three.js -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/examples/js/controls/OrbitControls.js"></script>
+  <script>
+    // Fondo aleatorio
+    const images = ['1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.png', '10.png'];
+    const randomImage = images[Math.floor(Math.random() * images.length)];
+    document.body.style.backgroundImage = 'url(' + randomImage + ')';
+
+    // Click en imagen
+    document.getElementById('profileImage').addEventListener('click', function() {
+      window.location.href = '1.html';
+    });
+
+    // THREE.JS 3D MODEL
+    const container = document.getElementById('scene-container');
+    let width = container.clientWidth;
+    let height = container.clientHeight;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+    camera.position.set(0, 1.5, 3);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    container.appendChild(renderer.domElement);
+
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+
+    const light1 = new THREE.HemisphereLight(0xffffff, 0x444444, 1.2);
+    scene.add(light1);
+
+    const light2 = new THREE.DirectionalLight(0xffffff, 1);
+    light2.position.set(3, 10, 10);
+    scene.add(light2);
+
+    // Ajuste de tamaño al redimensionar
+    window.addEventListener('resize', () => {
+      width = container.clientWidth;
+      height = container.clientHeight;
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
+    });
+
+    // Carga del modelo GLB
+    const loader = new THREE.GLTFLoader();
+    loader.load('canba7.glb', function(gltf) {
+      const model = gltf.scene;
+      model.scale.set(1.5, 1.5, 1.5);
+      scene.add(model);
+      animate();
+    }, undefined, function(error) {
+      console.error('Error cargando GLB:', error);
+    });
+
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+  </script>
+</body>
+</html>
