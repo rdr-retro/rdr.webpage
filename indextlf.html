@@ -1,3 +1,4 @@
+<!-- indextlf.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -40,11 +41,26 @@
       overflow: hidden;
       margin-bottom: 16.2px; /* reducido un 10% */
       border: 2.16px solid white; /* reducido un 10% */
+      /* Animación de escala continua */
+      animation: pulse 1.6s ease-in-out infinite;
+      cursor: pointer;
+      transition: box-shadow 0.2s;
+    }
+
+    .profile-image:active {
+      box-shadow: 0 0 12px 2px #ff69b4;
+    }
+
+    @keyframes pulse {
+      0%   { transform: scale(1);}
+      50%  { transform: scale(1.18);}
+      100% { transform: scale(1);}
     }
 
     .profile-image img {
       width: 100%;
       height: auto;
+      display: block;
     }
 
     .title-container {
@@ -149,7 +165,7 @@
 <body class="lato-light">
   <div class="container">
 
-    <div class="profile-image">
+    <div class="profile-image" id="profileImage">
       <img src="rdr.png" alt="Imagen de perfil" />
     </div>
 
@@ -223,9 +239,15 @@
   </div>
 
   <script>
+    // Fondo aleatorio
     var images = ['1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.png', '10.png'];
     var randomImage = images[Math.floor(Math.random() * images.length)];
     document.body.style.backgroundImage = 'url(' + randomImage + ')';
+
+    // Abrir 1tlf.html al hacer clic en la imagen de perfil
+    document.getElementById('profileImage').addEventListener('click', function() {
+      window.location.href = '1tlf.html';
+    });
   </script>
 
 </body>
