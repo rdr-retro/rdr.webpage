@@ -1,55 +1,159 @@
 #include "tree_lib.hpp"
-#include <opencv2/opencv.hpp>
-#include <random>
-#include <sstream>
 
 namespace tree_lib {
 
-Generator::Generator() {}
-Generator::~Generator() {}
+Generator::Generator()
+    : running(false), paused(false), keyLength(1024), generationIntervalMs(1000), cap(0)
+{
+    if (!cap.isOpened()) {
+        // No lanza error, solo estado interno
+    }
+}
 
-std::string Generator::generate() {
-    cv::VideoCapture cap(0);
-    if (!cap.isOpened()) return "";
+Generator::~Generator() {
+    stopGeneration();
+    if (cap.isOpened()) cap.release();
+}
 
+bool Generator::hayCamaraDisponible() {
+    std::lock_guard<std::mutex> lock(cameraMutex);
+    if (!cap.isOpened()) {
+        cap.open(0);
+        if (!cap.isOpened()) return false;
+    }
+    return true;
+}
+
+sf::Image Generator::cvMatToSfImage(const cv::Mat& mat) {
+    sf::Image img;
+    if (mat.empty()) return img;
+
+    cv::Mat matRGBA;
+    if (mat.channels() == 3) {
+        cv::cvtColor(mat, matRGBA, cv::COLOR_BGR2RGBA);
+    } else if (mat.channels() == 4) {
+        cv::cvtColor(mat, matRGBA, cv::COLOR_BGRA2RGBA);
+    } else {
+        return img;
+    }
+
+    img.create(matRGBA.cols, matRGBA.rows, matRGBA.data);
+    return img;
+}
+
+sf::Image Generator::captureImageFromCamera() {
+    std::lock_guard<std::mutex> lock(cameraMutex);
+    if (!cap.isOpened()) cap.open(0);
     cv::Mat frame;
-    cap >> frame;
-    if (frame.empty()) return "";
-
-    uint64_t entropy = frameEntropy(frame);
-    std::mt19937_64 rng(entropy);
-
-    lastDigits = randomDigits1024(rng);
-    return lastDigits;
+    if (!cap.isOpened() || !cap.read(frame) || frame.empty()) {
+        return sf::Image(); // Imagen vacía
+    }
+    return cvMatToSfImage(frame);
 }
 
-std::string Generator::getLast() const {
-    return lastDigits;
-}
+std::string Generator::generateKeyFromImage(const sf::Image& image, size_t length) {
+    unsigned int width = image.getSize().x;
+    unsigned int height = image.getSize().y;
+    const int regionSize = 10;
+    unsigned int centerX = width / 2;
+    unsigned int centerY = height / 2;
 
-uint64_t Generator::frameEntropy(const cv::Mat& frame) const {
-    uint64_t sum = 0;
-    for (int y = 0; y < frame.rows; ++y) {
-        for (int x = 0; x < frame.cols; ++x) {
-            cv::Vec3b pixel = frame.at<cv::Vec3b>(y, x);
-            sum += pixel[0] + pixel[1] + pixel[2];
+    std::vector<uint32_t> seeds;
+    for (int y = -regionSize / 2; y < regionSize / 2; ++y) {
+        for (int x = -regionSize / 2; x < regionSize / 2; ++x) {
+            sf::Color pixel = image.getPixel(centerX + x, centerY + y);
+            uint32_t value = (pixel.r << 16) | (pixel.g << 8) | pixel.b;
+            seeds.push_back(value);
         }
     }
-    return sum;
-}
 
-std::string Generator::randomDigits1024(std::mt19937_64& rng) {
-    std::ostringstream oss;
-    std::uniform_int_distribution<int> dist(0, 9);
-    for (int i = 0; i < 1024; ++i) {
-        oss << dist(rng);
+    std::seed_seq seed(seeds.begin(), seeds.end());
+    std::mt19937 rng(seed);
+
+    const std::string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    std::uniform_int_distribution<> dist(0, static_cast<int>(chars.size()) - 1);
+
+    std::string result;
+    result.reserve(length);
+    for (size_t i = 0; i < length; ++i) {
+        result += chars[dist(rng)];
     }
-    return oss.str();
+    return result;
 }
 
-bool hayCamaraDisponible() {
-    cv::VideoCapture cap(0);
-    return cap.isOpened();
+std::string Generator::generateSingleKey(const sf::Image& image, size_t length) {
+    return generateKeyFromImage(image, length);
+}
+
+void Generator::startIndefiniteGeneration(std::function<void(const std::string&)> callback, size_t length, unsigned int intervalMs) {
+    if (running.load()) return; // Ya corriendo
+    callbackFunc = callback;
+    keyLength = length;
+    generationIntervalMs = intervalMs;
+    running.store(true);
+    paused.store(false);
+    generationThread = std::thread(&Generator::generationThreadFunc, this);
+}
+
+void Generator::pauseGeneration() {
+    paused.store(true);
+}
+
+void Generator::resumeGeneration() {
+    paused.store(false);
+    cv.notify_all();
+}
+
+void Generator::stopGeneration() {
+    running.store(false);
+    cv.notify_all();
+    if (generationThread.joinable()) generationThread.join();
+}
+
+void Generator::generationThreadFunc() {
+    while (running.load()) {
+        {
+            std::unique_lock<std::mutex> lock(mtx);
+            cv.wait(lock, [this]() { return !paused.load() || !running.load(); });
+            if (!running.load()) break;
+        }
+
+        sf::Image img = captureImageFromCamera();
+        if (img.getSize().x == 0 || img.getSize().y == 0) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(generationIntervalMs));
+            continue;
+        }
+
+        std::string key = generateKeyFromImage(img, keyLength);
+        if (callbackFunc) callbackFunc(key);
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(generationIntervalMs));
+    }
+}
+
+std::string Generator::cifrarXOR(const std::string& texto, const std::string& clave) {
+    std::string resultado = texto;
+    size_t keyLen = clave.size();
+    for (size_t i = 0; i < texto.size(); ++i) {
+        resultado[i] ^= clave[i % keyLen];
+    }
+    return resultado;
+}
+
+bool Generator::isGenerating() const {
+    return running.load();
+}
+
+bool Generator::isPaused() const {
+    return paused.load();
+}
+
+void Generator::setKeyLength(size_t length) {
+    keyLength = length;
+}
+
+void Generator::setGenerationInterval(unsigned int intervalMs) {
+    generationIntervalMs = intervalMs;
 }
 
 } // namespace tree_lib
