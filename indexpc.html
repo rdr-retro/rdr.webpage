@@ -21,20 +21,19 @@
     }
 
     .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-  padding: 19px 4vw;
-  max-width: 540px;
-  background: rgba(255,255,255,0.35);
-  border-radius: 28px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-  backdrop-filter: blur(7px);
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 auto;
+      padding: 19px 4vw;
+      max-width: 540px;
+      background: rgba(255,255,255,0.35);
+      border-radius: 28px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      backdrop-filter: blur(10px);
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
 
     .profile-image {
       width: 108px;
@@ -63,17 +62,16 @@
 
     .title-container {
       text-align: center;
-      background: rgba(34, 40, 49, 0.65);
+      background: rgba(34, 40, 49, 0);
       padding: 10px 24px;
       border-radius: 32px;
       margin-bottom: 24px;
     }
 
-    .title {
-      font-size: 30px;
-      color: #fff;
-      margin: 0;
-      letter-spacing: 1px;
+    .title-container img {
+      width: 100%;
+      max-width: 320px;
+      border-radius: 16px;
     }
 
     .info-container {
@@ -83,7 +81,8 @@
       margin-bottom: 16px;
       color: #fff;
       box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-      backdrop-filter: blur(4px);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.15);
       position: relative;
       overflow: hidden;
     }
@@ -93,7 +92,7 @@
       position: absolute;
       inset: 0;
       z-index: 0;
-      opacity: 0.15;
+      opacity: 0.2;
       pointer-events: none;
       background: linear-gradient(120deg, #fff 0%, transparent 100%);
     }
@@ -105,26 +104,28 @@
     }
 
     .pink {
-      background: linear-gradient(120deg, #a770ef 0%, #f6d365 100%);
-      color: #2d223a;
+      background: rgba(225, 50, 120, 0.35);
+      color: #2d1122;
     }
 
     .blue {
-      background: linear-gradient(120deg, #43cea2 0%, #185a9d 100%);
+      background: rgba(0, 140, 255, 0.35);
+      color: #ffffff;
     }
 
     .green {
-      background: linear-gradient(120deg, #11998e 0%, #38ef7d 100%);
+      background: rgba(0, 255, 140, 0.35);
+      color: #002b1a;
     }
 
     .lightpink {
-      background: linear-gradient(120deg, #f7971e 0%, #ffd200 100%);
-      color: #5c3a00;
+      background: rgba(255, 225, 0, 0.35);
+      color: #3c2800;
     }
 
     .lightblue {
-      background: linear-gradient(120deg, #43e97b 0%, #38f9d7 100%);
-      color: #1b2a2f;
+      background: rgba(0, 255, 255, 0.35);
+      color: #002d2d;
     }
 
     .info-row {
@@ -171,11 +172,14 @@
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      background-color: #ff6900;
+      background: rgba(255, 105, 0, 0.35);
       border-radius: 20px;
       padding: 14px;
       margin-bottom: 16px;
       color: #fff;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .blender-icon {
@@ -221,7 +225,7 @@
     </div>
 
     <div class="title-container">
-      <h2 class="title pt-serif-bold">Raúl Díaz Gutiérrez</h2>
+      <img src="raul.diaz.gutierrez.png" alt="Raúl Díaz Gutiérrez" />
     </div>
 
     <div class="info-container pink">
@@ -301,4 +305,4 @@
     });
   </script>
 </body>
-</html> //haz mas pequeño todo el contenido un 20%
+</html>
