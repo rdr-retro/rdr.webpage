@@ -1,15 +1,13 @@
+<!-- CÓDIGO COMPLETO A 30% DE BORDE -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Raúl Díaz Gutiérrez</title>
-
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-
   <style>
     body {
       margin: 0;
@@ -33,6 +31,7 @@
       backdrop-filter: blur(10px);
       margin-top: 20px;
       margin-bottom: 20px;
+      border: 1px solid rgba(255,255,255,0.30); /* actualizado */
     }
 
     .profile-image {
@@ -82,7 +81,7 @@
       color: #fff;
       box-shadow: 0 2px 12px rgba(0,0,0,0.08);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.30); /* actualizado */
       position: relative;
       overflow: hidden;
     }
@@ -92,7 +91,7 @@
       position: absolute;
       inset: 0;
       z-index: 0;
-      opacity: 0.2;
+      opacity: 0.30; /* actualizado */
       pointer-events: none;
       background: linear-gradient(120deg, #fff 0%, transparent 100%);
     }
@@ -179,7 +178,7 @@
       color: #fff;
       backdrop-filter: blur(12px);
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.30); /* actualizado */
     }
 
     .blender-icon {
@@ -294,12 +293,9 @@
   </div>
 
   <script>
-    // Fondo aleatorio
     var images = ['1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.png', '10.png'];
     var randomImage = images[Math.floor(Math.random() * images.length)];
     document.body.style.backgroundImage = 'url(' + randomImage + ')';
-
-    // Abrir 1.html al hacer clic en la imagen de perfil
     document.getElementById('profileImage').addEventListener('click', function() {
       window.location.href = '1.html';
     });
