@@ -85,6 +85,7 @@
       pointer-events: none;
       transition: all 0.8s ease;
     }
+
     .boton-cerrar {
       position: fixed;
       top: 20px;
@@ -94,13 +95,14 @@
       font-weight: bold;
       padding: 12px 20px;
       border: none;
-      border-radius: 8px;
+      border-radius: 35px;
       cursor: pointer;
       font-size: 1.2rem;
       box-shadow: 0 0 10px rgb(125, 255, 125);
       z-index: 2000;
       display: none;
     }
+
     .info-lista {
       position: fixed;
       right: 140px;
@@ -108,19 +110,31 @@
       width: 250px;
       background: rgba(0,0,0,0.6);
       padding: 15px;
-      border-radius: 12px;
+      border-radius: 35px;
       box-shadow: 0 0 10px #000;
       display: none;
       z-index: 3000;
     }
+
     .info-lista h2 {
       margin-top: 0;
       font-size: 1.6rem;
       text-align: center;
       color: rgb(125, 255, 125);
     }
+
     .info-lista ol {
       padding-left: 20px;
+    }
+
+    audio#reproductor-audio {
+      display: none;
+      margin-top: 30px;
+      width: 100%;
+      border-radius: 100px;
+      background: rgba(255,255,255,0.1);
+      box-shadow: 0 0 10px rgba(125, 255, 125, 0.7);
+      outline: none;
     }
 
     .frase-animada {
@@ -142,6 +156,7 @@
       margin: 0;
       padding-bottom: 8px;
     }
+
     @keyframes fadeInFrase {
       from { opacity: 0; transform: translateX(-50%) translateY(30px);}
       to { opacity: 1; transform: translateX(-50%) translateY(0);}
@@ -165,11 +180,20 @@
 <body>
   <h1 class="titulo">Mis habilidades</h1>
   <button class="boton-cerrar">Cerrar</button>
+
+  <!-- Panel de habilidades -->
   <div class="info-lista">
-    <h2>Palabras</h2>
+    <h2></h2>
     <ol id="lista-palabras"></ol>
+    <!-- Reproductor de audio dentro del panel -->
+    <audio id="reproductor-audio" controls>
+      <source src="" type="audio/mpeg" />
+      Tu navegador no soporta audio HTML5.
+    </audio>
   </div>
+
   <div class="frase-animada" id="frase"></div>
+
   <div id="cubo-template" style="display:none;">
     <div class="cubo-wrapper">
       <div class="cubo">
@@ -182,6 +206,7 @@
       </div>
     </div>
   </div>
+
   <script>
     // Fondo aleatorio
     const fondos = ['1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.png', '10.png'];
@@ -191,7 +216,6 @@
     // Frases animadas tipiadas
     const frases = [
       "Haz clic en un cubo magico para ver mis habilidades.",
-    
     ];
     function mostrarFraseAnimada() {
       const frase = frases[Math.floor(Math.random() * frases.length)];
@@ -214,9 +238,13 @@
         escribir();
       }, 180);
     }
-    window.addEventListener('DOMContentLoaded', mostrarFraseAnimada);
+    window.addEventListener('DOMContentLoaded', () => {
+      mostrarFraseAnimada();
+      // Ajustar volumen por defecto del audio
+      document.getElementById('reproductor-audio').volume = 0.06;
+    });
 
-    // Cubos interactivos
+    // Variables
     const cantidadCubos = 5;
     const margen = 24;
     const minSize = 100;
@@ -228,6 +256,14 @@
       ["Feliz", "Triste", "Rápido", "Lento", "Alto", "Bajo"],
       ["Correr", "Saltar", "Leer", "Escribir", "Cantar", "Bailar"]
     ];
+    const audiosCubos = [
+      "audio1.mp3",
+      "audio2.mp3",
+      "audio3.mp3",
+      "audio4.mp3",
+      "audio5.mp3"
+    ];
+
     const posiciones = [];
     const cubos = [];
     function halfSize(s) { return s / 2; }
@@ -248,10 +284,14 @@
       }
       return null;
     }
+
     const template = document.querySelector('#cubo-template .cubo-wrapper');
     const botonCerrar = document.querySelector('.boton-cerrar');
     const infoLista = document.querySelector('.info-lista');
     const listaPalabras = document.getElementById('lista-palabras');
+    const reproductor = document.getElementById('reproductor-audio');
+    const reproductorSource = reproductor.querySelector('source');
+
     for (let i = 0; i < cantidadCubos; i++) {
       const size = generarTamaño();
       const pos = generarPosicionLibre(size);
@@ -282,14 +322,18 @@
       document.body.appendChild(nuevoWrapper);
       cubos.push({wrapper: nuevoWrapper, cubo: cubo, pos: pos, size: size, palabras: textosCubos[i]});
     }
+
     let cuboActivo = null;
     let zoom = 2.5;
     const zoomMin = 1.0;
     const zoomMax = 5.0;
+
     function expandirCubo(obj) {
       cuboActivo = obj;
       zoom = 2.5;
-      cubos.forEach(o => { if (o !== obj) o.wrapper.classList.add('desvanecer'); });
+      cubos.forEach(o => {
+        if (o !== obj) o.wrapper.classList.add('desvanecer');
+      });
       const w = obj.wrapper;
       w.style.left = (window.innerWidth/2 - obj.size/2) + 'px';
       w.style.top = (window.innerHeight/2 - obj.size/2) + 'px';
@@ -297,9 +341,21 @@
       botonCerrar.style.display = 'block';
       w.querySelectorAll('.cara').forEach(c => c.style.color = 'transparent');
       listaPalabras.innerHTML = '';
-      obj.palabras.forEach(p => { const li = document.createElement('li'); li.textContent = p; listaPalabras.appendChild(li); });
+      obj.palabras.forEach(p => {
+        const li = document.createElement('li');
+        li.textContent = p;
+        listaPalabras.appendChild(li);
+      });
       infoLista.style.display = 'block';
+
+      // Reproductor de audio
+      const index = cubos.indexOf(obj);
+      reproductorSource.src = audiosCubos[index];
+      reproductor.load();
+      reproductor.style.display = 'block';
+      reproductor.play().catch(() => {});
     }
+
     function restaurarCubos() {
       cubos.forEach(o => {
         o.wrapper.classList.remove('desvanecer');
@@ -310,13 +366,24 @@
       });
       botonCerrar.style.display = 'none';
       infoLista.style.display = 'none';
+      reproductor.pause();
+      reproductor.currentTime = 0;
+      reproductor.style.display = 'none';
       cuboActivo = null;
     }
+
     cubos.forEach(o => o.wrapper.addEventListener('click', () => {
       if (!cuboActivo) expandirCubo(o);
     }));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape' && cuboActivo) restaurarCubos(); });
-    botonCerrar.addEventListener('click', () => { if (cuboActivo) restaurarCubos(); });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && cuboActivo) restaurarCubos();
+    });
+
+    botonCerrar.addEventListener('click', () => {
+      if (cuboActivo) restaurarCubos();
+    });
+
     document.addEventListener('wheel', (e) => {
       if (cuboActivo) {
         e.preventDefault();
