@@ -3,27 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Perfil Técnico</title>
+  <title>Mis habilidades + Frase animada</title>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet" />
   <style>
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
-      padding: 0;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
       font-family: "Montserrat", "Lato", sans-serif;
+      perspective: 900px;
+      position: relative;
+      color: white;
       background-size: cover;
       background-position: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      min-height: 100vh;
-      position: relative;
-      overflow: hidden;
-      color: white;
       background-repeat: no-repeat;
     }
-
     body::before {
       content: '';
       position: absolute;
@@ -33,259 +30,165 @@
       z-index: 0;
     }
 
-    /* Contenedor con glassmorphism y glow borde */
-    .glass-border-wrapper {
-      position: relative;
-      border-radius: 32px;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.08);
-      box-shadow:
-        0 0 20px 3px rgba(255, 255, 255, 0.12),
-        0 8px 32px rgba(44, 62, 80, 0.25);
-      backdrop-filter: blur(22px) saturate(180%);
-      -webkit-backdrop-filter: blur(22px) saturate(180%);
-      transition: box-shadow 0.4s ease;
-      width: 460px;
-      height: 460px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    h1.titulo {
+      position: fixed;
+      top: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 3.5rem;
+      font-weight: bold;
+      text-shadow: 2px 2px 8px #000;
+      pointer-events: none;
+      user-select: none;
+      z-index: 1000;
+    }
+
+    .cubo-wrapper {
+      position: absolute;
+      transition: transform 0.8s ease, left 0.8s ease, top 0.8s ease;
       z-index: 1;
     }
-    .glass-border-wrapper:hover {
-      box-shadow:
-        0 0 26px 6px rgba(255, 255, 255, 0.25),
-        0 10px 48px rgba(44, 62, 80, 0.35);
+    .cubo {
+      transform-style: preserve-3d;
+      animation: rotar 7s linear infinite;
+      border-radius: 6px;
+      cursor: pointer;
     }
-
-    .chart-container {
-      position: relative;
-      width: 420px;
-      height: 420px;
-      background: rgba(255, 255, 255, 0.12);
-      border-radius: 32px;
-      box-shadow:
-        0 8px 32px rgba(44, 62, 80, 0.25),
-        0 0 40px rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(18px) saturate(160%);
-      overflow: visible;
-      padding: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2;
-      border: 1.5px solid rgba(255, 255, 255, 0.18);
+    .cubo:hover .cara {
+      background: rgba(0,255,0,0.2);
+      border-color: rgb(125, 255, 125);
     }
-
-    .chart-container:hover {
-      box-shadow: 0 16px 48px rgba(52, 152, 219, 0.25), 0 2px 8px rgba(0,0,0,0.18);
-    }
-
-    .chart-center-image {
+    .cara {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 110px;
-      height: 110px;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      border: 4px solid #fff;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-      object-fit: cover;
-      background: linear-gradient(135deg, #fff 70%, #f1f7fa 100%);
-      z-index: 3;
-      transition: box-shadow 0.3s;
+      border: 2px solid #fff;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(5px);
+      color: #fff;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-shadow: 1px 1px 4px #000;
+      user-select: none;
+      border-radius: 6px;
+      box-sizing: border-box;
+      text-align: center;
+      transition: background 0.3s ease, border 0.3s ease;
     }
-
-    .chart-center-image:hover {
-      box-shadow: 0 0 30px 4px #e67e22a0, 0 0 0 6px #fff;
+    @keyframes rotar {
+      from { transform: rotateX(0deg) rotateY(0deg);}
+      to   { transform: rotateX(360deg) rotateY(360deg);}
     }
-
-    canvas {
-      position: relative;
-      z-index: 2;
-      background: transparent;
-      filter:
-        drop-shadow(0 0 14px rgba(230, 126, 34, 0.45))
-        drop-shadow(0 0 18px rgba(26, 188, 156, 0.3))
-        drop-shadow(0 0 14px rgba(142, 68, 173, 0.3));
-      border-radius: 50%;
+    .desvanecer {
+      opacity: 0;
+      transform: scale(0.1);
+      pointer-events: none;
+      transition: all 0.8s ease;
+    }
+    .boton-cerrar {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgb(125, 255, 125);
+      color: #000;
+      font-weight: bold;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      box-shadow: 0 0 10px rgb(125, 255, 125);
+      z-index: 2000;
+      display: none;
+    }
+    .info-lista {
+      position: fixed;
+      right: 140px;
+      top: 100px;
+      width: 250px;
+      background: rgba(0,0,0,0.6);
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #000;
+      display: none;
+      z-index: 3000;
+    }
+    .info-lista h2 {
+      margin-top: 0;
+      font-size: 1.6rem;
+      text-align: center;
+      color: rgb(125, 255, 125);
+    }
+    .info-lista ol {
+      padding-left: 20px;
     }
 
     .frase-animada {
-      position: relative;
-      margin-top: 40px;
-      margin-bottom: 20px;
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
       font-size: 1.35rem;
       font-weight: 700;
       color: #ffffff;
       text-align: center;
-      z-index: 2;
-      min-height: 2.5em;
+      z-index: 10;
+      min-height: 2.8em;
+      width: 100vw;
       opacity: 0;
       animation: fadeInFrase 1.3s cubic-bezier(.4,0,.2,1) forwards;
       text-shadow: 0 0 6px rgba(255,255,255,0.4), 0 0 12px rgba(255,255,255,0.2);
+      pointer-events: none;
+      margin: 0;
+      padding-bottom: 8px;
     }
-
     @keyframes fadeInFrase {
-      from { opacity: 0; transform: translateY(30px);}
-      to { opacity: 1; transform: translateY(0);}
+      from { opacity: 0; transform: translateX(-50%) translateY(30px);}
+      to { opacity: 1; transform: translateX(-50%) translateY(0);}
     }
 
     @media (max-width: 600px) {
-      .glass-border-wrapper {
-        width: 94vw;
-        height: 94vw;
-        padding: 12px;
-      }
-      .chart-container {
-        width: 100%;
-        height: 100%;
-        padding: 10px;
-      }
-      .chart-center-image {
-        width: 70px;
-        height: 70px;
-      }
       .frase-animada {
         font-size: 1.05rem;
+        min-height: 2em;
+        padding-bottom: 4px;
       }
+      .info-lista {
+        top: 60px;
+        right: 16px;
+        width: 82vw;
+      }
+      h1.titulo { font-size: 2rem; }
     }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <div class="glass-border-wrapper">
-    <div class="chart-container">
-      <canvas id="skillsChart"></canvas>
-      <img src="rdr.png" alt="Perfil" class="chart-center-image" />
+  <h1 class="titulo">Mis habilidades</h1>
+  <button class="boton-cerrar">Cerrar</button>
+  <div class="info-lista">
+    <h2>Palabras</h2>
+    <ol id="lista-palabras"></ol>
+  </div>
+  <div class="frase-animada" id="frase"></div>
+  <div id="cubo-template" style="display:none;">
+    <div class="cubo-wrapper">
+      <div class="cubo">
+        <div class="cara frente"></div>
+        <div class="cara atras"></div>
+        <div class="cara derecha"></div>
+        <div class="cara izquierda"></div>
+        <div class="cara arriba"></div>
+        <div class="cara abajo"></div>
+      </div>
     </div>
   </div>
-  <div id="frase" class="frase-animada"></div>
-
   <script>
     // Fondo aleatorio
     const fondos = ['1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.png', '10.png'];
     const fondoAleatorio = fondos[Math.floor(Math.random() * fondos.length)];
     document.body.style.backgroundImage = `url(${fondoAleatorio})`;
 
-    const labels1 = ['Blender', 'Informático', 'Autoeficacia', 'Artista'];
-    const data1 = [25, 25, 25, 25];
-
-    const labels2 = ['Linux', 'Vibecoding Programador', 'C y C++', 'Reparador de Hardware', 'Otros', 'Diseño de productos'];
-    const originalData2 = [13, 31, 8, 38, 0, 30];
-    const othersPercent = 5;
-    const sumWithoutOthers = originalData2.reduce((sum, val, i) => i !== 4 ? sum + val : sum, 0);
-    const factor = (100 - othersPercent) / sumWithoutOthers;
-
-    let adjustedData2 = originalData2.map((val, i) => {
-      if (i === 4) return othersPercent;
-      return Math.round(val * factor);
-    });
-
-    const totalAdjusted = adjustedData2.reduce((a,b) => a + b, 0);
-    const diff = 100 - totalAdjusted;
-    adjustedData2[adjustedData2.length - 1] += diff;
-
-    // Plugin para etiquetas dentro de las secciones (textos curvados)
-    const labelInsideSlices = {
-      id: 'labelInsideSlices',
-      afterDraw(chart) {
-        const {ctx} = chart;
-        chart.data.datasets.forEach((dataset, dIndex) => {
-          const meta = chart.getDatasetMeta(dIndex);
-          meta.data.forEach((arc, i) => {
-            const label = chart.data.labels[dIndex][i];
-            if (!label) return;
-            const startAngle = arc.startAngle;
-            const endAngle = arc.endAngle;
-            const r = (arc.innerRadius + arc.outerRadius) / 2;
-            ctx.save();
-            ctx.font = 'bold 12px Montserrat, Lato, sans-serif';
-            const text = label;
-            const textWidth = ctx.measureText(text).width;
-            const angleSpan = endAngle - startAngle;
-            const radius = r;
-            const angularWidth = textWidth / radius;
-            let angle = startAngle + (angleSpan - angularWidth) / 2;
-            for (let j = 0; j < text.length; j++) {
-              const char = text[j];
-              const charWidth = ctx.measureText(char).width;
-              const charAngle = charWidth / radius;
-              const x = chart.width / 2 + Math.cos(angle + charAngle / 2) * radius;
-              const y = chart.height / 2 + Math.sin(angle + charAngle / 2) * radius;
-              ctx.save();
-              ctx.translate(x, y);
-              ctx.rotate(angle + charAngle / 2 + Math.PI / 2);
-              ctx.fillStyle = "#ffffff";
-              ctx.textAlign = 'center';
-              ctx.textBaseline = 'middle';
-              ctx.shadowColor = "rgba(255,255,255,0.7)";
-              ctx.shadowBlur = 4;
-              ctx.fillText(char, 0, 0);
-              ctx.restore();
-              angle += charAngle;
-            }
-            ctx.restore();
-          });
-        });
-      }
-    };
-
-    const config = {
-      type: 'doughnut',
-      data: {
-        labels: [labels1, labels2],
-        datasets: [
-          {
-            label: 'Núcleo',
-            data: data1,
-            backgroundColor: [
-              'rgba(230, 126, 34, 0.45)',
-              'rgba(52, 152, 219, 0.45)',
-              'rgba(46, 204, 113, 0.45)',
-              'rgba(155, 89, 182, 0.45)'
-            ],
-            borderWidth: 0,   // Sin borde sólido
-            spacing: 4,       // Separación entre secciones
-            radius: '65%',
-            cutout: '25%'
-          },
-          {
-            label: 'Anillo Exterior',
-            data: adjustedData2,
-            backgroundColor: [
-              'rgba(241, 196, 15, 0.35)',
-              'rgba(26, 188, 156, 0.35)',
-              'rgba(52, 73, 94, 0.35)',
-              'rgba(231, 76, 60, 0.35)',
-              'rgba(149, 165, 166, 0.35)',
-              'rgba(142, 68, 173, 0.35)'
-            ],
-            borderWidth: 0,   // Sin borde sólido
-            spacing: 3,       // Separación un poco menor que el anillo interno
-            radius: '120%',
-            cutout: '60%'
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        cutout: '50%',
-        animation: {
-          duration: 1200,
-          easing: 'easeOutQuart'
-        },
-        plugins: {
-          legend: { display: false },
-          tooltip: { enabled: true }
-        }
-      },
-      plugins: [labelInsideSlices]
-    };
-
-    new Chart(document.getElementById('skillsChart'), config);
-
+    // Frases animadas tipiadas
     const frases = [
       "La creatividad es el motor de la innovación.",
       "Cada línea de código cuenta una historia.",
@@ -293,7 +196,6 @@
       "Transformando ideas en soluciones reales.",
       "El futuro pertenece a los que se atreven a crear."
     ];
-
     function mostrarFraseAnimada() {
       const frase = frases[Math.floor(Math.random() * frases.length)];
       const fraseDiv = document.getElementById("frase");
@@ -315,8 +217,117 @@
         escribir();
       }, 180);
     }
-
     window.addEventListener('DOMContentLoaded', mostrarFraseAnimada);
+
+    // Cubos interactivos
+    const cantidadCubos = 5;
+    const margen = 24;
+    const minSize = 100;
+    const maxSize = 160;
+    const textosCubos = [
+      ["Blender", "Diseño", "Interfaces", "Crear Videojuegos", "Arte", "Piensa Diferente"],
+      ["Informatico", "Hardware", "Software", "Vibe Coding", "Programacion", "Violeta"],
+      ["SUPER Autoeficacia", "Hiperfoco", "Tres", "Cuatro", "Cinco", "Seis"],
+      ["Feliz", "Triste", "Rápido", "Lento", "Alto", "Bajo"],
+      ["Correr", "Saltar", "Leer", "Escribir", "Cantar", "Bailar"]
+    ];
+    const posiciones = [];
+    const cubos = [];
+    function halfSize(s) { return s / 2; }
+    function seSuperpone(x1, y1, s1, x2, y2, s2, m) {
+      return !(x1 + s1 + m < x2 || x2 + s2 + m < x1 || y1 + s1 + m < y2 || y2 + s2 + m < y1);
+    }
+    function generarTamaño() {
+      const factor = Math.pow(Math.random(), 2);
+      return Math.floor(minSize + factor * (maxSize - minSize));
+    }
+    function generarPosicionLibre(size) {
+      let intentoMax = 100;
+      while (intentoMax--) {
+        const x = Math.floor(Math.random() * (window.innerWidth - size - margen) + margen/2);
+        const y = Math.floor(Math.random() * (window.innerHeight - size - margen) + margen/2);
+        const choque = posiciones.some(p => seSuperpone(x, y, size, p.x, p.y, p.size, margen));
+        if (!choque) return {x, y};
+      }
+      return null;
+    }
+    const template = document.querySelector('#cubo-template .cubo-wrapper');
+    const botonCerrar = document.querySelector('.boton-cerrar');
+    const infoLista = document.querySelector('.info-lista');
+    const listaPalabras = document.getElementById('lista-palabras');
+    for (let i = 0; i < cantidadCubos; i++) {
+      const size = generarTamaño();
+      const pos = generarPosicionLibre(size);
+      if (!pos) break;
+      posiciones.push({x: pos.x, y: pos.y, size});
+      const nuevoWrapper = template.cloneNode(true);
+      const cubo = nuevoWrapper.querySelector('.cubo');
+      cubo.style.width = size + 'px';
+      cubo.style.height = size + 'px';
+      const caras = cubo.querySelectorAll('.cara');
+      const h = halfSize(size);
+      caras.forEach((cara, idx) => {
+        cara.style.width = size + 'px';
+        cara.style.height = size + 'px';
+        cara.style.fontSize = Math.floor(size / 7) + 'px';
+      });
+      cubo.querySelector('.frente').style.transform = `translateZ(${h}px)`;
+      cubo.querySelector('.atras').style.transform = `rotateY(180deg) translateZ(${h}px)`;
+      cubo.querySelector('.derecha').style.transform = `rotateY(90deg) translateZ(${h}px)`;
+      cubo.querySelector('.izquierda').style.transform = `rotateY(-90deg) translateZ(${h}px)`;
+      cubo.querySelector('.arriba').style.transform = `rotateX(90deg) translateZ(${h}px)`;
+      cubo.querySelector('.abajo').style.transform = `rotateX(-90deg) translateZ(${h}px)`;
+      const nombres = ["frente", "atras", "derecha", "izquierda", "arriba", "abajo"];
+      nombres.forEach((n, idx) => { cubo.querySelector("." + n).textContent = textosCubos[i][idx]; });
+      cubo.style.animationDuration = (6 + Math.random()*6).toFixed(2) + 's';
+      nuevoWrapper.style.left = pos.x + 'px';
+      nuevoWrapper.style.top = pos.y + 'px';
+      document.body.appendChild(nuevoWrapper);
+      cubos.push({wrapper: nuevoWrapper, cubo: cubo, pos: pos, size: size, palabras: textosCubos[i]});
+    }
+    let cuboActivo = null;
+    let zoom = 2.5;
+    const zoomMin = 1.0;
+    const zoomMax = 5.0;
+    function expandirCubo(obj) {
+      cuboActivo = obj;
+      zoom = 2.5;
+      cubos.forEach(o => { if (o !== obj) o.wrapper.classList.add('desvanecer'); });
+      const w = obj.wrapper;
+      w.style.left = (window.innerWidth/2 - obj.size/2) + 'px';
+      w.style.top = (window.innerHeight/2 - obj.size/2) + 'px';
+      w.style.transform = `scale(${zoom})`;
+      botonCerrar.style.display = 'block';
+      w.querySelectorAll('.cara').forEach(c => c.style.color = 'transparent');
+      listaPalabras.innerHTML = '';
+      obj.palabras.forEach(p => { const li = document.createElement('li'); li.textContent = p; listaPalabras.appendChild(li); });
+      infoLista.style.display = 'block';
+    }
+    function restaurarCubos() {
+      cubos.forEach(o => {
+        o.wrapper.classList.remove('desvanecer');
+        o.wrapper.style.left = o.pos.x + 'px';
+        o.wrapper.style.top = o.pos.y + 'px';
+        o.wrapper.style.transform = '';
+        o.cubo.querySelectorAll('.cara').forEach(c => c.style.color = '#fff');
+      });
+      botonCerrar.style.display = 'none';
+      infoLista.style.display = 'none';
+      cuboActivo = null;
+    }
+    cubos.forEach(o => o.wrapper.addEventListener('click', () => {
+      if (!cuboActivo) expandirCubo(o);
+    }));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && cuboActivo) restaurarCubos(); });
+    botonCerrar.addEventListener('click', () => { if (cuboActivo) restaurarCubos(); });
+    document.addEventListener('wheel', (e) => {
+      if (cuboActivo) {
+        e.preventDefault();
+        zoom += e.deltaY < 0 ? 0.1 : -0.1;
+        zoom = Math.max(zoomMin, Math.min(zoomMax, zoom));
+        cuboActivo.wrapper.style.transform = `scale(${zoom})`;
+      }
+    }, {passive:false});
   </script>
 </body>
 </html>
