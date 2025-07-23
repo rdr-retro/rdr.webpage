@@ -2,106 +2,282 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Dock con imagen que se estira horizontalmente al mantener clic</title>
+  <title>Imagen visible detrás del dock y tareas con eliminar</title>
   <style>
+    /* Contenedor Body */
     body {
       margin: 0;
-      height: 100vh;
-      background: #f0f0f0;
       font-family: sans-serif;
+      background: #f0f0f0;
       display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding-top: 110px;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 180px; /* para dejar espacio a la imagen */
       position: relative;
+      overflow-x: hidden;
     }
 
+    /* Imagen detrás del dock sin blanqueado */
     .background-image {
       position: absolute;
-      top: 10px;
-      width: 160px;
-      height: auto;
-      z-index: 0;
-      transition: transform 0.1s ease;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 205px;
       cursor: pointer;
-      user-select: none;
-      transform-origin: center center;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      z-index: -1;       /* detrás del dock */
+      opacity: 1;        /* completamente visible, sin transparencia */
+      filter: drop-shadow(0 0 5px rgba(0,0,0,0.1)); /* ligera sombra para resaltar */
+      background: transparent;
     }
-
     .background-image:hover {
-      transform: translateY(-10px);
+      transform: translateX(-50%) translateY(-5px);
+      opacity: 1;
     }
 
+    /* Dock con solo degradado sin fondo blanco para máxima visibilidad imagen */
     .dock {
-      position: relative;
-      padding: 30px 80px;
-      font-size: 48px;
-      border-radius: 40px;
-      color: #000;
-      background: #ccc;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-      z-index: 1;
-
-      border: 6px solid transparent;
       background-image:
-        linear-gradient(#ccc, #ccc),
-        linear-gradient(
-          270deg,
-          #ff9a9e,
-          #fbc7c7,
-          #f48fb1,
-          #fbc7c7,
-          #ff9a9e,
-          #f48fb1,
-          #fbc7c7,
-          #ff9a9e
-        );
+        linear-gradient(270deg, #ff9a9e, #fbc7c7, #f48fb1, #fbc7c7, #ff9a9e);
       background-origin: border-box;
-      background-clip: padding-box, border-box;
-      background-size: 100% 100%, 400% 100%;
+      background-clip: border-box;
+      background-size: 400% 100%;
+      padding: 30px 60px;
+      border-radius: 40px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+      z-index: 1;
+      border: 6px solid transparent;
       animation: gradientFlowStop 3s forwards cubic-bezier(0.33, 1, 0.68, 1);
+      width: fit-content;
+      text-align: center;
+      color: white;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      user-select: none;
+    }
+    @keyframes gradientFlowStop {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 400% 50%; }
     }
 
-    @keyframes gradientFlowStop {
-      0% {
-        background-position: 0% 50%, 0% 50%;
-      }
-      100% {
-        background-position: 0% 50%, 400% 50%;
-      }
+    h1 {
+      margin-top: 0;
+      font-size: 36px;
+      text-align: center;
+      user-select: none;
+    }
+
+    /* Inputs para agregar tarea */
+    .task-input {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .task-input input {
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      width: 250px;
+      outline-offset: 2px;
+      transition: outline-color 0.25s ease;
+    }
+    .task-input input:focus {
+      outline: 3px solid #f48fb1;
+    }
+
+    .task-input button {
+      padding: 10px 20px;
+      font-size: 18px;
+      border-radius: 10px;
+      border: none;
+      background-color: #ff9a9e;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .task-input button:hover {
+      background-color: #e06673;
+    }
+
+    /* Contenedor de tareas */
+    .task-container {
+      margin-top: 40px;
+      width: 380px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+      padding: 20px 30px;
+      z-index: 1;
+      user-select: none;
+    }
+
+    .task-title {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    /* Cada tarea */
+    .task {
+      font-size: 20px;
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: space-between;
+    }
+
+    /* Checkbox + texto alineados */
+    .task-left {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-grow: 1;
+      min-width: 0;
+    }
+
+    .task input[type="checkbox"] {
+      transform: scale(1.4);
+      cursor: pointer;
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    /* Texto tachado si completada */
+    .task.completed span {
+      text-decoration: line-through;
+      opacity: 0.5;
+      user-select: none;
+      overflow-wrap: break-word;
+    }
+
+    /* Botón rojo para eliminar */
+    .delete-btn {
+      background-color: #e74c3c;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      padding: 4px 10px;
+      font-size: 18px;
+      transition: background-color 0.25s ease;
+      user-select: none;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .delete-btn:hover {
+      background-color: #c0392b;
     }
   </style>
 </head>
 <body>
 
-  <img src="rocky.png" alt="Fondo" class="background-image" id="rockyImage" />
-  <div class="dock">Buenos días</div>
+  <!-- Imagen detrás del dock, totalmente visible -->
+  <img src="rocky.png" alt="Fondo" class="background-image" />
+
+  <div class="dock" role="banner">
+    <h1>Mis Tareas</h1>
+    <div class="task-input">
+      <input type="text" id="newTask" placeholder="Nueva tarea..." aria-label="Nueva tarea" />
+      <button onclick="addTask()" aria-label="Agregar tarea">Agregar</button>
+    </div>
+  </div>
+
+  <main class="task-container" role="main" aria-labelledby="task-title">
+    <div id="task-title" class="task-title">Tareas pendientes</div>
+    <div id="taskList" aria-live="polite" aria-relevant="additions removals"></div>
+  </main>
 
   <script>
-    const img = document.getElementById('rockyImage');
-    let scaleX = 1;
-    let intervalId;
+    document.addEventListener('DOMContentLoaded', loadTasks);
 
-    img.addEventListener('mousedown', (e) => {
-      e.preventDefault();
+    function addTask() {
+      const input = document.getElementById('newTask');
+      const taskText = input.value.trim();
+      if (!taskText) return;
 
-      intervalId = setInterval(() => {
-        if (scaleX < 3) { // límite máximo de estiramiento
-          scaleX += 0.05;
-          img.style.transform = `translateY(-10px) scaleX(${scaleX})`;
-        }
-      }, 50);
-    });
+      const taskList = document.getElementById('taskList');
+      const task = createTaskElement(taskText, false);
+      taskList.appendChild(task);
 
-    function resetScale() {
-      clearInterval(intervalId);
-      scaleX = 1;
-      img.style.transform = 'translateY(0) scaleX(1)';
+      saveTasks();
+      input.value = '';
+      input.focus();
     }
 
-    window.addEventListener('mouseup', resetScale);
-    img.addEventListener('mouseleave', resetScale);
-  </script>
+    function createTaskElement(text, completed) {
+      const task = document.createElement('div');
+      task.className = 'task';
+      if (completed) task.classList.add('completed');
 
+      const leftDiv = document.createElement('div');
+      leftDiv.className = 'task-left';
+
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.checked = completed;
+      checkbox.setAttribute('aria-label', 'Marcar tarea como completada');
+      checkbox.onchange = () => toggleTask(checkbox);
+
+      const span = document.createElement('span');
+      span.textContent = text;
+
+      leftDiv.appendChild(checkbox);
+      leftDiv.appendChild(span);
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.className = 'delete-btn';
+      deleteBtn.textContent = '×';
+      deleteBtn.title = 'Eliminar tarea';
+      deleteBtn.setAttribute('aria-label', `Eliminar tarea: ${text}`);
+      deleteBtn.onclick = () => deleteTask(task);
+
+      task.appendChild(leftDiv);
+      task.appendChild(deleteBtn);
+
+      return task;
+    }
+
+    function toggleTask(checkbox) {
+      const task = checkbox.closest('.task');
+      task.classList.toggle('completed');
+      saveTasks();
+    }
+
+    function deleteTask(taskElement) {
+      taskElement.remove();
+      saveTasks();
+    }
+
+    function saveTasks() {
+      const tasks = [];
+      document.querySelectorAll('#taskList .task').forEach(task => {
+        tasks.push({
+          text: task.querySelector('.task-left span').innerText,
+          completed: task.classList.contains('completed')
+        });
+      });
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    function loadTasks() {
+      const stored = localStorage.getItem('tasks');
+      if (!stored) return;
+
+      const tasks = JSON.parse(stored);
+      const taskList = document.getElementById('taskList');
+      taskList.innerHTML = '';
+
+      tasks.forEach(task => {
+        const el = createTaskElement(task.text, task.completed);
+        taskList.appendChild(el);
+      });
+    }
+  </script>
 </body>
 </html>
