@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dock con imagen que se estira horizontalmente al mantener clic</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #f0f0f0;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 110px;
+      position: relative;
+    }
+
+    .background-image {
+      position: absolute;
+      top: 10px;
+      width: 160px;
+      height: auto;
+      z-index: 0;
+      transition: transform 0.1s ease;
+      cursor: pointer;
+      user-select: none;
+      transform-origin: center center;
+    }
+
+    .background-image:hover {
+      transform: translateY(-10px);
+    }
+
+    .dock {
+      position: relative;
+      padding: 30px 80px;
+      font-size: 48px;
+      border-radius: 40px;
+      color: #000;
+      background: #ccc;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+
+      border: 6px solid transparent;
+      background-image:
+        linear-gradient(#ccc, #ccc),
+        linear-gradient(
+          270deg,
+          #ff9a9e,
+          #fbc7c7,
+          #f48fb1,
+          #fbc7c7,
+          #ff9a9e,
+          #f48fb1,
+          #fbc7c7,
+          #ff9a9e
+        );
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+      background-size: 100% 100%, 400% 100%;
+      animation: gradientFlowStop 3s forwards cubic-bezier(0.33, 1, 0.68, 1);
+    }
+
+    @keyframes gradientFlowStop {
+      0% {
+        background-position: 0% 50%, 0% 50%;
+      }
+      100% {
+        background-position: 0% 50%, 400% 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <img src="rocky.png" alt="Fondo" class="background-image" id="rockyImage" />
+  <div class="dock">Buenos días</div>
+
+  <script>
+    const img = document.getElementById('rockyImage');
+    let scaleX = 1;
+    let intervalId;
+
+    img.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+
+      intervalId = setInterval(() => {
+        if (scaleX < 3) { // límite máximo de estiramiento
+          scaleX += 0.05;
+          img.style.transform = `translateY(-10px) scaleX(${scaleX})`;
+        }
+      }, 50);
+    });
+
+    function resetScale() {
+      clearInterval(intervalId);
+      scaleX = 1;
+      img.style.transform = 'translateY(0) scaleX(1)';
+    }
+
+    window.addEventListener('mouseup', resetScale);
+    img.addEventListener('mouseleave', resetScale);
+  </script>
+
+</body>
+</html>
