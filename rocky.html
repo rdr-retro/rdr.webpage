@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <title>Imagen visible detrás del dock y tareas con eliminar</title>
   <style>
-    /* Contenedor Body */
     body {
       margin: 0;
       font-family: sans-serif;
@@ -12,12 +11,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 180px; /* para dejar espacio a la imagen */
+      padding-top: 180px;
       position: relative;
       overflow-x: hidden;
     }
-
-    /* Imagen detrás del dock sin blanqueado */
     .background-image {
       position: absolute;
       top: 50px;
@@ -26,17 +23,15 @@
       width: 205px;
       cursor: pointer;
       transition: transform 0.2s ease, opacity 0.2s ease;
-      z-index: -1;       /* detrás del dock */
-      opacity: 1;        /* completamente visible, sin transparencia */
-      filter: drop-shadow(0 0 5px rgba(0,0,0,0.1)); /* ligera sombra para resaltar */
+      z-index: -1;
+      opacity: 1;
+      filter: drop-shadow(0 0 5px rgba(0,0,0,0.1));
       background: transparent;
     }
     .background-image:hover {
       transform: translateX(-50%) translateY(-5px);
       opacity: 1;
     }
-
-    /* Dock con solo degradado sin fondo blanco para máxima visibilidad imagen */
     .dock {
       background-image:
         linear-gradient(270deg, #ff9a9e, #fbc7c7, #f48fb1, #fbc7c7, #ff9a9e);
@@ -59,23 +54,20 @@
       0% { background-position: 0% 50%; }
       100% { background-position: 400% 50%; }
     }
-
     h1 {
       margin-top: 0;
       font-size: 36px;
       text-align: center;
       user-select: none;
     }
-
-    /* Inputs para agregar tarea */
     .task-input {
       margin-top: 20px;
       display: flex;
       gap: 10px;
       justify-content: center;
+      flex-wrap: wrap;
     }
-
-    .task-input input {
+    .task-input input[type="text"] {
       padding: 10px;
       font-size: 18px;
       border-radius: 10px;
@@ -84,10 +76,29 @@
       outline-offset: 2px;
       transition: outline-color 0.25s ease;
     }
-    .task-input input:focus {
+    .task-input input[type="text"]:focus {
       outline: 3px solid #f48fb1;
     }
-
+    .task-input-datetime {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 10px;
+      width: 100%;
+      max-width: 380px;
+    }
+    .task-input-datetime input[type="datetime-local"] {
+      padding: 6px 8px;
+      font-size: 14px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      flex: 1 1 45%;
+      outline-offset: 2px;
+      transition: outline-color 0.25s ease;
+    }
+    .task-input-datetime input[type="datetime-local"]:focus {
+      outline: 3px solid #f48fb1;
+    }
     .task-input button {
       padding: 10px 20px;
       font-size: 18px;
@@ -98,101 +109,139 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
       user-select: none;
+      height: 44px;
+      align-self: center;
+      margin-left: 10px;
     }
     .task-input button:hover {
       background-color: #e06673;
     }
-
-    /* Contenedor de tareas */
     .task-container {
       margin-top: 40px;
-      width: 380px;
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
-      padding: 20px 30px;
+      width: 420px;
+      background-image: linear-gradient(115deg,#ff9a9e 0,#fbc7c7 30%,#f48fb1 80%,#ff9a9e 100%);
+      background-size: 400% 100%;
+      border-radius: 24px;
+      box-shadow: 0 4px 20px rgba(255, 115, 140, 0.13),0 2px 8px rgba(0,0,0,0.12);
+      padding: 30px 34px 24px 34px;
       z-index: 1;
       user-select: none;
+      border: 2px solid #f48fb1;
+      animation: gradientFlowStop 1.7s forwards cubic-bezier(0.33, 1, 0.68, 1);
     }
-
     .task-title {
       font-size: 24px;
-      margin-bottom: 15px;
-      color: #333;
+      margin-bottom: 18px;
+      color: #fff;
+      text-shadow: 0 1px 2px #c07685a4;
+      letter-spacing: 0.02em;
     }
-
-    /* Cada tarea */
+    .date-group h3 {
+      margin: 24px 0 10px;
+      color: #7f364c;
+      font-weight: bold;
+      letter-spacing: 0.01em;
+      font-size: 18px;
+      background: rgba(255,255,255,0.29);
+      display: inline-block;
+      padding: 3px 18px 2px 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px #ffb5b830;
+      user-select: none;
+    }
     .task {
-      font-size: 20px;
-      margin: 10px 0;
+      font-size: 19px;
+      margin: 12px 0;
       display: flex;
-      align-items: center;
-      gap: 10px;
-      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      padding: 10px 6px 10px 0;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.22);
     }
-
-    /* Checkbox + texto alineados */
     .task-left {
       display: flex;
-      gap: 10px;
+      flex-direction: row;
       align-items: center;
+      gap: 13px;
       flex-grow: 1;
       min-width: 0;
     }
-
     .task input[type="checkbox"] {
-      transform: scale(1.4);
+      transform: scale(1.95);
       cursor: pointer;
       flex-shrink: 0;
       user-select: none;
+      accent-color: #f06a85;
+      border-radius: 8px;
+      margin-left: 4px;
+      margin-right: 6px;
     }
-
-    /* Texto tachado si completada */
+    /* Estilo para la hora solo (span con clase task-time) */
+    .task-time {
+      color: #00308F; /* azul intenso */
+      font-weight: 600;
+      user-select: text;
+    }
     .task.completed span {
       text-decoration: line-through;
-      opacity: 0.5;
+      opacity: 0.45;
       user-select: none;
       overflow-wrap: break-word;
     }
-
-    /* Botón rojo para eliminar */
     .delete-btn {
       background-color: #e74c3c;
       border: none;
       color: white;
       font-weight: bold;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
-      padding: 4px 10px;
-      font-size: 18px;
-      transition: background-color 0.25s ease;
+      padding: 4px 14px;
+      font-size: 19px;
+      transition: background-color 0.23s ease;
       user-select: none;
       flex-shrink: 0;
       line-height: 1;
+      height: 38px;
+      align-self: center;
+      box-shadow: 0 1px 5px #ecb8c23a;
     }
     .delete-btn:hover {
       background-color: #c0392b;
     }
+    .task-left span {
+      font-size: 18px;
+      color: #541023;
+      font-weight: 500;
+      user-select: text; /* permitir seleccionar texto */
+    }
+    .task-left > div {
+      margin-left: 42px;
+      font-size: 14px;
+      color: #994252;
+      user-select: none;
+    }
   </style>
 </head>
 <body>
-
-  <!-- Imagen detrás del dock, totalmente visible -->
   <img src="rocky.png" alt="Fondo" class="background-image" />
-
   <div class="dock" role="banner">
     <h1>Mis Tareas</h1>
     <div class="task-input">
       <input type="text" id="newTask" placeholder="Nueva tarea..." aria-label="Nueva tarea" />
       <button onclick="addTask()" aria-label="Agregar tarea">Agregar</button>
     </div>
+    <div class="task-input-datetime">
+      <input type="datetime-local" id="startDateTime" aria-label="Fecha y hora de inicio (opcional)" />
+      <input type="datetime-local" id="endDateTime" aria-label="Fecha y hora de fin (opcional)" />
+    </div>
   </div>
-
   <main class="task-container" role="main" aria-labelledby="task-title">
     <div id="task-title" class="task-title">Tareas pendientes</div>
     <div id="taskList" aria-live="polite" aria-relevant="additions removals"></div>
   </main>
-
   <script>
     document.addEventListener('DOMContentLoaded', loadTasks);
 
@@ -201,16 +250,41 @@
       const taskText = input.value.trim();
       if (!taskText) return;
 
-      const taskList = document.getElementById('taskList');
-      const task = createTaskElement(taskText, false);
-      taskList.appendChild(task);
+      const startInput = document.getElementById('startDateTime').value;
+      const endInput = document.getElementById('endDateTime').value;
 
+      const now = new Date();
+      const dateStr = now.toLocaleDateString();
+      const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      const group = getOrCreateDateGroup(dateStr);
+
+      const task = createTaskElement(taskText, false, timeStr, startInput, endInput);
+      group.appendChild(task);
       saveTasks();
+
       input.value = '';
+      document.getElementById('startDateTime').value = '';
+      document.getElementById('endDateTime').value = '';
       input.focus();
     }
 
-    function createTaskElement(text, completed) {
+    function getOrCreateDateGroup(dateStr) {
+      let group = document.querySelector(`[data-date="${dateStr}"]`);
+      if (!group) {
+        group = document.createElement('div');
+        group.dataset.date = dateStr;
+        group.className = 'date-group';
+        const header = document.createElement('h3');
+        header.textContent = dateStr;
+        group.appendChild(header);
+        document.getElementById('taskList').appendChild(group);
+      }
+      return group;
+    }
+
+    // Ahora la hora está envuelta en un <span class="task-time"> para poder estilizarla
+    function createTaskElement(text, completed, time, startDateTime, endDateTime) {
       const task = document.createElement('div');
       task.className = 'task';
       if (completed) task.classList.add('completed');
@@ -225,22 +299,53 @@
       checkbox.onchange = () => toggleTask(checkbox);
 
       const span = document.createElement('span');
-      span.textContent = text;
+      // Construimos el contenido con hora en span azul y texto normal
+      span.innerHTML = `<span class="task-time">[${time}]</span> ${escapeHtml(text)}`;
 
       leftDiv.appendChild(checkbox);
       leftDiv.appendChild(span);
+
+      if (startDateTime || endDateTime) {
+        const info = document.createElement('div');
+        let content = '';
+        if (startDateTime) {
+          const startDate = new Date(startDateTime);
+          content += `Inicio: ${startDate.toLocaleString()}`;
+        }
+        if (endDateTime) {
+          const endDate = new Date(endDateTime);
+          content += (content ? ' | ' : '') + `Fin: ${endDate.toLocaleString()}`;
+        }
+        info.textContent = content;
+        leftDiv.appendChild(info);
+      }
 
       const deleteBtn = document.createElement('button');
       deleteBtn.className = 'delete-btn';
       deleteBtn.textContent = '×';
       deleteBtn.title = 'Eliminar tarea';
       deleteBtn.setAttribute('aria-label', `Eliminar tarea: ${text}`);
-      deleteBtn.onclick = () => deleteTask(task);
+      deleteBtn.onclick = () => {
+        const parentGroup = task.parentElement;
+        task.remove();
+        if (parentGroup.children.length === 1) parentGroup.remove();
+        saveTasks();
+      };
 
       task.appendChild(leftDiv);
       task.appendChild(deleteBtn);
 
+      task.dataset.startDateTime = startDateTime || '';
+      task.dataset.endDateTime = endDateTime || '';
+
       return task;
+    }
+
+    // Escape HTML para evitar inyección si el texto contiene caracteres especiales
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
     }
 
     function toggleTask(checkbox) {
@@ -249,17 +354,23 @@
       saveTasks();
     }
 
-    function deleteTask(taskElement) {
-      taskElement.remove();
-      saveTasks();
-    }
-
     function saveTasks() {
       const tasks = [];
-      document.querySelectorAll('#taskList .task').forEach(task => {
-        tasks.push({
-          text: task.querySelector('.task-left span').innerText,
-          completed: task.classList.contains('completed')
+      document.querySelectorAll('.date-group').forEach(group => {
+        const date = group.dataset.date;
+        group.querySelectorAll('.task').forEach(task => {
+          const span = task.querySelector('.task-left span').innerText;
+          const match = span.match(/^\[(.*?)\] (.*)/);
+          const time = match ? match[1] : '';
+          const text = match ? match[2] : span;
+          tasks.push({
+            text,
+            completed: task.classList.contains('completed'),
+            date,
+            time,
+            startDateTime: task.dataset.startDateTime || null,
+            endDateTime: task.dataset.endDateTime || null
+          });
         });
       });
       localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -268,14 +379,20 @@
     function loadTasks() {
       const stored = localStorage.getItem('tasks');
       if (!stored) return;
-
       const tasks = JSON.parse(stored);
       const taskList = document.getElementById('taskList');
       taskList.innerHTML = '';
-
+      const grouped = {};
       tasks.forEach(task => {
-        const el = createTaskElement(task.text, task.completed);
-        taskList.appendChild(el);
+        if (!grouped[task.date]) grouped[task.date] = [];
+        grouped[task.date].push(task);
+      });
+      Object.keys(grouped).sort().forEach(date => {
+        const group = getOrCreateDateGroup(date);
+        grouped[date].forEach(task => {
+          const el = createTaskElement(task.text, task.completed, task.time, task.startDateTime, task.endDateTime);
+          group.appendChild(el);
+        });
       });
     }
   </script>
