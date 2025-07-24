@@ -228,6 +228,36 @@
       color: #994252;
       user-select: none;
     }
+
+    /* Estilos para importar/exportar */
+    .import-export-container {
+      margin-top: 28px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .import-export-container button {
+      padding: 10px 26px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      user-select: none;
+      color: white;
+    }
+    #exportBtn {
+      background: #4caf50;
+    }
+    #exportBtn:hover {
+      background: #449d48;
+    }
+    #importBtn {
+      background: #2196f3;
+    }
+    #importBtn:hover {
+      background: #1976d2;
+    }
   </style>
 </head>
 <body>
@@ -246,6 +276,12 @@
   <main class="task-container" role="main" aria-labelledby="task-title">
     <div id="task-title" class="task-title">Tareas pendientes</div>
     <div id="taskList" aria-live="polite" aria-relevant="additions removals"></div>
+
+    <div class="import-export-container">
+      <button id="exportBtn" aria-label="Exportar tareas">Exportar tareas</button>
+      <button id="importBtn" aria-label="Importar tareas">Importar tareas</button>
+      <input type="file" id="importFileInput" accept="application/json" style="display:none" aria-label="Seleccionar archivo JSON para importar tareas" />
+    </div>
   </main>
   <script>
     document.addEventListener('DOMContentLoaded', loadTasks);
@@ -264,7 +300,7 @@
 
       const group = getOrCreateDateGroup(dateStr);
 
-      // Nuevo: no pasamos completed (queda undefined para que ambas unchecked)
+      // Ambos checkboxes desmarcados por defecto: completed null
       const task = createTaskElement(taskText, null, timeStr, startInput, endInput);
       group.appendChild(task);
       saveTasks();
@@ -297,14 +333,12 @@
       const leftDiv = document.createElement('div');
       leftDiv.className = 'task-left';
 
-      // Checkbox "hecho"
       const checkboxDone = document.createElement('input');
       checkboxDone.type = 'checkbox';
       checkboxDone.checked = completed === true;
       checkboxDone.setAttribute('aria-label', 'Marcar tarea como completada');
       checkboxDone.className = 'checkbox-done';
 
-      // Checkbox "no hecho"
       const checkboxNotDone = document.createElement('input');
       checkboxNotDone.type = 'checkbox';
       checkboxNotDone.checked = completed === false;
@@ -433,6 +467,76 @@
           group.appendChild(el);
         });
       });
+    }
+
+    // IMPORT / EXPORT
+
+    const exportBtn = document.getElementById('exportBtn');
+    const importBtn = document.getElementById('importBtn');
+    const importFileInput = document.getElementById('importFileInput');
+
+    exportBtn.addEventListener('click', exportTasks);
+    importBtn.addEventListener('click', () => importFileInput.click());
+    importFileInput.addEventListener('change', handleImportFile);
+
+    function exportTasks() {
+      const tasksJson = localStorage.getItem('tasks');
+      if (!tasksJson) {
+        alert('No hay tareas para exportar.');
+        return;
+      }
+      const blob = new Blob([tasksJson], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'tasks-export.json';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function handleImportFile(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const importedTasks = JSON.parse(e.target.result);
+          if (!Array.isArray(importedTasks)) throw new Error('Formato inválido: debe ser un arreglo');
+
+          for (const t of importedTasks) {
+            if (typeof t.text !== 'string') throw new Error('Cada tarea debe tener texto');
+          }
+
+          const currentTasksJson = localStorage.getItem('tasks');
+          let currentTasks = currentTasksJson ? JSON.parse(currentTasksJson) : [];
+
+          const existingKeys = new Set(currentTasks.map(t => `${t.text}___${t.date}___${t.time}`));
+          const newTasks = importedTasks.filter(t => {
+            const key = `${t.text}___${t.date}___${t.time}`;
+            return !existingKeys.has(key);
+          });
+
+          if (newTasks.length === 0) {
+            alert('No hay tareas nuevas para importar.');
+            return;
+          }
+
+          const combinedTasks = currentTasks.concat(newTasks);
+          localStorage.setItem('tasks', JSON.stringify(combinedTasks));
+          loadTasks();
+          alert(`Se importaron ${newTasks.length} tarea(s) nueva(s).`);
+        } catch (err) {
+          alert('Error al importar tareas: ' + err.message);
+        } finally {
+          importFileInput.value = '';
+        }
+      };
+
+      reader.readAsText(file);
     }
   </script>
 </body>
