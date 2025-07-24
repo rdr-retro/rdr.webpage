@@ -165,19 +165,24 @@
       display: flex;
       flex-direction: row;
       align-items: center;
-      gap: 13px;
+      gap: 15px; /* espacio entre checkboxes y texto */
       flex-grow: 1;
       min-width: 0;
     }
-    .task input[type="checkbox"] {
-      transform: scale(1.95);
+    .task-left input[type="checkbox"] {
+      transform: scale(1.6);
       cursor: pointer;
       flex-shrink: 0;
       user-select: none;
-      accent-color: #f06a85;
       border-radius: 8px;
-      margin-left: 4px;
-      margin-right: 6px;
+      margin-left: 0 !important;
+      margin-right: 6px !important;
+    }
+    .checkbox-done {
+      accent-color: #2ecc71; /* verde */
+    }
+    .checkbox-notdone {
+      accent-color: #e74c3c; /* rojo */
     }
     /* Estilo para la hora solo (span con clase task-time) */
     .task-time {
@@ -259,7 +264,8 @@
 
       const group = getOrCreateDateGroup(dateStr);
 
-      const task = createTaskElement(taskText, false, timeStr, startInput, endInput);
+      // Nuevo: no pasamos completed (queda undefined para que ambas unchecked)
+      const task = createTaskElement(taskText, null, timeStr, startInput, endInput);
       group.appendChild(task);
       saveTasks();
 
@@ -283,26 +289,51 @@
       return group;
     }
 
-    // Ahora la hora está envuelta en un <span class="task-time"> para poder estilizarla
     function createTaskElement(text, completed, time, startDateTime, endDateTime) {
       const task = document.createElement('div');
       task.className = 'task';
-      if (completed) task.classList.add('completed');
+      if (completed === true) task.classList.add('completed');
 
       const leftDiv = document.createElement('div');
       leftDiv.className = 'task-left';
 
-      const checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      checkbox.checked = completed;
-      checkbox.setAttribute('aria-label', 'Marcar tarea como completada');
-      checkbox.onchange = () => toggleTask(checkbox);
+      // Checkbox "hecho"
+      const checkboxDone = document.createElement('input');
+      checkboxDone.type = 'checkbox';
+      checkboxDone.checked = completed === true;
+      checkboxDone.setAttribute('aria-label', 'Marcar tarea como completada');
+      checkboxDone.className = 'checkbox-done';
+
+      // Checkbox "no hecho"
+      const checkboxNotDone = document.createElement('input');
+      checkboxNotDone.type = 'checkbox';
+      checkboxNotDone.checked = completed === false;
+      checkboxNotDone.setAttribute('aria-label', 'Marcar tarea como NO completada');
+      checkboxNotDone.className = 'checkbox-notdone';
+
+      checkboxDone.onchange = () => {
+        if (checkboxDone.checked) {
+          checkboxNotDone.checked = false;
+          toggleTask(task, true);
+        } else {
+          toggleTask(task, false);
+        }
+      };
+
+      checkboxNotDone.onchange = () => {
+        if (checkboxNotDone.checked) {
+          checkboxDone.checked = false;
+          toggleTask(task, false);
+        } else {
+          if (!checkboxDone.checked) toggleTask(task, false);
+        }
+      };
 
       const span = document.createElement('span');
-      // Construimos el contenido con hora en span azul y texto normal
       span.innerHTML = `<span class="task-time">[${time}]</span> ${escapeHtml(text)}`;
 
-      leftDiv.appendChild(checkbox);
+      leftDiv.appendChild(checkboxDone);
+      leftDiv.appendChild(checkboxNotDone);
       leftDiv.appendChild(span);
 
       if (startDateTime || endDateTime) {
@@ -341,16 +372,18 @@
       return task;
     }
 
-    // Escape HTML para evitar inyección si el texto contiene caracteres especiales
     function escapeHtml(text) {
       const div = document.createElement('div');
       div.textContent = text;
       return div.innerHTML;
     }
 
-    function toggleTask(checkbox) {
-      const task = checkbox.closest('.task');
-      task.classList.toggle('completed');
+    function toggleTask(task, isDone) {
+      if (isDone) {
+        task.classList.add('completed');
+      } else {
+        task.classList.remove('completed');
+      }
       saveTasks();
     }
 
@@ -359,13 +392,19 @@
       document.querySelectorAll('.date-group').forEach(group => {
         const date = group.dataset.date;
         group.querySelectorAll('.task').forEach(task => {
+          const checkboxDone = task.querySelector('.checkbox-done');
+          const checkboxNotDone = task.querySelector('.checkbox-notdone');
+          let completed = null;
+          if (checkboxDone.checked) completed = true;
+          else if (checkboxNotDone.checked) completed = false;
+
           const span = task.querySelector('.task-left span').innerText;
           const match = span.match(/^\[(.*?)\] (.*)/);
           const time = match ? match[1] : '';
           const text = match ? match[2] : span;
           tasks.push({
             text,
-            completed: task.classList.contains('completed'),
+            completed,
             date,
             time,
             startDateTime: task.dataset.startDateTime || null,
