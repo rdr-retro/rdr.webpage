@@ -1,0 +1,223 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Green Blue Studios</title>
+
+  <!-- 🔹 Favicon (imagen de la pestaña) -->
+  <link rel="icon" href="logo2.png" type="image/png" />
+
+  <style>
+    body {
+      margin: 0;
+      background-color: #000; /* Fondo negro puro */
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: #1a1a1a; /* Parte superior gris oscuro */
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      opacity: 0;
+      animation: fadeInSmoky 1.2s ease forwards;
+      animation-delay: 0.2s;
+    }
+
+    nav a {
+      color: #ccc;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo-title img {
+      height: 40px;
+      width: auto;
+    }
+
+    .hero {
+      background: none; /* Sin imagen de fondo */
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .hero img {
+      max-width: 300px;
+      width: 80%;
+      height: auto;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeInSmoky 1.5s ease forwards;
+      animation-delay: 0.4s;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #ddd;
+      opacity: 0;
+      animation: fadeInSmoky 1.5s ease forwards;
+      animation-delay: 0.7s;
+    }
+
+    section {
+      padding: 4rem 2rem;
+      text-align: center;
+      background-color: #000; /* Negro puro */
+    }
+
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeInSmoky 1.5s ease forwards;
+      animation-delay: 1s;
+    }
+
+    .title-gradient {
+      background: linear-gradient(to right, #30d588, #0073ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    section p {
+      max-width: 700px;
+      margin: 0 auto 1.5rem auto;
+      color: #ccc;
+      line-height: 1.6;
+      opacity: 0;
+      animation: fadeInSmoky 1.5s ease forwards;
+      animation-delay: 1.3s;
+    }
+
+    .dev-badge {
+      display: inline-block;
+      margin-left: 0.75rem;
+      padding: 0.3rem 0.7rem;
+      font-size: 0.8rem;
+      font-weight: bold;
+      background-color: #ff9800;
+      color: #000;
+      border-radius: 4px;
+      vertical-align: middle;
+      letter-spacing: 0.05em;
+    }
+
+    .project-2d-image {
+      max-width: 400px;
+      width: 90%;
+      height: auto;
+      display: block;
+      margin: 2rem auto;
+      opacity: 0;
+      animation: fadeInSmoky 1.5s ease forwards;
+      animation-delay: 1.6s;
+    }
+
+    .btn-open-entry {
+      display: inline-block;
+      padding: 0.8rem 1.6rem;
+      background: #0073ff;
+      color: #fff;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      transition: background 0.2s ease, transform 0.1s ease;
+      opacity: 0;
+      animation: fadeInSmoky 1.5s ease forwards;
+      animation-delay: 2s;
+    }
+
+    .btn-open-entry:hover {
+      background: #0a8fff;
+      transform: translateY(-1px);
+    }
+
+    .btn-open-entry:active {
+      transform: translateY(0);
+    }
+
+    @keyframes fadeInSmoky {
+      0% {
+        opacity: 0;
+        filter: blur(30px);
+        transform: translateY(30px);
+      }
+      50% {
+        opacity: 0.6;
+        filter: blur(15px);
+        transform: translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .dev-badge {
+        font-size: 0.85rem;
+        padding: 0.35rem 0.8rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo-title">
+      <img src="logo.png" alt="Logo" />
+      <strong>Green Blue Studios</strong>
+    </div>
+    <nav>
+      <a href="#">Inicio</a>
+      <a href="#project-2d">Project 2D</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <img src="logo2.png" alt="Logo Principal" />
+    <p>Donde la creatividad se modela en 3D</p>
+  </section>
+
+  <section id="project-2d">
+    <h2>
+      <span class="title-gradient">Project 2D</span>
+      <span class="dev-badge">EN DESARROLLO</span>
+    </h2>
+    <p>
+      Nuestro proyecto 2D en desarrollo. Un mundo dibujado a mano,
+      mecánicas clásicas y mucha personalidad.
+      Pronto compartiremos avances, arte y gameplay.
+    </p>
+
+    <img src="img1.png" alt="Arte de Project 2D" class="project-2d-image" />
+    <a href="2d.html" class="btn-open-entry">Abrir entrada</a>
+  </section>
+</body>
+</html>
