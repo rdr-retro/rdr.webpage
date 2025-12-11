@@ -385,6 +385,14 @@
         @media print {
 
             /* Forzar la impresión exacta de colores y fondos (Dark Mode) */
+            * {
+                opacity: 1 !important;
+                visibility: visible !important;
+                animation: none !important;
+                filter: none !important;
+                transition: none !important;
+            }
+
             html,
             body,
             section {
