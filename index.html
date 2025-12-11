@@ -384,73 +384,137 @@
 
         @media print {
 
-            /* Forzar la impresión exacta de colores y fondos (Dark Mode) */
+            /* === RESET TOTAL PARA CONSISTENCIA MULTIPLATAFORMA === */
             * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                box-sizing: border-box !important;
+                text-shadow: none !important;
+                filter: none !important;
                 opacity: 1 !important;
                 visibility: visible !important;
                 animation: none !important;
-                filter: none !important;
                 transition: none !important;
             }
 
+            @page {
+                size: A4;
+                margin: 0;
+            }
+
             html,
-            body,
-            section {
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
+            body {
+                width: 210mm;
+                min-height: 297mm;
+                margin: 0 auto;
                 background-color: #000 !important;
                 color: white !important;
-                height: auto !important;
             }
 
-            /* Ocultar elementos de navegación y control */
-            header#top-header,
-            .dev-badge {
-                display: none !important;
+            body {
+                padding: 1.5cm 1.5cm;
+                /* Márgenes internos simulados para consistencia */
             }
 
-            /* Evitar cortes de página dentro de las tarjetas */
-            .info-box,
+            /* === FORZAR LAYOUT DE ESCRITORIO === */
+            section,
+            #project-2d {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                text-align: left !important;
+            }
+
+            /* === RESTAURAR CENTRADO PARA CABECERA Y LOGO === */
             .hero,
-            .header-cv,
-            .contact-info {
-                break-inside: avoid;
+            .header-cv {
+                text-align: center !important;
+                width: 100% !important;
+                margin-bottom: 2rem !important;
+            }
+
+            .hero img {
+                margin: 0 auto !important;
+                display: block !important;
+                max-width: 200px !important;
+                /* Controlar tamaño en print */
+            }
+
+            .header-cv h2,
+            .header-cv .title-gradient {
+                text-align: center !important;
+                display: block !important;
+                width: 100% !important;
+            }
+
+            /* Forzar que el resto del contenido siga a la izquierda */
+            .info-box {
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: flex-start !important;
+                gap: 1.5rem !important;
+                margin: 1.5rem 0 !important;
                 page-break-inside: avoid;
+                break-inside: avoid;
+                width: 100% !important;
             }
 
-            /* Asegurar visibilidad de textos */
-            p,
-            h1,
-            h2,
-            h3,
-            h4,
-            h5,
-            li,
-            span,
-            div {
+            .colored-rectangle {
+                flex-shrink: 0 !important;
+                width: 70px !important;
+                height: 70px !important;
+                background: linear-gradient(135deg, #0073ff, #30d588) !important;
+                border: 1px solid #333 !important;
+                /* Borde sutil por si falla el fondo */
+            }
+
+            .info-text {
+                flex-grow: 1 !important;
+                width: auto !important;
+                text-align: left !important;
+                color: #eee !important;
+            }
+
+            /* Alineación estricta de textos */
+            .header-cv h2,
+            .info-text strong,
+            .info-text h3,
+            .info-text ul,
+            .info-text p {
+                text-align: left !important;
                 color: white !important;
-                text-shadow: none !important;
             }
 
-            /* Mantener gradientes si el navegador lo soporta en impresión */
+            /* === RESTAURAR DEGRADADOS Y LINEAS === */
             .title-gradient {
                 background: linear-gradient(to right, #30d588, #0073ff) !important;
                 -webkit-background-clip: text !important;
                 background-clip: text !important;
                 -webkit-text-fill-color: transparent !important;
-                color: transparent !important;
+                color: #30d588 !important;
+                /* Fallback legible */
             }
 
-            /* Colores de enlaces */
+            .white-line {
+                width: 100% !important;
+                height: 2px !important;
+                background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.9), transparent) !important;
+                margin: 2rem 0 !important;
+                opacity: 1 !important;
+                border: none !important;
+            }
+
+            /* === OCULTAR ELEMENTOS NO DESEADOS === */
+            header#top-header,
+            .dev-badge {
+                display: none !important;
+            }
+
+            /* === COLORES DE ENLACES === */
             a {
-                color: var(--color-link) !important;
+                color: #0073ff !important;
                 text-decoration: none !important;
-            }
-
-            /* Ajustes menores de márgenes para maximizar espacio sin romper diseño */
-            @page {
-                margin: 0.5cm;
-                size: auto;
             }
         }
     </style>
