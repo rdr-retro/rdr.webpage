@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CV Raúl Diaz Gutiérrez - Programación e IA</title>
 
-    <link rel="icon" href="logo2.png" type="image/png" />
+    <link rel="icon" href="logo.png" type="image/png" />
 
     <style>
         :root {
@@ -20,7 +20,7 @@
         body {
             margin: 0;
             background-color: #000;
-            color: white;
+            color: #bfbfbf;
             font-family: 'Segoe UI', sans-serif;
             overflow-x: hidden;
         }
@@ -191,6 +191,7 @@
             animation: fadeInSmoky 0.8s ease forwards;
         }
 
+        /* Ajuste de los delays para la nueva línea */
         .white-line:nth-of-type(1) {
             animation-delay: 0.9s;
         }
@@ -207,6 +208,11 @@
             animation-delay: 3.0s;
         }
 
+        /* Nuevo delay para la línea extra */
+        .white-line:nth-of-type(5) {
+            animation-delay: 3.7s;
+        }
+
         .info-box {
             display: flex;
             align-items: center;
@@ -220,6 +226,7 @@
             padding: 0 1rem;
         }
 
+        /* Ajuste de los delays para las cajas de información */
         .info-box:nth-of-type(1) {
             animation-delay: 1.0s;
         }
@@ -236,6 +243,12 @@
             animation-delay: 3.2s;
         }
 
+        /* Nuevo delay para la caja extra */
+        .info-box:nth-of-type(5) {
+            animation-delay: 3.9s;
+        }
+
+
         .colored-rectangle {
             flex-shrink: 0;
             width: 15vw;
@@ -244,7 +257,8 @@
             height: auto;
             aspect-ratio: 1 / 1;
             padding: 5px;
-            background: linear-gradient(135deg, #0073ff, #30d588);
+            background: transparent;
+            border: 1px solid #333;
             overflow: hidden;
             display: flex;
             align-items: center;
@@ -275,13 +289,13 @@
             display: block;
             font-size: 1.2rem;
             margin-bottom: 0.3rem;
-            color: #30d588;
+            color: #fff;
         }
 
         .info-text h3 {
             font-size: 1.05rem;
             margin: 0.8rem 0 0.2rem 0;
-            color: #0073ff;
+            color: #e0e0e0;
         }
 
         .info-text ul {
@@ -301,7 +315,7 @@
             content: '»';
             position: absolute;
             left: 0;
-            color: #0073ff;
+            color: #777;
             font-weight: bold;
         }
 
@@ -559,6 +573,10 @@
             <div class="contact-item">
                 <a href="https://github.com/rdr-retro" target="_blank">github.com/rdr-retro</a>
             </div>
+            <div class="contact-item">
+                <a href="https://rdr-retro.github.io/Green-Blue-Studios/" target="_blank">Proyecto Personal
+                    Green-Blue-Studios</a>
+            </div>
         </div>
 
         <hr class="white-line" />
@@ -570,16 +588,20 @@
             <div class="info-text">
                 <strong>Perfil y Objetivo Profesional</strong>
                 <p>
-                    Profesional apasionado por la Informática, enfocado en el desarrollo de soluciones y la interacción
-                    avanzada con Inteligencia Artificial.
+                    Profesional en <strong>Sistemas Microinformáticos y Desarrollo con Java</strong>, con una
+                    <strong>fuerte
+                        especialización en la aplicación de Inteligencia Artificial (Prompt Engineering)</strong> para
+                    la
+                    optimización de procesos y la creación de soluciones innovadoras.
                 </p>
                 <p>
-                    Soy un <strong>Experto en Interacción con IA (Prompt Engineering / Brivecoding)</strong>, con
-                    experiencia en el desarrollo de programas en <a href="#" target="_blank">Java</a> con integración de
-                    IA (ver <a href="https://github.com/tu-perfil-github" target="_blank">GitHub</a>). Destaco por mi
-                    <strong>autoeficacia</strong> y <strong>capacidad de aprendizaje rápido</strong>. Busco una vacante
-                    que me permita aplicar mis conocimientos en programación e IA, especialmente en roles de desarrollo
-                    de proyectos.
+                    Mi objetivo es integrarme en un equipo de <strong>Desarrollo o I+D</strong> donde pueda aplicar mi
+                    habilidad para
+                    interactuar y codificar con la IA (<strong>Brivecoding</strong>), transformando ideas complejas en
+                    código
+                    funcional. Demuestro una <strong>Autoeficacia</strong> excepcional y una <strong>gran capacidad de
+                        adaptación</strong> a
+                    nuevas tecnologías y lenguajes de programación.
                 </p>
             </div>
         </div>
@@ -594,17 +616,27 @@
                 <strong>Experiencia Laboral</strong>
 
                 <h3>Técnico en Sistemas Microinformáticos (Prácticas F.P.)</h3>
-                *Informática Empresarial | Brihuega, Guadalajara, España | Octubre 2025 – Diciembre 2025*
+                <em>Informática Empresarial | Guadalajara, España | Octubre 2025 – Diciembre 2025</em>
                 <ul>
-                    <li>Reparación y diagnóstico de equipos informáticos con resultados favorables.</li>
-                    <li>Clonación de sistemas y configuración de software esencial.</li>
-                    <li>Sustitución de componentes hardware y mantenimiento preventivo.</li>
+                    <li><strong>Diagnóstico y Reparación Avanzada</strong> de equipos (hardware y software), resultando
+                        en una alta
+                        tasa de resolución de incidencias.</li>
+                    <li>Implementación de protocolos de <strong>Clonación y Backups de Sistemas</strong> para garantizar
+                        la
+                        continuidad operativa.</li>
+                    <li>Gestión y mantenimiento preventivo de componentes hardware (montaje, sustitución y
+                        actualización).</li>
                 </ul>
 
                 <h3>Personal de Apoyo en Restauración</h3>
-                *Restaurante Los Cristales | Brihuega, Guadalajara, España | Junio 2022*
+                <em>Restaurante Los Cristales | Brihuega, Guadalajara, España | Junio 2022</em>
                 <ul>
-                    <li>Apoyo en las operaciones diarias, demostrando responsabilidad y adaptabilidad.</li>
+                    <li>Colaboración activa en la gestión de operaciones diarias, destacando en la <strong>coordinación
+                            de
+                            tareas</strong> y la <strong>rapidez en el servicio</strong>.</li>
+                    <li>Demostración de <strong>adaptabilidad y proactividad</strong> en entornos de alta presión y
+                        ritmo rápido.
+                    </li>
                 </ul>
             </div>
         </div>
@@ -619,12 +651,16 @@
                 <strong>Educación y Formación</strong>
 
                 <h3>Grado Medio en Sistemas Microinformáticos y Redes (SMR)</h3>
-                *I.E.S. Brianda de Mendoza | Guadalajara, España | Finalizado en 2025*
+                <em>I.E.S. Brianda de Mendoza | Guadalajara, España | Finalizado en 2025</em>
+                <p>
+                    Formación integral en infraestructura de red, sistemas operativos, y mantenimiento de equipos.
+                </p>
 
                 <h3>Educación Secundaria Obligatoria</h3>
 
                 <p style="margin-top: 1rem;">
-                    <strong>Idiomas:</strong> Español (Nativo) | Inglés (Bajo-Medio)
+                    <strong>Idiomas:</strong> Español (Nativo) | Inglés (Nivel A2/B1 - Lectura técnica y comprensión
+                    básica)
                 </p>
             </div>
         </div>
@@ -638,14 +674,61 @@
             <div class="info-text">
                 <strong>Habilidades Clave</strong>
                 <ul>
-                    <li><strong>Inteligencia Artificial:</strong> Experto en Prompt Engineering (Brivecoding) e
-                        interacción avanzada con modelos de IA.</li>
-                    <li><strong>Programación:</strong> Desarrollo de proyectos funcionales con <a href="#"
-                            target="_blank">Java</a> (integración de IA).</li>
-                    <li><strong>Sistemas y Hardware:</strong> Reparación, diagnóstico, clonación y mantenimiento de
-                        equipos microinformáticos.</li>
-                    <li><strong>Habilidades Blandas:</strong> Alta <strong>Autoeficacia</strong>, <strong>Aprendizaje
-                            Rápido</strong>, Proactividad y Resolución de Problemas.</li>
+                    <li><strong>Inteligencia Artificial y Desarrollo:</strong>
+                        <ul>
+                            <li><strong>Prompt Engineering Avanzado (Brivecoding):</strong> Optimización de consultas
+                                para modelos de
+                                IA (LLMs) para generar código eficiente y soluciones de software.</li>
+                            <li><strong>Programación Orientada a Objetos (Java):</strong> Experiencia en desarrollo de
+                                proyectos
+                                funcionales y lógica de negocio.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Sistemas Microinformáticos:</strong>
+                        <ul>
+                            <li><strong>Diagnóstico Hardware/Software:</strong> Resolución de fallos en PCs, portátiles
+                                y
+                                periféricos.</li>
+                            <li><strong>Virtualización y Sistemas Operativos:</strong> Manejo de entornos de
+                                virtualización y
+                                administración básica de Windows/Linux.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Competencias Interpersonales (Soft Skills):</strong>
+                        <ul>
+                            <li><strong>Autoeficacia y Autogestión:</strong> Capacidad probada para asumir retos y
+                                gestionar el
+                                propio aprendizaje de forma independiente.</li>
+                            <li><strong>Resolución de Problemas Técnicos:</strong> Enfoque lógico y estructurado para
+                                identificar y
+                                solucionar incidencias.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <hr class="white-line" />
+
+        <div class="info-box">
+            <div class="colored-rectangle">
+                <img src="logo2.png" alt="Icono Proyecto Personal" />
+            </div>
+            <div class="info-text">
+                <strong>Proyecto Personal: Green Blue Studios (Cofundador)</strong>
+
+                <h3>Desarrollo de Videojuegos <a href="https://rdr-retro.github.io/Green-Blue-Studios/"
+                        target="_blank">Ver Proyecto</a></h3>
+
+                <ul>
+                    <li><strong>Desarrollo de Herramientas en Java:</strong> Creación de un conjunto de utilidades en
+                        Java para facilitar el desarrollo rápido de videojuegos 2D RPG.</li>
+                    <li><strong>Gestión de Proyectos:</strong> Liderazgo integral, desde la conceptualización hasta
+                        la promoción, para dar a conocer el talento del equipo.</li>
+                    <li><strong>Programación de Videojuegos (2D RPG):</strong> Aplicación de lógica de juego, manejo de
+                        <em>assets</em> y
+                        creación de sistemas de juego propios.
+                    </li>
                 </ul>
             </div>
         </div>
