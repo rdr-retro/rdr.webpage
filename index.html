@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,6 +16,12 @@
             --font-small: 0.9rem;
             --color-link: #0073ff;
             --color-link-hover: #30d588;
+
+            /* NUEVAS VARIABLES PARA LAS INFO-BOX */
+            --card-bg: rgba(18, 18, 18, 0.9);
+            --card-border: rgba(255, 255, 255, 0.06);
+            --card-shadow: 0 18px 45px rgba(0, 0, 0, 0.8);
+            --card-radius: 18px;
         }
 
         body {
@@ -213,9 +220,14 @@
             animation-delay: 3.7s;
         }
 
+        /* ===========================
+           NUEVO DISEÑO INFO-BOX
+           =========================== */
+
         .info-box {
+            position: relative;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: flex-start;
             gap: 1.5rem;
             margin: 2.5rem auto;
@@ -223,7 +235,28 @@
             text-align: left;
             opacity: 0;
             animation: fadeInSmoky 0.9s ease forwards;
-            padding: 0 1rem;
+            padding: 1.6rem 1.8rem;
+            border-radius: var(--card-radius);
+            background:
+                radial-gradient(circle at top left, rgba(48, 213, 136, 0.20), transparent 55%),
+                radial-gradient(circle at top right, rgba(0, 115, 255, 0.15), transparent 55%),
+                linear-gradient(145deg, rgba(18, 18, 18, 0.95), rgba(10, 10, 10, 0.98));
+            border: 1px solid var(--card-border);
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+        }
+
+        .info-box::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg,
+                    rgba(255, 255, 255, 0.03),
+                    transparent 40%,
+                    transparent 60%,
+                    rgba(255, 255, 255, 0.03));
+            pointer-events: none;
+            mix-blend-mode: screen;
         }
 
         /* Ajuste de los delays para las cajas de información */
@@ -243,80 +276,119 @@
             animation-delay: 3.2s;
         }
 
-        /* Nuevo delay para la caja extra */
         .info-box:nth-of-type(5) {
             animation-delay: 3.9s;
         }
 
-
         .colored-rectangle {
+            position: relative;
             flex-shrink: 0;
-            width: 15vw;
-            min-width: 80px;
-            max-width: 120px;
-            height: auto;
-            aspect-ratio: 1 / 1;
-            padding: 5px;
-            background: transparent;
-            border: 1px solid #333;
-            overflow: hidden;
+            width: 72px;
+            height: 72px;
+            padding: 2px;
+            border-radius: 22%;
+            background: conic-gradient(from 210deg,
+                    #30d588,
+                    #0073ff,
+                    #30d588);
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 8px;
+            box-shadow: 0 0 18px rgba(0, 0, 0, 0.8);
+        }
+
+        .colored-rectangle::after {
+            content: "";
+            position: absolute;
+            inset: 4px;
+            border-radius: 18%;
+            background: radial-gradient(circle at 30% 0%, rgba(255, 255, 255, 0.15), transparent 55%),
+                #050505;
         }
 
         .colored-rectangle img {
-            width: 70%;
-            height: 70%;
+            position: relative;
+            width: 58%;
+            height: 58%;
             object-fit: contain;
-            filter: invert(1);
-            border: none;
-            background-color: transparent;
-            animation: none !important;
-            opacity: 1 !important;
+            z-index: 1;
         }
 
         .info-text {
+            position: relative;
+            z-index: 1;
             flex-grow: 1;
             font-size: var(--font-medium);
             color: #eee;
             font-weight: 500;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .info-text strong {
             display: block;
-            font-size: 1.2rem;
-            margin-bottom: 0.3rem;
-            color: #fff;
+            font-size: 1.15rem;
+            margin-bottom: 0.6rem;
+            color: #ffffff;
+            letter-spacing: 0.02em;
+        }
+
+        .info-text > strong {
+            text-transform: uppercase;
+            font-size: 1.05rem;
+            letter-spacing: 0.12em;
+            opacity: 0.92;
         }
 
         .info-text h3 {
-            font-size: 1.05rem;
-            margin: 0.8rem 0 0.2rem 0;
-            color: #e0e0e0;
+            font-size: 1.02rem;
+            margin: 0.8rem 0 0.25rem 0;
+            color: #e3e3e3;
+        }
+
+        .info-text em {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            font-style: normal;
+            opacity: 0.92;
+        }
+
+        .info-text p {
+            margin-top: 0.5rem;
+            margin-bottom: 0.4rem;
+            color: #dddddd;
         }
 
         .info-text ul {
             list-style: none;
             padding-left: 0;
             margin-top: 0.5rem;
+            margin-bottom: 0.3rem;
         }
 
         .info-text li {
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.35rem;
             padding-left: 1.2em;
             position: relative;
             font-size: 0.95rem;
+            color: #d5d5d5;
         }
 
         .info-text li::before {
-            content: '»';
+            content: '';
             position: absolute;
             left: 0;
-            color: #777;
-            font-weight: bold;
+            top: 0.55em;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 0%, #ffffff, #30d588);
+            box-shadow: 0 0 6px rgba(48, 213, 136, 0.8);
+        }
+
+        .info-text li strong {
+            display: inline;
+            font-size: 0.96rem;
+            color: #ffffff;
         }
 
         @keyframes fadeInSmoky {
@@ -362,16 +434,15 @@
 
             .info-box {
                 flex-direction: column;
-                text-align: center;
+                text-align: left;
                 gap: 1rem;
-                padding: 1rem 0;
+                padding: 1.3rem 1.2rem;
             }
 
             .colored-rectangle {
-                width: 100px;
-                min-width: 100px;
-                max-width: 100px;
-                aspect-ratio: 1 / 1;
+                width: 68px;
+                height: 68px;
+                margin-bottom: 0.3rem;
             }
 
             .info-text {
@@ -379,7 +450,7 @@
             }
 
             .info-text strong {
-                text-align: center;
+                text-align: left;
             }
 
             .info-text h3 {
@@ -388,7 +459,7 @@
 
             .info-text ul {
                 text-align: left;
-                margin: 0;
+                margin: 0.2rem 0;
             }
 
             .white-line {
@@ -427,10 +498,8 @@
 
             body {
                 padding: 1.5cm 1.5cm;
-                /* Márgenes internos simulados para consistencia */
             }
 
-            /* === FORZAR LAYOUT DE ESCRITORIO === */
             section,
             #project-2d {
                 width: 100% !important;
@@ -440,7 +509,6 @@
                 text-align: left !important;
             }
 
-            /* === RESTAURAR CENTRADO PARA CABECERA Y LOGO === */
             .hero,
             .header-cv {
                 text-align: center !important;
@@ -452,7 +520,6 @@
                 margin: 0 auto !important;
                 display: block !important;
                 max-width: 200px !important;
-                /* Controlar tamaño en print */
             }
 
             .header-cv h2,
@@ -462,7 +529,6 @@
                 width: 100% !important;
             }
 
-            /* Forzar que el resto del contenido siga a la izquierda */
             .info-box {
                 display: flex !important;
                 flex-direction: row !important;
@@ -472,6 +538,10 @@
                 page-break-inside: avoid;
                 break-inside: avoid;
                 width: 100% !important;
+                border-radius: 12px !important;
+                background: #000000 !important;
+                border: 1px solid #333 !important;
+                box-shadow: none !important;
             }
 
             .colored-rectangle {
@@ -479,8 +549,14 @@
                 width: 70px !important;
                 height: 70px !important;
                 background: linear-gradient(135deg, #0073ff, #30d588) !important;
+                border-radius: 18% !important;
                 border: 1px solid #333 !important;
-                /* Borde sutil por si falla el fondo */
+            }
+
+            .colored-rectangle::after {
+                inset: 4px !important;
+                border-radius: 16% !important;
+                background: #000 !important;
             }
 
             .info-text {
@@ -490,7 +566,6 @@
                 color: #eee !important;
             }
 
-            /* Alineación estricta de textos */
             .header-cv h2,
             .info-text strong,
             .info-text h3,
@@ -500,14 +575,12 @@
                 color: white !important;
             }
 
-            /* === RESTAURAR DEGRADADOS Y LINEAS === */
             .title-gradient {
                 background: linear-gradient(to right, #30d588, #0073ff) !important;
                 -webkit-background-clip: text !important;
                 background-clip: text !important;
                 -webkit-text-fill-color: transparent !important;
                 color: #30d588 !important;
-                /* Fallback legible */
             }
 
             .white-line {
@@ -519,13 +592,11 @@
                 border: none !important;
             }
 
-            /* === OCULTAR ELEMENTOS NO DESEADOS === */
             header#top-header,
             .dev-badge {
                 display: none !important;
             }
 
-            /* === COLORES DE ENLACES === */
             a {
                 color: #0073ff !important;
                 text-decoration: none !important;
@@ -533,6 +604,7 @@
         }
     </style>
 </head>
+
 
 <body>
     <header id="top-header">
@@ -546,9 +618,11 @@
         </nav>
     </header>
 
+
     <section class="hero">
         <img src="logo2.png" alt="Logo Principal" />
     </section>
+
 
     <section id="project-2d">
         <div class="header-cv">
@@ -559,6 +633,7 @@
                 Descargar CV (PDF)
             </button>
         </div>
+
 
         <div class="contact-info">
             <div class="contact-item">
@@ -579,7 +654,9 @@
             </div>
         </div>
 
+
         <hr class="white-line" />
+
 
         <div class="info-box">
             <div class="colored-rectangle">
@@ -606,7 +683,9 @@
             </div>
         </div>
 
+
         <hr class="white-line" />
+
 
         <div class="info-box">
             <div class="colored-rectangle">
@@ -614,6 +693,7 @@
             </div>
             <div class="info-text">
                 <strong>Experiencia Laboral</strong>
+
 
                 <h3>Técnico en Sistemas Microinformáticos (Prácticas F.P.)</h3>
                 <em>Informática Empresarial | Guadalajara, España | Octubre 2025 – Diciembre 2025</em>
@@ -628,6 +708,7 @@
                         actualización).</li>
                 </ul>
 
+
                 <h3>Personal de Apoyo en Restauración</h3>
                 <em>Restaurante Los Cristales | Brihuega, Guadalajara, España | Junio 2022</em>
                 <ul>
@@ -641,7 +722,9 @@
             </div>
         </div>
 
+
         <hr class="white-line" />
+
 
         <div class="info-box">
             <div class="colored-rectangle">
@@ -650,13 +733,16 @@
             <div class="info-text">
                 <strong>Educación y Formación</strong>
 
+
                 <h3>Grado Medio en Sistemas Microinformáticos y Redes (SMR)</h3>
                 <em>I.E.S. Brianda de Mendoza | Guadalajara, España | Finalizado en 2025</em>
                 <p>
                     Formación integral en infraestructura de red, sistemas operativos, y mantenimiento de equipos.
                 </p>
 
+
                 <h3>Educación Secundaria Obligatoria</h3>
+
 
                 <p style="margin-top: 1rem;">
                     <strong>Idiomas:</strong> Español (Nativo) | Inglés (Nivel A2/B1 - Lectura técnica y comprensión
@@ -665,7 +751,9 @@
             </div>
         </div>
 
+
         <hr class="white-line" />
+
 
         <div class="info-box">
             <div class="colored-rectangle">
@@ -708,17 +796,21 @@
             </div>
         </div>
 
+
         <hr class="white-line" />
+
 
         <div class="info-box">
             <div class="colored-rectangle">
-                <img src="logo2.png" alt="Icono Proyecto Personal" />
+                <img src="gb.png" alt="Icono Proyecto Personal" />
             </div>
             <div class="info-text">
                 <strong>Proyecto Personal: Green Blue Studios (Cofundador)</strong>
 
+
                 <h3>Desarrollo de Videojuegos <a href="https://rdr-retro.github.io/Green-Blue-Studios/"
                         target="_blank">Ver Proyecto</a></h3>
+
 
                 <ul>
                     <li><strong>Desarrollo de Herramientas en Java:</strong> Creación de un conjunto de utilidades en
@@ -733,9 +825,12 @@
             </div>
         </div>
 
+
         <hr class="white-line" />
+
 
     </section>
 </body>
+
 
 </html>
