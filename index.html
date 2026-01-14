@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="es">
+
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CV Raúl Diaz Gutiérrez - Programación e IA</title>
+
+    <link rel="icon" href="logo.png" type="image/png" />
+
+    <style>
+        :root {
+            --max-width: 800px;
+            --font-medium: 1rem;
+            --font-small: 0.9rem;
+            --color-link: #0073ff;
+            --color-link-hover: #30d588;
+
+            /* NUEVAS VARIABLES PARA LAS INFO-BOX */
+            --card-bg: rgba(18, 18, 18, 0.9);
+            --card-border: rgba(255, 255, 255, 0.06);
+            --card-shadow: 0 18px 45px rgba(0, 0, 0, 0.8);
+            --card-radius: 18px;
+        }
+
+        body {
+            margin: 0;
+            background-color: #000;
+            color: #bfbfbf;
+            font-family: 'Segoe UI', sans-serif;
+            overflow-x: hidden;
+        }
+
+        header#top-header {
+            background-color: #1a1a1a;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            opacity: 0;
+            animation: fadeInSmoky 0.9s ease forwards 0.1s;
+        }
+
+        nav a {
+            color: #ccc;
+            margin: 0 1rem;
+            text-decoration: none;
+            font-size: var(--font-small);
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-title img {
+            height: 40px;
+            width: auto;
+        }
+
+        .hero {
+            background: none;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero img {
+            max-width: 300px;
+            width: 80%;
+            height: auto;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInSmoky 0.9s ease forwards 0.2s;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #ddd;
+            opacity: 0;
+            animation: fadeInSmoky 0.9s ease forwards 0.4s;
+        }
+
+        section {
+            padding: 4rem 2rem;
+            text-align: center;
+            background-color: #000;
+        }
+
+        #project-2d {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+            padding: 2rem;
+        }
+
+        /* === NOMBRE + BOTÓN NARANJA CENTRADOS Y UNO DEBAJO DEL OTRO === */
+        .header-cv {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header-cv h2 {
+            font-size: 2.2rem;
+            margin: 0 0 1rem 0;
+            opacity: 0;
+            animation: fadeInSmoky 0.9s ease forwards 0.5s;
+        }
+
+        .title-gradient {
+            background: linear-gradient(to right, #30d588, #0073ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .dev-badge {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.95rem;
+            font-weight: bold;
+            background-color: #ff9800;
+            color: #000;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255, 152, 0, 0.3);
+        }
+
+        .dev-badge:hover {
+            background-color: #ffb74d;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 152, 0, 0.4);
+        }
+
+        .contact-info {
+            text-align: center;
+            font-size: 1.1rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            opacity: 0;
+            animation: fadeInSmoky 0.9s ease forwards 0.7s;
+        }
+
+        .contact-item {
+            margin: 0.6rem 0;
+            font-size: 1.05rem;
+        }
+
+        .contact-item a {
+            color: var(--color-link);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .contact-item a:hover {
+            color: var(--color-link-hover);
+            background: rgba(0, 115, 255, 0.1);
+        }
+
+        .contact-text {
+            color: #eee;
+            font-weight: 500;
+        }
+
+        .info-text a {
+            color: var(--color-link-hover);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px dashed var(--color-link-hover);
+            transition: all 0.3s;
+        }
+
+        .info-text a:hover {
+            color: var(--color-link);
+            border-bottom: 1px solid var(--color-link);
+        }
+
+        .white-line {
+            border: none;
+            height: 2px;
+            width: 80%;
+            margin: 3rem auto;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.9), transparent);
+            opacity: 0;
+            animation: fadeInSmoky 0.8s ease forwards;
+        }
+
+        /* Ajuste de los delays para la nueva línea */
+        .white-line:nth-of-type(1) {
+            animation-delay: 0.9s;
+        }
+
+        .white-line:nth-of-type(2) {
+            animation-delay: 1.6s;
+        }
+
+        .white-line:nth-of-type(3) {
+            animation-delay: 2.3s;
+        }
+
+        .white-line:nth-of-type(4) {
+            animation-delay: 3.0s;
+        }
+
+        /* Nuevo delay para la línea extra */
+        .white-line:nth-of-type(5) {
+            animation-delay: 3.7s;
+        }
+
+        /* ===========================
+           NUEVO DISEÑO INFO-BOX
+           =========================== */
+
+        .info-box {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            gap: 1.5rem;
+            margin: 2.5rem auto;
+            max-width: var(--max-width);
+            text-align: left;
+            opacity: 0;
+            animation: fadeInSmoky 0.9s ease forwards;
+            padding: 1.6rem 1.8rem;
+            border-radius: var(--card-radius);
+            background:
+                radial-gradient(circle at top left, rgba(48, 213, 136, 0.20), transparent 55%),
+                radial-gradient(circle at top right, rgba(0, 115, 255, 0.15), transparent 55%),
+                linear-gradient(145deg, rgba(18, 18, 18, 0.95), rgba(10, 10, 10, 0.98));
+            border: 1px solid var(--card-border);
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+        }
+
+        .info-box::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg,
+                    rgba(255, 255, 255, 0.03),
+                    transparent 40%,
+                    transparent 60%,
+                    rgba(255, 255, 255, 0.03));
+            pointer-events: none;
+            mix-blend-mode: screen;
+        }
+
+        /* Ajuste de los delays para las cajas de información */
+        .info-box:nth-of-type(1) {
+            animation-delay: 1.0s;
+        }
+
+        .info-box:nth-of-type(2) {
+            animation-delay: 1.8s;
+        }
+
+        .info-box:nth-of-type(3) {
+            animation-delay: 2.5s;
+        }
+
+        .info-box:nth-of-type(4) {
+            animation-delay: 3.2s;
+        }
+
+        .info-box:nth-of-type(5) {
+            animation-delay: 3.9s;
+        }
+
+        .colored-rectangle {
+            position: relative;
+            flex-shrink: 0;
+            width: 72px;
+            height: 72px;
+            padding: 2px;
+            border-radius: 22%;
+            background: conic-gradient(from 210deg,
+                    #30d588,
+                    #0073ff,
+                    #30d588);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 18px rgba(0, 0, 0, 0.8);
+        }
+
+        .colored-rectangle::after {
+            content: "";
+            position: absolute;
+            inset: 4px;
+            border-radius: 18%;
+            background: radial-gradient(circle at 30% 0%, rgba(255, 255, 255, 0.15), transparent 55%),
+                #050505;
+        }
+
+        .colored-rectangle img {
+            position: relative;
+            width: 58%;
+            height: 58%;
+            object-fit: contain;
+            z-index: 1;
+        }
+
+        .info-text {
+            position: relative;
+            z-index: 1;
+            flex-grow: 1;
+            font-size: var(--font-medium);
+            color: #eee;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        .info-text strong {
+            display: block;
+            font-size: 1.15rem;
+            margin-bottom: 0.6rem;
+            color: #ffffff;
+            letter-spacing: 0.02em;
+        }
+
+        .info-text > strong {
+            text-transform: uppercase;
+            font-size: 1.05rem;
+            letter-spacing: 0.12em;
+            opacity: 0.92;
+        }
+
+        .info-text h3 {
+            font-size: 1.02rem;
+            margin: 0.8rem 0 0.25rem 0;
+            color: #e3e3e3;
+        }
+
+        .info-text em {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            font-style: normal;
+            opacity: 0.92;
+        }
+
+        .info-text p {
+            margin-top: 0.5rem;
+            margin-bottom: 0.4rem;
+            color: #dddddd;
+        }
+
+        .info-text ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 0.5rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .info-text li {
+            margin-bottom: 0.35rem;
+            padding-left: 1.2em;
+            position: relative;
+            font-size: 0.95rem;
+            color: #d5d5d5;
+        }
+
+        .info-text li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.55em;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 0%, #ffffff, #30d588);
+            box-shadow: 0 0 6px rgba(48, 213, 136, 0.8);
+        }
+
+        .info-text li strong {
+            display: inline;
+            font-size: 0.96rem;
+            color: #ffffff;
+        }
+
+        @keyframes fadeInSmoky {
+            0% {
+                opacity: 0;
+                filter: blur(20px);
+                transform: translateY(20px);
+            }
+
+            70% {
+                opacity: 0.85;
+                filter: blur(5px);
+            }
+
+            100% {
+                opacity: 1;
+                filter: blur(0);
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            header#top-header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1.2rem;
+                gap: 0.6rem;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 0.3rem 0.6rem 0.3rem 0;
+                font-size: 0.95rem;
+            }
+
+            section {
+                padding: 2.5rem 0.5rem;
+            }
+
+            .header-cv h2 {
+                font-size: 1.9rem;
+            }
+
+            .info-box {
+                flex-direction: column;
+                text-align: left;
+                gap: 1rem;
+                padding: 1.3rem 1.2rem;
+            }
+
+            .colored-rectangle {
+                width: 68px;
+                height: 68px;
+                margin-bottom: 0.3rem;
+            }
+
+            .info-text {
+                font-size: 0.95rem;
+            }
+
+            .info-text strong {
+                text-align: left;
+            }
+
+            .info-text h3 {
+                text-align: left;
+            }
+
+            .info-text ul {
+                text-align: left;
+                margin: 0.2rem 0;
+            }
+
+            .white-line {
+                width: 90%;
+            }
+        }
+
+        @media print {
+
+            /* === RESET TOTAL PARA CONSISTENCIA MULTIPLATAFORMA === */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                box-sizing: border-box !important;
+                text-shadow: none !important;
+                filter: none !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                animation: none !important;
+                transition: none !important;
+            }
+
+            @page {
+                size: A4;
+                margin: 0;
+            }
+
+            html,
+            body {
+                width: 210mm;
+                min-height: 297mm;
+                margin: 0 auto;
+                background-color: #000 !important;
+                color: white !important;
+            }
+
+            body {
+                padding: 1.5cm 1.5cm;
+            }
+
+            section,
+            #project-2d {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                text-align: left !important;
+            }
+
+            .hero,
+            .header-cv {
+                text-align: center !important;
+                width: 100% !important;
+                margin-bottom: 2rem !important;
+            }
+
+            .hero img {
+                margin: 0 auto !important;
+                display: block !important;
+                max-width: 200px !important;
+            }
+
+            .header-cv h2,
+            .header-cv .title-gradient {
+                text-align: center !important;
+                display: block !important;
+                width: 100% !important;
+            }
+
+            .info-box {
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: flex-start !important;
+                gap: 1.5rem !important;
+                margin: 1.5rem 0 !important;
+                page-break-inside: avoid;
+                break-inside: avoid;
+                width: 100% !important;
+                border-radius: 12px !important;
+                background: #000000 !important;
+                border: 1px solid #333 !important;
+                box-shadow: none !important;
+            }
+
+            .colored-rectangle {
+                flex-shrink: 0 !important;
+                width: 70px !important;
+                height: 70px !important;
+                background: linear-gradient(135deg, #0073ff, #30d588) !important;
+                border-radius: 18% !important;
+                border: 1px solid #333 !important;
+            }
+
+            .colored-rectangle::after {
+                inset: 4px !important;
+                border-radius: 16% !important;
+                background: #000 !important;
+            }
+
+            .info-text {
+                flex-grow: 1 !important;
+                width: auto !important;
+                text-align: left !important;
+                color: #eee !important;
+            }
+
+            .header-cv h2,
+            .info-text strong,
+            .info-text h3,
+            .info-text ul,
+            .info-text p {
+                text-align: left !important;
+                color: white !important;
+            }
+
+            .title-gradient {
+                background: linear-gradient(to right, #30d588, #0073ff) !important;
+                -webkit-background-clip: text !important;
+                background-clip: text !important;
+                -webkit-text-fill-color: transparent !important;
+                color: #30d588 !important;
+            }
+
+            .white-line {
+                width: 100% !important;
+                height: 2px !important;
+                background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.9), transparent) !important;
+                margin: 2rem 0 !important;
+                opacity: 1 !important;
+                border: none !important;
+            }
+
+            header#top-header,
+            .dev-badge {
+                display: none !important;
+            }
+
+            a {
+                color: #0073ff !important;
+                text-decoration: none !important;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+    <header id="top-header">
+        <div class="logo-title">
+            <img src="logo.png" alt="Logo" />
+            <strong>Raúl Portfolio</strong>
+        </div>
+        <nav>
+            <a href="#">Inicio</a>
+            <a href="#project-2d">Mi CV</a>
+        </nav>
+    </header>
+
+
+    <section class="hero">
+        <img src="logo2.png" alt="Logo Principal" />
+    </section>
+
+
+    <section id="project-2d">
+        <div class="header-cv">
+            <h2>
+                <span class="title-gradient">Raúl Díaz Gutiérrez</span>
+            </h2>
+            <button class="dev-badge" onclick="window.print()">
+                Descargar CV (PDF)
+            </button>
+        </div>
+
+
+        <div class="contact-info">
+            <div class="contact-item">
+                <a href="tel:+34649846675">649 84 66 75</a>
+            </div>
+            <div class="contact-item">
+                <a href="mailto:elerrorrdg@gmail.com">elerrorrdg@gmail.com</a>
+            </div>
+            <div class="contact-item">
+                <span class="contact-text">Malacuera, Guadalajara, España</span>
+            </div>
+            <div class="contact-item">
+                <a href="https://github.com/rdr-retro" target="_blank">github.com/rdr-retro</a>
+            </div>
+           <div class="contact-item">
+                <a href="https://rockyvideoeditor.neocities.org/" target="_blank">
+                    Proyecto Personal Green-Blue-Studios
+                </a>
+            </div>
+            <div class="contact-item">
+                <a href="https://rdr-retro.github.io/Green-Blue-Studios/" target="_blank">
+                    Proyecto Personal Rocky Video Editor
+                </a>
+            </div>
+        </div>
+
+
+        <hr class="white-line" />
+
+
+        <div class="info-box">
+            <div class="colored-rectangle">
+                <img src="logo2.png" alt="Icono Perfil" />
+            </div>
+        <div class="info-text">
+    <strong>Perfil y Objetivo Profesional</strong>
+    <p>
+        Desarrollador de aplicaciones con IA <strong>Frontend / Backend</strong> Llevo utilizando la inteligencia
+        artificial desde antes de que se hiciera viral con la salida de ChatGPT, durante los años
+      2021–2022 utilizaba la plataforma anterior de IA de OpenAI para crear las webs que me solicitaban
+        en el grado.
+        <strong>La primera versión pública de ChatGPT de OpenAI salió el 30 de noviembre de 2022.</strong>
+    </p>
+    <img src="Raúl Díaz.png" alt="Raúl Díaz" style="max-width:90%; height:auto;">
+    <p>
+        Antes de que existiera ChatGPT como interfaz abierta, OpenAI ofrecía acceso a sus modelos mediante una plataforma de prueba basada en API, pero no era pública:
+
+Habia que registrarte en OpenAi en la web con una cuenta de gmail y pedir acceso a la API.
+
+Una vez aprobado, podías probar los modelos GPT-3, incluyendo Davinci, Curie, Babbage y Ada.
+       <strong> Me obsesioné con la creación de elementos mediante IA y me considero experto en comunicarme con ella</strong>
+       Actualmente no solo uso chat gpt uso varias desde Gemini hasta Claude incluido. 
+       Ahora estoy muy enfocado en antigrabity y forks similares para desarrollar programas utiles. <strong>Actualmente me encuentro realizando un
+        Editor de vídeo con Python en Frontend y C++17 en el backend.</strong>https://rockyvideoeditor.neocities.org/
+    </p>
+    <p>
+       <strong>Objetivo:</strong> Trabajar para un equipo de desarrollo I+D para construir una aplicacion o servicio.
+       Creacion de una identidad profesional. (Sobre un software).
+       <strong>Me considero una persona muy creativa con hablidades de 3D en Blender. Uso Blender desde 2019</strong> Me gusta darle personalidad a mis programas y darle mi propia identidad. Me parece mal el uso de la ia para las identidades visuales (me causan mucho rechazo)
+    </p>
+</div>
+
+        </div>
+
+
+        <hr class="white-line" />
+
+
+<div class="info-box">
+    <div class="colored-rectangle">
+        <img src="blender.png" alt="Icono Modelado 3D" />
+    </div>
+    <div class="info-text">
+        <strong>Habilidades de Modelado 3D en Blender</strong>
+
+        <h3>Modelado y Texturizado 3D</h3>
+
+        <ul>
+            <li><strong>Modelado 3D avanzado:</strong> Amplia experiencia en la creación de modelos detallados y optimizados en Blender.</li>
+            <li><strong>Texturizado funcional:</strong> Conocimientos sólidos de texturizado; aunque no es mi punto más fuerte, sé desenvolverme y aplicar flujos de trabajo básicos.</li>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/I9qDlGVOIuw?si=L652FWIWx5mzk0Lp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+        </ul>
+    </div>
+</div>
+
+<hr class="white-line" />
+
+
+        <div class="info-box">
+            <div class="colored-rectangle">
+                <img src="logo2.png" alt="Icono Perfil" />
+            </div>
+        <div class="info-text">
+    <strong>Experiencia demostrable</strong>
+    <p>
+        Rocky Video Editor <a href="https://rockyvideoeditor.neocities.org/">https://rockyvideoeditor.neocities.org/</a><br>
+
+    </p>
+    <img src="rockyvideo.png" alt="Raúl Díaz" style="max-width:80%; height:auto;">
+    <p>
+        Editor de video opensource Hecho en Python y en c++17 (Funcional pero en desarrollo)
+    </p>
+
+<p>
+<strong>xmb.py</strong>
+              <a href="https://github.com/rdr-retro/xmb.py">https://github.com/rdr-retro/xmb.pyl</a>
+
+          <img src="xmb.png" alt="xmb.py" style="max-width:80%; height:auto;"> <br>
+xmb.py es un sistema de menú inspirado en la interfaz XMB de PlayStation, implementado en Python usando Pygame.
+ Está diseñado para manejar múltiples categorías, submenús, archivos y reproducción de música con visualización dinámica, con soporte completo de animaciones y layout adaptable a cualquier resolución. 
+</p>
+
+    <p>
+      <strong>Super-terminal</strong>
+              <a href="https://github.com/rdr-retro/Super-terminal">https://github.com/rdr-retro/Super-terminal</a>
+<br>
+          <img src="terminal.png" alt="terminal" style="max-width:30%; height:auto;"> <br>
+Creada en c. La aplicación permite ejecutar comandos del sistema y visualizar su salida en una interfaz gráfica, además de mostrar el uso de CPU y RAM en tiempo real.
+    </p>
+
+
+
+</div>
+
+        </div>
+
+
+        <hr class="white-line" />
+
+
+        <div class="info-box">
+            <div class="colored-rectangle">
+                <img src="img4.png" alt="Icono Trabajo" />
+            </div>
+            <div class="info-text">
+                <strong>Experiencia Laboral</strong>
+
+
+                <h3>Técnico en Sistemas Microinformáticos (Prácticas F.P.)</h3>
+                <em>Informática Empresarial | Guadalajara, España | Octubre 2025 – Diciembre 2025</em>
+                <ul>
+                    <li><strong>Diagnóstico y Reparación Avanzada</strong> de equipos (hardware y software), resultando
+                        en una alta
+                        tasa de resolución de incidencias.</li>
+                    <li>Implementación de protocolos de <strong>Clonación y Backups de Sistemas</strong> para garantizar
+                        la
+                        continuidad operativa.</li>
+                    <li>Gestión y mantenimiento preventivo de componentes hardware (montaje, sustitución y
+                        actualización).</li>
+                </ul>
+
+
+                <h3>Personal de Apoyo en Restauración</h3>
+                <em>Restaurante Los Cristales | Brihuega, Guadalajara, España | Junio 2022</em>
+                <ul>
+                    <li>Colaboración activa en la gestión de operaciones diarias, destacando en la <strong>coordinación
+                            de
+                            tareas</strong> y la <strong>rapidez en el servicio</strong>.</li>
+                    <li>Demostración de <strong>adaptabilidad y proactividad</strong> en entornos de alta presión y
+                        ritmo rápido.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <hr class="white-line" />
+
+
+        <div class="info-box">
+            <div class="colored-rectangle">
+                <img src="img2.png" alt="Icono Educación" />
+            </div>
+            <div class="info-text">
+                <strong>Educación y Formación</strong>
+
+
+                <h3>Grado Medio en Sistemas Microinformáticos y Redes (SMR)</h3>
+                <em>I.E.S. Brianda de Mendoza | Guadalajara, España | Finalizado en 2025</em>
+                <p>
+                    Formación integral en infraestructura de red, sistemas operativos, y mantenimiento de equipos.
+                </p>
+
+
+                <h3>Educación Secundaria Obligatoria</h3>
+
+
+                <p style="margin-top: 1rem;">
+                    <strong>Idiomas:</strong> Español (Nativo) | Inglés (Nivel A2/B1 - Lectura técnica y comprensión
+                    básica)
+                </p>
+            </div>
+        </div>
+
+
+        <hr class="white-line" />
+
+
+        <div class="info-box">
+            <div class="colored-rectangle">
+                <img src="img3.png" alt="Icono Habilidades" />
+            </div>
+            <div class="info-text">
+                <strong>Habilidades Clave</strong>
+                <ul>
+                    <li><strong>Inteligencia Artificial y Desarrollo:</strong>
+                        <ul>
+                            <li><strong>Prompt Engineering Avanzado (Brivecoding):</strong> Optimización de consultas
+                                para modelos de
+                                IA (LLMs) para generar código eficiente y soluciones de software.</li>
+                            <li><strong>Programación Orientada a Objetos (Java):</strong> Experiencia en desarrollo de
+                                proyectos
+                                funcionales y lógica de negocio.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Sistemas Microinformáticos:</strong>
+                        <ul>
+                            <li><strong>Diagnóstico Hardware/Software:</strong> Resolución de fallos en PCs, portátiles
+                                y
+                                periféricos.</li>
+                            <li><strong>Virtualización y Sistemas Operativos:</strong> Manejo de entornos de
+                                virtualización y
+                                administración básica de Windows/Linux.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Competencias Interpersonales (Soft Skills):</strong>
+                        <ul>
+                            <li><strong>Autoeficacia y Autogestión:</strong> Capacidad probada para asumir retos y
+                                gestionar el
+                                propio aprendizaje de forma independiente.</li>
+                            <li><strong>Resolución de Problemas Técnicos:</strong> Enfoque lógico y estructurado para
+                                identificar y
+                                solucionar incidencias.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <hr class="white-line" />
+
+
+        
+
+
+
+        
+
+
+    </section>
+</body>
+
+
+</html>
