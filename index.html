@@ -287,35 +287,14 @@
             /* Aumentado de 0.5 */
         }
 
-        .info-box.light-text,
-        .info-box.light-text strong,
-        .info-box.light-text h3,
-        .info-box.light-text p,
-        .info-box.light-text li {
+        .info-box,
+        .info-box strong,
+        .info-box h3,
+        .info-box p,
+        .info-box li,
+        .info-box em {
             color: #ffffff !important;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.4);
-        }
-
-        .info-box.light-text em {
-            color: #e0e0e0 !important;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-        }
-
-        .info-box.dark-text,
-        .info-box.dark-text strong,
-        .info-box.dark-text h3,
-        .info-box.dark-text p,
-        .info-box.dark-text li {
-            color: #0b0b0b !important;
-            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
-        }
-
-        .info-box.dark-text em {
-            color: #222222 !important;
-        }
-
-        .info-box.dark-text .colored-rectangle::after {
-            background: #ffffff !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.4) !important;
         }
 
         .info-box.dark-text li::before {
@@ -658,31 +637,14 @@
                 display: block !important;
             }
 
-            .info-box.light-text,
-            .info-box.light-text strong,
-            .info-box.light-text h3,
-            .info-box.light-text p,
-            .info-box.light-text li {
+            .info-box,
+            .info-box strong,
+            .info-box h3,
+            .info-box p,
+            .info-box li {
                 color: #ffffff !important;
                 text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8) !important;
-                -webkit-filter: none !important;
-                /* Evitar que filtros afecten texto */
                 filter: none !important;
-            }
-
-            .info-box.dark-text,
-            .info-box.dark-text strong,
-            .info-box.dark-text h3,
-            .info-box.dark-text p,
-            .info-box.dark-text li {
-                color: #0b0b0b !important;
-                text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3) !important;
-                -webkit-filter: none !important;
-                filter: none !important;
-            }
-
-            .info-box.dark-text::after {
-                background: rgba(255, 255, 255, 0.15) !important;
             }
 
             .colored-rectangle {
@@ -1049,36 +1011,7 @@
                 // Animation delays
                 box.style.animationDelay = `${1 + index * 0.7}s`;
 
-                // Brightness detection
-                const img = new Image();
-                img.src = imgUrl;
-                img.onload = () => {
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
-                    canvas.width = 1;
-                    canvas.height = 1;
-                    ctx.drawImage(img, 0, 0, 1, 1);
-                    const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
-
-                    // Simple brightness formula (HSP)
-                    const brightness = Math.sqrt(
-                        0.299 * (r * r) +
-                        0.587 * (g * g) +
-                        0.114 * (b * b)
-                    );
-
-                    if (brightness > 127.5) {
-                        box.classList.add('dark-text');
-                        box.classList.remove('light-text');
-                    } else {
-                        box.classList.add('light-text');
-                        box.classList.remove('dark-text');
-                    }
-                };
-                // Fallback for local files or CORS issues if any (though here it should work)
-                img.onerror = () => {
-                    box.classList.add('light-text');
-                };
+                // Contrast logic removed as per user request (always white)
             });
         });
     </script>
