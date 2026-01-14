@@ -237,13 +237,35 @@
             animation: fadeInSmoky 0.9s ease forwards;
             padding: 1.6rem 1.8rem;
             border-radius: var(--card-radius);
-            background:
-                radial-gradient(circle at top left, rgba(48, 213, 136, 0.20), transparent 55%),
-                radial-gradient(circle at top right, rgba(0, 115, 255, 0.15), transparent 55%),
-                linear-gradient(145deg, rgba(18, 18, 18, 0.95), rgba(10, 10, 10, 0.98));
-            border: 1px solid var(--card-border);
-            box-shadow: var(--card-shadow);
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
             overflow: hidden;
+            background-size: 105% auto;
+            /* Ligeramente más grande para evitar bordes */
+            background-position: center;
+            z-index: 1;
+        }
+
+        .info-box::before {
+            content: "";
+            position: absolute;
+            inset: -5px;
+            /* Expandir un poco hacia afuera */
+            background-image: inherit;
+            background-size: cover;
+            background-position: center;
+            filter: blur(4px) brightness(0.4);
+            z-index: -1;
+            transform: scale(1.05);
+            /* Zoom inicial para evitar bordes */
+            transition: transform 0.5s ease;
+        }
+
+        .info-box:hover::before {
+            transform: scale(1.1);
         }
 
         .info-box::before {
@@ -259,25 +281,54 @@
             mix-blend-mode: screen;
         }
 
-        /* Ajuste de los delays para las cajas de información */
-        .info-box:nth-of-type(1) {
-            animation-delay: 1.0s;
+        .info-box.light-text,
+        .info-box.light-text strong,
+        .info-box.light-text h3,
+        .info-box.light-text p,
+        .info-box.light-text li {
+            color: #ffffff !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.4);
         }
 
-        .info-box:nth-of-type(2) {
-            animation-delay: 1.8s;
+        .info-box.light-text em {
+            color: #e0e0e0 !important;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
         }
 
-        .info-box:nth-of-type(3) {
-            animation-delay: 2.5s;
+        .info-box.dark-text,
+        .info-box.dark-text strong,
+        .info-box.dark-text h3,
+        .info-box.dark-text p,
+        .info-box.dark-text li {
+            color: #0b0b0b !important;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
         }
 
-        .info-box:nth-of-type(4) {
-            animation-delay: 3.2s;
+        .info-box.dark-text em {
+            color: #222222 !important;
         }
 
-        .info-box:nth-of-type(5) {
-            animation-delay: 3.9s;
+        .info-box.dark-text .colored-rectangle::after {
+            background: #ffffff !important;
+        }
+
+        .info-box.dark-text li::before {
+            background: radial-gradient(circle at 30% 0%, #000000, #30d588);
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Subtle dark overlay for better text contrast on very bright clouds */
+        .info-box::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.2);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .info-box.dark-text::after {
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .colored-rectangle {
@@ -332,7 +383,7 @@
             letter-spacing: 0.02em;
         }
 
-        .info-text > strong {
+        .info-text>strong {
             text-transform: uppercase;
             font-size: 1.05rem;
             letter-spacing: 0.12em;
@@ -539,40 +590,57 @@
                 break-inside: avoid;
                 width: 100% !important;
                 border-radius: 12px !important;
-                background: #000000 !important;
-                border: 1px solid #333 !important;
+                background: rgba(10, 10, 10, 0.6) !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                border: 1px solid rgba(255, 255, 255, 0.1) !important;
                 box-shadow: none !important;
+                position: relative !important;
+                overflow: hidden !important;
+                background-size: cover !important;
+                background-position: center !important;
             }
 
-            .colored-rectangle {
-                flex-shrink: 0 !important;
-                width: 70px !important;
-                height: 70px !important;
-                background: linear-gradient(135deg, #0073ff, #30d588) !important;
-                border-radius: 18% !important;
-                border: 1px solid #333 !important;
+            .info-box::before {
+                content: "" !important;
+                position: absolute !important;
+                inset: 0 !important;
+                background-image: inherit !important;
+                background-size: cover !important;
+                background-position: center !important;
+                filter: blur(4px) brightness(0.4) !important;
+                z-index: -1 !important;
+                display: block !important;
             }
 
-            .colored-rectangle::after {
-                inset: 4px !important;
-                border-radius: 16% !important;
-                background: #000 !important;
+            .info-box::after {
+                content: "" !important;
+                position: absolute !important;
+                inset: 0 !important;
+                z-index: 0 !important;
+                display: block !important;
             }
 
-            .info-text {
-                flex-grow: 1 !important;
-                width: auto !important;
-                text-align: left !important;
-                color: #eee !important;
+            .info-box.light-text,
+            .info-box.light-text strong,
+            .info-box.light-text h3,
+            .info-box.light-text p,
+            .info-box.light-text li {
+                color: #ffffff !important;
+                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8) !important;
             }
 
-            .header-cv h2,
-            .info-text strong,
-            .info-text h3,
-            .info-text ul,
-            .info-text p {
-                text-align: left !important;
-                color: white !important;
+            .info-box.dark-text,
+            .info-box.dark-text strong,
+            .info-box.dark-text h3,
+            .info-box.dark-text p,
+            .info-box.dark-text li {
+                color: #0b0b0b !important;
+                text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3) !important;
+            }
+
+            .info-box.dark-text::after {
+                background: rgba(255, 255, 255, 0.15) !important;
             }
 
             .title-gradient {
@@ -648,7 +716,7 @@
             <div class="contact-item">
                 <a href="https://github.com/rdr-retro" target="_blank">github.com/rdr-retro</a>
             </div>
-           <div class="contact-item">
+            <div class="contact-item">
                 <a href="https://rockyvideoeditor.neocities.org/" target="_blank">
                     Proyecto Personal Green-Blue-Studios
                 </a>
@@ -668,33 +736,41 @@
             <div class="colored-rectangle">
                 <img src="logo2.png" alt="Icono Perfil" />
             </div>
-        <div class="info-text">
-    <strong>Perfil y Objetivo Profesional</strong>
-    <p>
-        Desarrollador de aplicaciones con IA <strong>Frontend / Backend</strong> Llevo utilizando la inteligencia
-        artificial desde antes de que se hiciera viral con la salida de ChatGPT, durante los años
-      2021–2022 utilizaba la plataforma anterior de IA de OpenAI para crear las webs que me solicitaban
-        en el grado.
-        <strong>La primera versión pública de ChatGPT de OpenAI salió el 30 de noviembre de 2022.</strong>
-    </p>
-    <img src="Raúl Díaz.png" alt="Raúl Díaz" style="max-width:90%; height:auto;">
-    <p>
-        Antes de que existiera ChatGPT como interfaz abierta, OpenAI ofrecía acceso a sus modelos mediante una plataforma de prueba basada en API, pero no era pública:
+            <div class="info-text">
+                <strong>Perfil y Objetivo Profesional</strong>
+                <p>
+                    Desarrollador de aplicaciones con IA <strong>Frontend / Backend</strong> Llevo utilizando la
+                    inteligencia
+                    artificial desde antes de que se hiciera viral con la salida de ChatGPT, durante los años
+                    2021–2022 utilizaba la plataforma anterior de IA de OpenAI para crear las webs que me solicitaban
+                    en el grado.
+                    <strong>La primera versión pública de ChatGPT de OpenAI salió el 30 de noviembre de 2022.</strong>
+                </p>
+                <img src="Raúl Díaz.png" alt="Raúl Díaz" style="max-width:90%; height:auto;">
+                <p>
+                    Antes de que existiera ChatGPT como interfaz abierta, OpenAI ofrecía acceso a sus modelos mediante
+                    una plataforma de prueba basada en API, pero no era pública:
 
-Habia que registrarte en OpenAi en la web con una cuenta de gmail y pedir acceso a la API.
+                    Habia que registrarte en OpenAi en la web con una cuenta de gmail y pedir acceso a la API.
 
-Una vez aprobado, podías probar los modelos GPT-3, incluyendo Davinci, Curie, Babbage y Ada.
-       <strong> Me obsesioné con la creación de elementos mediante IA y me considero experto en comunicarme con ella</strong>
-       Actualmente no solo uso chat gpt uso varias desde Gemini hasta Claude incluido. 
-       Ahora estoy muy enfocado en antigrabity y forks similares para desarrollar programas utiles. <strong>Actualmente me encuentro realizando un
-        Editor de vídeo con Python en Frontend y C++17 en el backend.</strong>https://rockyvideoeditor.neocities.org/
-    </p>
-    <p>
-       <strong>Objetivo:</strong> Trabajar para un equipo de desarrollo I+D para construir una aplicacion o servicio.
-       Creacion de una identidad profesional. (Sobre un software).
-       <strong>Me considero una persona muy creativa con hablidades de 3D en Blender. Uso Blender desde 2019</strong> Me gusta darle personalidad a mis programas y darle mi propia identidad. Me parece mal el uso de la ia para las identidades visuales (me causan mucho rechazo)
-    </p>
-</div>
+                    Una vez aprobado, podías probar los modelos GPT-3, incluyendo Davinci, Curie, Babbage y Ada.
+                    <strong> Me obsesioné con la creación de elementos mediante IA y me considero experto en comunicarme
+                        con ella</strong>
+                    Actualmente no solo uso chat gpt uso varias desde Gemini hasta Claude incluido.
+                    Ahora estoy muy enfocado en antigrabity y forks similares para desarrollar programas utiles.
+                    <strong>Actualmente me encuentro realizando un
+                        Editor de vídeo con Python en Frontend y C++17 en el
+                        backend.</strong>https://rockyvideoeditor.neocities.org/
+                </p>
+                <p>
+                    <strong>Objetivo:</strong> Trabajar para un equipo de desarrollo I+D para construir una aplicacion o
+                    servicio.
+                    Creacion de una identidad profesional. (Sobre un software).
+                    <strong>Me considero una persona muy creativa con hablidades de 3D en Blender. Uso Blender desde
+                        2019</strong> Me gusta darle personalidad a mis programas y darle mi propia identidad. Me parece
+                    mal el uso de la ia para las identidades visuales (me causan mucho rechazo)
+                </p>
+            </div>
 
         </div>
 
@@ -702,62 +778,73 @@ Una vez aprobado, podías probar los modelos GPT-3, incluyendo Davinci, Curie, B
         <hr class="white-line" />
 
 
-<div class="info-box">
-    <div class="colored-rectangle">
-        <img src="blender.png" alt="Icono Modelado 3D" />
-    </div>
-    <div class="info-text">
-        <strong>Habilidades de Modelado 3D en Blender</strong>
+        <div class="info-box">
+            <div class="colored-rectangle">
+                <img src="blender.png" alt="Icono Modelado 3D" />
+            </div>
+            <div class="info-text">
+                <strong>Habilidades de Modelado 3D en Blender</strong>
 
-        <h3>Modelado y Texturizado 3D</h3>
+                <h3>Modelado y Texturizado 3D</h3>
 
-        <ul>
-            <li><strong>Modelado 3D avanzado:</strong> Amplia experiencia en la creación de modelos detallados y optimizados en Blender.</li>
-            <li><strong>Texturizado funcional:</strong> Conocimientos sólidos de texturizado; aunque no es mi punto más fuerte, sé desenvolverme y aplicar flujos de trabajo básicos.</li>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/I9qDlGVOIuw?si=L652FWIWx5mzk0Lp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <ul>
+                    <li><strong>Modelado 3D avanzado:</strong> Amplia experiencia en la creación de modelos detallados y
+                        optimizados en Blender.</li>
+                    <li><strong>Texturizado funcional:</strong> Conocimientos sólidos de texturizado; aunque no es mi
+                        punto más fuerte, sé desenvolverme y aplicar flujos de trabajo básicos.</li>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/I9qDlGVOIuw?si=L652FWIWx5mzk0Lp"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-        </ul>
-    </div>
-</div>
+                </ul>
+            </div>
+        </div>
 
-<hr class="white-line" />
+        <hr class="white-line" />
 
 
         <div class="info-box">
             <div class="colored-rectangle">
                 <img src="logo2.png" alt="Icono Perfil" />
             </div>
-        <div class="info-text">
-    <strong>Experiencia demostrable</strong>
-    <p>
-        Rocky Video Editor <a href="https://rockyvideoeditor.neocities.org/">https://rockyvideoeditor.neocities.org/</a><br>
+            <div class="info-text">
+                <strong>Experiencia demostrable</strong>
+                <p>
+                    Rocky Video Editor <a
+                        href="https://rockyvideoeditor.neocities.org/">https://rockyvideoeditor.neocities.org/</a><br>
 
-    </p>
-    <img src="rockyvideo.png" alt="Raúl Díaz" style="max-width:80%; height:auto;">
-    <p>
-        Editor de video opensource Hecho en Python y en c++17 (Funcional pero en desarrollo)
-    </p>
+                </p>
+                <img src="rockyvideo.png" alt="Raúl Díaz" style="max-width:80%; height:auto;">
+                <p>
+                    Editor de video opensource Hecho en Python y en c++17 (Funcional pero en desarrollo)
+                </p>
 
-<p>
-<strong>xmb.py</strong>
-              <a href="https://github.com/rdr-retro/xmb.py">https://github.com/rdr-retro/xmb.pyl</a>
+                <p>
+                    <strong>xmb.py</strong>
+                    <a href="https://github.com/rdr-retro/xmb.py">https://github.com/rdr-retro/xmb.pyl</a>
 
-          <img src="xmb.png" alt="xmb.py" style="max-width:80%; height:auto;"> <br>
-xmb.py es un sistema de menú inspirado en la interfaz XMB de PlayStation, implementado en Python usando Pygame.
- Está diseñado para manejar múltiples categorías, submenús, archivos y reproducción de música con visualización dinámica, con soporte completo de animaciones y layout adaptable a cualquier resolución. 
-</p>
+                    <img src="xmb.png" alt="xmb.py" style="max-width:80%; height:auto;"> <br>
+                    xmb.py es un sistema de menú inspirado en la interfaz XMB de PlayStation, implementado en Python
+                    usando Pygame.
+                    Está diseñado para manejar múltiples categorías, submenús, archivos y reproducción de música con
+                    visualización dinámica, con soporte completo de animaciones y layout adaptable a cualquier
+                    resolución.
+                </p>
 
-    <p>
-      <strong>Super-terminal</strong>
-              <a href="https://github.com/rdr-retro/Super-terminal">https://github.com/rdr-retro/Super-terminal</a>
-<br>
-          <img src="terminal.png" alt="terminal" style="max-width:30%; height:auto;"> <br>
-Creada en c. La aplicación permite ejecutar comandos del sistema y visualizar su salida en una interfaz gráfica, además de mostrar el uso de CPU y RAM en tiempo real.
-    </p>
+                <p>
+                    <strong>Super-terminal</strong>
+                    <a
+                        href="https://github.com/rdr-retro/Super-terminal">https://github.com/rdr-retro/Super-terminal</a>
+                    <br>
+                    <img src="terminal.png" alt="terminal" style="max-width:30%; height:auto;"> <br>
+                    Creada en c. La aplicación permite ejecutar comandos del sistema y visualizar su salida en una
+                    interfaz gráfica, además de mostrar el uso de CPU y RAM en tiempo real.
+                </p>
 
 
 
-</div>
+            </div>
 
         </div>
 
@@ -811,7 +898,7 @@ Creada en c. La aplicación permite ejecutar comandos del sistema y visualizar s
             <div class="info-text">
                 <strong>Educación y Formación</strong>
 
-<h3>Educación Secundaria Obligatoria</h3>
+                <h3>Educación Secundaria Obligatoria</h3>
                 <h3>Grado Medio en Sistemas Microinformáticos y Redes (SMR)</h3>
                 <em>I.E.S. Brianda de Mendoza | Guadalajara, España | Finalizado en 2025</em>
                 <p>
@@ -819,10 +906,10 @@ Creada en c. La aplicación permite ejecutar comandos del sistema y visualizar s
                 </p>
 
 
-                
 
 
-               
+
+
             </div>
         </div>
 
@@ -875,14 +962,63 @@ Creada en c. La aplicación permite ejecutar comandos del sistema y visualizar s
         <hr class="white-line" />
 
 
-        
 
 
 
-        
+
+
 
 
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const boxes = document.querySelectorAll('.info-box');
+            const images = ['3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.png', '10.png'];
+
+            // Shuffle images
+            const shuffledImages = images.sort(() => 0.5 - Math.random());
+
+            boxes.forEach((box, index) => {
+                const imgUrl = shuffledImages[index % shuffledImages.length];
+                box.style.backgroundImage = `url('${imgUrl}')`;
+
+                // Animation delays
+                box.style.animationDelay = `${1 + index * 0.7}s`;
+
+                // Brightness detection
+                const img = new Image();
+                img.src = imgUrl;
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = 1;
+                    canvas.height = 1;
+                    ctx.drawImage(img, 0, 0, 1, 1);
+                    const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
+
+                    // Simple brightness formula (HSP)
+                    const brightness = Math.sqrt(
+                        0.299 * (r * r) +
+                        0.587 * (g * g) +
+                        0.114 * (b * b)
+                    );
+
+                    if (brightness > 127.5) {
+                        box.classList.add('dark-text');
+                        box.classList.remove('light-text');
+                    } else {
+                        box.classList.add('light-text');
+                        box.classList.remove('dark-text');
+                    }
+                };
+                // Fallback for local files or CORS issues if any (though here it should work)
+                img.onerror = () => {
+                    box.classList.add('light-text');
+                };
+            });
+        });
+    </script>
 </body>
 
 
