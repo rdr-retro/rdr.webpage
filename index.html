@@ -8,6 +8,7 @@
     <title>CV Raúl Diaz Gutiérrez - Programación e IA</title>
 
     <link rel="icon" href="logo.png" type="image/png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
         :root {
@@ -54,15 +55,11 @@
             margin-bottom: 0.8rem;
             border-radius: 35px;
             /* Mucho más redondeado */
-            opacity: 0;
-            animation: fadeInSmoky 0.9s ease forwards 0.2s;
         }
 
         .hero p {
             font-size: 1.2rem;
             color: #ddd;
-            opacity: 0;
-            animation: fadeInSmoky 0.9s ease forwards 0.4s;
         }
 
         section {
@@ -99,8 +96,6 @@
             justify-content: center;
             font-size: 2.2rem;
             margin: 0 0 1rem 0;
-            opacity: 0;
-            animation: fadeInSmoky 0.9s ease forwards 0.5s;
             text-align: center;
         }
 
@@ -220,31 +215,9 @@
             margin: 0.8rem auto;
             /* Reducido de 1.5rem */
             background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.9), transparent);
-            opacity: 0;
-            animation: fadeInSmoky 0.8s ease forwards;
         }
 
-        /* Ajuste de los delays para la nueva línea */
-        .white-line:nth-of-type(1) {
-            animation-delay: 0.9s;
-        }
 
-        .white-line:nth-of-type(2) {
-            animation-delay: 1.6s;
-        }
-
-        .white-line:nth-of-type(3) {
-            animation-delay: 2.3s;
-        }
-
-        .white-line:nth-of-type(4) {
-            animation-delay: 3.0s;
-        }
-
-        /* Nuevo delay para la línea extra */
-        .white-line:nth-of-type(5) {
-            animation-delay: 3.7s;
-        }
 
         /* ===========================
            NUEVO DISEÑO INFO-BOX
@@ -260,8 +233,6 @@
             /* Reducido de 1.5rem */
             max-width: var(--max-width);
             text-align: left;
-            opacity: 0;
-            animation: fadeInSmoky 0.9s ease forwards;
             padding: 1.6rem 1.8rem;
             border-radius: var(--card-radius);
             background: rgba(10, 10, 10, 0.6);
@@ -359,14 +330,22 @@
                 #050505;
         }
 
-        .colored-rectangle img {
+        .colored-rectangle img,
+        .colored-rectangle i {
             position: relative;
+            z-index: 1;
+        }
+
+        .colored-rectangle img {
             width: 60%;
             height: 60%;
             object-fit: contain;
             border-radius: 8px;
-            /* Redondeo más visible */
-            z-index: 1;
+        }
+
+        .colored-rectangle i {
+            font-size: 2rem;
+            color: #ffffff;
         }
 
         .info-text {
@@ -446,24 +425,7 @@
             color: #ffffff;
         }
 
-        @keyframes fadeInSmoky {
-            0% {
-                opacity: 0;
-                filter: blur(20px);
-                transform: translateY(20px);
-            }
 
-            70% {
-                opacity: 0.85;
-                filter: blur(5px);
-            }
-
-            100% {
-                opacity: 1;
-                filter: blur(0);
-                transform: translateY(0);
-            }
-        }
 
         @media (max-width: 600px) {
             header#top-header {
@@ -777,7 +739,7 @@
 
         <div class="info-box">
             <div class="colored-rectangle">
-                <img src="logo2.png" alt="Icono Perfil" />
+                <i class="fas fa-address-card"></i>
             </div>
             <div class="info-text">
                 <strong>Perfil y Objetivo Profesional</strong>
@@ -823,7 +785,7 @@
 
         <div class="info-box">
             <div class="colored-rectangle">
-                <img src="blender.png" alt="Icono Modelado 3D" />
+                <i class="fas fa-cube"></i>
             </div>
             <div class="info-text">
                 <strong>Habilidades de Modelado 3D en Blender</strong>
@@ -849,7 +811,7 @@
 
         <div class="info-box">
             <div class="colored-rectangle">
-                <img src="logo2.png" alt="Icono Perfil" />
+                <i class="fas fa-terminal"></i>
             </div>
             <div class="info-text">
                 <strong>Experiencia demostrable</strong>
@@ -897,7 +859,7 @@
 
         <div class="info-box">
             <div class="colored-rectangle">
-                <img src="img4.png" alt="Icono Trabajo" />
+                <i class="fas fa-briefcase"></i>
             </div>
             <div class="info-text">
                 <strong>Experiencia Laboral</strong>
@@ -936,7 +898,7 @@
 
         <div class="info-box">
             <div class="colored-rectangle">
-                <img src="img2.png" alt="Icono Educación" />
+                <i class="fas fa-graduation-cap"></i>
             </div>
             <div class="info-text">
                 <strong>Educación y Formación</strong>
@@ -962,7 +924,7 @@
 
         <div class="info-box">
             <div class="colored-rectangle">
-                <img src="img3.png" alt="Icono Habilidades" />
+                <i class="fas fa-rocket"></i>
             </div>
             <div class="info-text">
                 <strong>Habilidades Clave</strong>
@@ -1021,8 +983,7 @@
                 box.style.backgroundImage = bgValue;
                 box.style.setProperty('--bg-image', bgValue); // Sincronizar con variable CSS
 
-                // Animation delays
-                box.style.animationDelay = `${1 + index * 0.7}s`;
+
 
                 // Contrast logic removed as per user request (always white)
             });
