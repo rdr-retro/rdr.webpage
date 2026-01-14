@@ -32,50 +32,28 @@
             overflow-x: hidden;
         }
 
-        header#top-header {
-            background-color: #1a1a1a;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            opacity: 0;
-            animation: fadeInSmoky 0.9s ease forwards 0.1s;
-        }
 
-        nav a {
-            color: #ccc;
-            margin: 0 1rem;
-            text-decoration: none;
-            font-size: var(--font-small);
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: white;
-        }
-
-        .logo-title {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
 
         .logo-title img {
-            height: 40px;
+            height: 32px;
             width: auto;
+            border-radius: 10px;
+            /* Aumentado */
         }
 
         .hero {
             background: none;
-            padding: 4rem 2rem;
+            padding: 1rem;
             text-align: center;
         }
 
         .hero img {
-            max-width: 300px;
+            max-width: 240px;
             width: 80%;
             height: auto;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
+            border-radius: 35px;
+            /* Mucho más redondeado */
             opacity: 0;
             animation: fadeInSmoky 0.9s ease forwards 0.2s;
         }
@@ -88,7 +66,8 @@
         }
 
         section {
-            padding: 4rem 2rem;
+            padding: 2rem 1.5rem;
+            /* Reducido de 4rem 2rem */
             text-align: center;
             background-color: #000;
         }
@@ -97,29 +76,43 @@
             max-width: 900px;
             margin: 0 auto;
             text-align: left;
-            padding: 2rem;
+            padding: 1.5rem;
+            /* Reducido de 2rem */
+        }
+
+        /* Redondeo global para todas las imágenes del CV */
+        #project-2d img {
+            border-radius: 20px;
+            /* Aumentado */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
         }
 
         /* === NOMBRE + BOTÓN NARANJA CENTRADOS Y UNO DEBAJO DEL OTRO === */
         .header-cv {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 1.5rem;
+            /* Reducido de 3rem */
         }
 
         .header-cv h2 {
+            display: flex;
+            justify-content: center;
             font-size: 2.2rem;
             margin: 0 0 1rem 0;
             opacity: 0;
             animation: fadeInSmoky 0.9s ease forwards 0.5s;
+            text-align: center;
         }
 
         .title-gradient {
-            background: linear-gradient(to right, #30d588, #0073ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            color: transparent;
+            display: inline-block;
+            color: #ffffff;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            text-align: center;
         }
+
+
 
         .dev-badge {
             display: inline-block;
@@ -141,38 +134,58 @@
             box-shadow: 0 6px 15px rgba(255, 152, 0, 0.4);
         }
 
-        .contact-info {
-            text-align: center;
-            font-size: 1.1rem;
-            margin: 2rem auto;
-            max-width: 600px;
-            opacity: 0;
-            animation: fadeInSmoky 0.9s ease forwards 0.7s;
+        .identity-box {
+            margin-top: 1rem;
+        }
+
+        .identity-box .colored-rectangle {
+            width: 120px;
+            height: 120px;
+            border-radius: 35px;
+        }
+
+        .identity-box .colored-rectangle img {
+            border-radius: 30px;
+        }
+
+        .identity-box .info-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .identity-box .name-item {
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .identity-box .dev-badge {
+            margin-top: 0.8rem;
+            width: fit-content;
         }
 
         .contact-item {
-            margin: 0.6rem 0;
-            font-size: 1.05rem;
+            margin: 0;
+            font-size: 1rem;
         }
 
         .contact-item a {
-            color: var(--color-link);
+            color: inherit;
             text-decoration: none;
             font-weight: 600;
-            transition: color 0.3s ease;
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            display: inline-block;
+            transition: opacity 0.3s ease;
+            opacity: 0.9;
         }
 
         .contact-item a:hover {
-            color: var(--color-link-hover);
-            background: rgba(0, 115, 255, 0.1);
+            opacity: 1;
+            text-decoration: underline;
         }
 
         .contact-text {
-            color: #eee;
             font-weight: 500;
+            opacity: 0.9;
         }
 
         .info-text a {
@@ -192,7 +205,8 @@
             border: none;
             height: 2px;
             width: 80%;
-            margin: 3rem auto;
+            margin: 0.8rem auto;
+            /* Reducido de 1.5rem */
             background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.9), transparent);
             opacity: 0;
             animation: fadeInSmoky 0.8s ease forwards;
@@ -230,7 +244,8 @@
             align-items: flex-start;
             justify-content: flex-start;
             gap: 1.5rem;
-            margin: 2.5rem auto;
+            margin: 0.8rem auto;
+            /* Reducido de 1.5rem */
             max-width: var(--max-width);
             text-align: left;
             opacity: 0;
@@ -238,13 +253,13 @@
             padding: 1.6rem 1.8rem;
             border-radius: var(--card-radius);
             background: rgba(10, 10, 10, 0.6);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.8);
             overflow: hidden;
-            background-size: 105% auto;
-            /* Ligeramente más grande para evitar bordes */
+            background-size: 115% auto;
+            /* Aumentado para más zoom */
             background-position: center;
             z-index: 1;
         }
@@ -252,33 +267,24 @@
         .info-box::before {
             content: "";
             position: absolute;
-            inset: -5px;
-            /* Expandir un poco hacia afuera */
+            inset: -15px;
+            /* Más margen para ocultar bordes */
             background-image: inherit;
             background-size: cover;
             background-position: center;
-            filter: blur(4px) brightness(0.4);
+            filter: blur(5px) brightness(0.6);
+            /* Aumentado de 0.4 */
             z-index: -1;
-            transform: scale(1.05);
-            /* Zoom inicial para evitar bordes */
-            transition: transform 0.5s ease;
+            transform: scale(1.15);
+            /* Zoom inicial aumentado */
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
+        /* Efecto de brillo combinado en el hover */
         .info-box:hover::before {
-            transform: scale(1.1);
-        }
-
-        .info-box::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(120deg,
-                    rgba(255, 255, 255, 0.03),
-                    transparent 40%,
-                    transparent 60%,
-                    rgba(255, 255, 255, 0.03));
-            pointer-events: none;
-            mix-blend-mode: screen;
+            transform: scale(1.25);
+            filter: blur(3px) brightness(0.7);
+            /* Aumentado de 0.5 */
         }
 
         .info-box.light-text,
@@ -322,7 +328,8 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.1);
+            /* Reducido de 0.2 */
             z-index: 0;
             pointer-events: none;
         }
@@ -334,10 +341,11 @@
         .colored-rectangle {
             position: relative;
             flex-shrink: 0;
-            width: 72px;
-            height: 72px;
+            width: 60px;
+            height: 60px;
             padding: 2px;
-            border-radius: 22%;
+            border-radius: 16px;
+            /* Aumentado */
             background: conic-gradient(from 210deg,
                     #30d588,
                     #0073ff,
@@ -345,23 +353,28 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 18px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 14px rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+            /* Asegura que el contenido respete el redondeo */
         }
 
         .colored-rectangle::after {
             content: "";
             position: absolute;
             inset: 4px;
-            border-radius: 18%;
+            border-radius: 12px;
+            /* Coincidir con el padre */
             background: radial-gradient(circle at 30% 0%, rgba(255, 255, 255, 0.15), transparent 55%),
                 #050505;
         }
 
         .colored-rectangle img {
             position: relative;
-            width: 58%;
-            height: 58%;
+            width: 60%;
+            height: 60%;
             object-fit: contain;
+            border-radius: 8px;
+            /* Redondeo más visible */
             z-index: 1;
         }
 
@@ -519,6 +532,11 @@
         }
 
         @media print {
+            :root {
+                --font-medium: 0.85rem !important;
+                --font-small: 0.75rem !important;
+                --card-radius: 12px !important;
+            }
 
             /* === RESET TOTAL PARA CONSISTENCIA MULTIPLATAFORMA === */
             * {
@@ -530,7 +548,9 @@
                 opacity: 1 !important;
                 visibility: visible !important;
                 animation: none !important;
+                -webkit-animation: none !important;
                 transition: none !important;
+                transform: none !important;
             }
 
             @page {
@@ -540,15 +560,21 @@
 
             html,
             body {
-                width: 210mm;
-                min-height: 297mm;
-                margin: 0 auto;
+                width: 100% !important;
+                height: auto !important;
+                /* Forzar altura automática */
+                margin: 0 !important;
+                padding: 0 !important;
                 background-color: #000 !important;
                 color: white !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
 
             body {
-                padding: 1.5cm 1.5cm;
+                padding: 0 !important;
+                /* Eliminado padding que creaba hueco */
+                font-size: 0.85rem !important;
             }
 
             section,
@@ -558,65 +584,76 @@
                 padding: 0 !important;
                 margin: 0 !important;
                 text-align: left !important;
+                display: block !important;
+                min-height: auto !important;
             }
 
             .hero,
-            .header-cv {
-                text-align: center !important;
-                width: 100% !important;
-                margin-bottom: 2rem !important;
-            }
-
             .hero img {
-                margin: 0 auto !important;
-                display: block !important;
-                max-width: 200px !important;
+                display: none !important;
+                height: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
             }
 
-            .header-cv h2,
-            .header-cv .title-gradient {
+            .header-cv {
+                display: none !important;
+            }
+
+            .header-cv h2 {
                 text-align: center !important;
-                display: block !important;
                 width: 100% !important;
+                margin: 0.5rem 0 !important;
+                /* Minimizar hueco */
+                display: block !important;
             }
 
             .info-box {
                 display: flex !important;
                 flex-direction: row !important;
                 align-items: flex-start !important;
-                gap: 1.5rem !important;
-                margin: 1.5rem 0 !important;
-                page-break-inside: avoid;
-                break-inside: avoid;
+                gap: 0.8rem !important;
+                margin: 0.1rem 0 !important;
+                /* Espaciado mínimo */
+                page-break-inside: auto !important;
+                break-inside: auto !important;
+                /* Permitir salto si es muy grande */
                 width: 100% !important;
-                border-radius: 12px !important;
-                background: rgba(10, 10, 10, 0.6) !important;
+                border-radius: 10px !important;
+                padding: 0.8rem 1rem !important;
+                /* Más pequeño */
+                background-color: rgba(15, 15, 15, 0.7) !important;
+                background-image: var(--bg-image) !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
                 border: 1px solid rgba(255, 255, 255, 0.1) !important;
                 box-shadow: none !important;
                 position: relative !important;
                 overflow: hidden !important;
-                background-size: cover !important;
+                background-size: 115% auto !important;
                 background-position: center !important;
             }
 
             .info-box::before {
                 content: "" !important;
                 position: absolute !important;
-                inset: 0 !important;
-                background-image: inherit !important;
+                inset: -10px !important;
+                background-image: var(--bg-image) !important;
                 background-size: cover !important;
                 background-position: center !important;
-                filter: blur(4px) brightness(0.4) !important;
+                filter: blur(5px) brightness(0.6) !important;
+                /* Aumentado de 0.4 */
                 z-index: -1 !important;
                 display: block !important;
+                transform: scale(1.15) !important;
             }
 
             .info-box::after {
                 content: "" !important;
                 position: absolute !important;
                 inset: 0 !important;
+                background: rgba(0, 0, 0, 0.1) !important;
+                /* Reducido de 0.2 */
                 z-index: 0 !important;
                 display: block !important;
             }
@@ -628,6 +665,9 @@
             .info-box.light-text li {
                 color: #ffffff !important;
                 text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8) !important;
+                -webkit-filter: none !important;
+                /* Evitar que filtros afecten texto */
+                filter: none !important;
             }
 
             .info-box.dark-text,
@@ -637,30 +677,73 @@
             .info-box.dark-text li {
                 color: #0b0b0b !important;
                 text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3) !important;
+                -webkit-filter: none !important;
+                filter: none !important;
             }
 
             .info-box.dark-text::after {
                 background: rgba(255, 255, 255, 0.15) !important;
             }
 
+            .colored-rectangle {
+                width: 50px !important;
+                height: 50px !important;
+                border-radius: 8px !important;
+            }
+
+            .info-text strong {
+                font-size: 0.95rem !important;
+                margin-bottom: 0.3rem !important;
+            }
+
+            .info-text p {
+                line-height: 1.4 !important;
+            }
+
+            .identity-box {
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: flex-start !important;
+                gap: 0.8rem !important;
+                margin: 0.2rem 0 !important;
+                page-break-inside: avoid;
+            }
+
+            .identity-box .colored-rectangle {
+                width: 70px !important;
+                height: 70px !important;
+                margin-bottom: 0.4rem !important;
+            }
+
+            .identity-box .name-item {
+                font-size: 1.15rem !important;
+                margin-bottom: 0.2rem !important;
+            }
+
+            .identity-box .info-text {
+                gap: 0.1rem !important;
+            }
+
+            .header-cv,
+            .dev-badge {
+                display: none !important;
+            }
+
             .title-gradient {
-                background: linear-gradient(to right, #30d588, #0073ff) !important;
-                -webkit-background-clip: text !important;
-                background-clip: text !important;
-                -webkit-text-fill-color: transparent !important;
-                color: #30d588 !important;
+                display: none !important;
             }
 
             .white-line {
                 width: 100% !important;
-                height: 2px !important;
-                background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.9), transparent) !important;
-                margin: 2rem 0 !important;
-                opacity: 1 !important;
+                height: 1px !important;
+                /* Más fina */
+                background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.6), transparent) !important;
+                margin: 0.1rem 0 !important;
+                /* Espaciado mínimo */
+                opacity: 0.8 !important;
                 border: none !important;
             }
 
-            header#top-header,
             .dev-badge {
                 display: none !important;
             }
@@ -675,56 +758,41 @@
 
 
 <body>
-    <header id="top-header">
-        <div class="logo-title">
-            <img src="logo.png" alt="Logo" />
-            <strong>Raúl Portfolio</strong>
-        </div>
-        <nav>
-            <a href="#">Inicio</a>
-            <a href="#project-2d">Mi CV</a>
-        </nav>
-    </header>
-
-
-    <section class="hero">
-        <img src="logo2.png" alt="Logo Principal" />
-    </section>
-
 
     <section id="project-2d">
-        <div class="header-cv">
-            <h2>
-                <span class="title-gradient">Raúl Díaz Gutiérrez</span>
-            </h2>
-            <button class="dev-badge" onclick="window.print()">
-                Descargar CV (PDF)
-            </button>
-        </div>
-
-
-        <div class="contact-info">
-            <div class="contact-item">
-                <a href="tel:+34649846675">649 84 66 75</a>
+        <div class="info-box identity-box">
+            <div class="colored-rectangle">
+                <img src="logo2.png" alt="Raúl Díaz Logo" />
             </div>
-            <div class="contact-item">
-                <a href="mailto:elerrorrdg@gmail.com">elerrorrdg@gmail.com</a>
-            </div>
-            <div class="contact-item">
-                <span class="contact-text">Malacuera, Guadalajara, España</span>
-            </div>
-            <div class="contact-item">
-                <a href="https://github.com/rdr-retro" target="_blank">github.com/rdr-retro</a>
-            </div>
-            <div class="contact-item">
-                <a href="https://rockyvideoeditor.neocities.org/" target="_blank">
-                    Proyecto Personal Green-Blue-Studios
-                </a>
-            </div>
-            <div class="contact-item">
-                <a href="https://rdr-retro.github.io/Green-Blue-Studios/" target="_blank">
-                    Proyecto Personal Rocky Video Editor
-                </a>
+            <div class="info-text">
+                <div class="contact-item name-item">
+                    Raúl Díaz Gutiérrez
+                </div>
+                <div class="contact-item">
+                    <a href="tel:+34649846675">649 84 66 75</a>
+                </div>
+                <div class="contact-item">
+                    <a href="mailto:elerrorrdg@gmail.com">elerrorrdg@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-text">Malacuera, Guadalajara, España</span>
+                </div>
+                <div class="contact-item">
+                    <a href="https://github.com/rdr-retro" target="_blank">github.com/rdr-retro</a>
+                </div>
+                <div class="contact-item">
+                    <a href="https://rdr-retro.github.io/Green-Blue-Studios/" target="_blank">
+                        Proyecto Personal Green-Blue-Studios
+                    </a>
+                </div>
+                <div class="contact-item">
+                    <a href="https://rockyvideoeditor.neocities.org/" target="_blank">
+                        Proyecto Personal Rocky Video Editor
+                    </a>
+                </div>
+                <button class="dev-badge" onclick="window.print()">
+                    Descargar CV (PDF)
+                </button>
             </div>
         </div>
 
@@ -962,13 +1030,6 @@
         <hr class="white-line" />
 
 
-
-
-
-
-
-
-
     </section>
 
     <script>
@@ -981,7 +1042,9 @@
 
             boxes.forEach((box, index) => {
                 const imgUrl = shuffledImages[index % shuffledImages.length];
-                box.style.backgroundImage = `url('${imgUrl}')`;
+                const bgValue = `url('${imgUrl}')`;
+                box.style.backgroundImage = bgValue;
+                box.style.setProperty('--bg-image', bgValue); // Sincronizar con variable CSS
 
                 // Animation delays
                 box.style.animationDelay = `${1 + index * 0.7}s`;
