@@ -11,210 +11,690 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
+        :root {
+            --max-width: 800px;
+            --font-medium: 1rem;
+            --font-small: 0.9rem;
+            --color-link: #0073ff;
+            --color-link-hover: #30d588;
+
+            /* NUEVAS VARIABLES PARA LAS INFO-BOX */
+            --card-bg: rgba(18, 18, 18, 0.9);
+            --card-border: rgba(255, 255, 255, 0.06);
+            --card-shadow: 0 18px 45px rgba(0, 0, 0, 0.8);
+            --card-radius: 18px;
+        }
+
         body {
-            background-color: #c0c0c0;
-            color: #000000;
-            font-family: "Times New Roman", Times, serif;
-            margin: 20px;
-            cursor: url('https://cur.cursors-4u.net/others/oth-2/oth153.cur'), auto;
+            margin: 0;
+            background-color: #000;
+            color: #bfbfbf;
+            font-family: 'Segoe UI', sans-serif;
+            overflow-x: hidden;
         }
 
-        h1,
-        h2,
-        h3 {
-            color: #000080;
+
+
+        .logo-title img {
+            height: 32px;
+            width: auto;
+            border-radius: 10px;
+            /* Aumentado */
+        }
+
+        .hero {
+            background: none;
+            padding: 1rem;
             text-align: center;
-            text-transform: uppercase;
-            text-decoration: underline;
         }
 
-        .marquee-container {
-            background-color: #0000ff;
+        .hero img {
+            max-width: 240px;
+            width: 80%;
+            height: auto;
+            margin-bottom: 0.8rem;
+            border-radius: 35px;
+            /* Mucho más redondeado */
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #ddd;
+        }
+
+        section {
+            padding: 2rem 1.5rem;
+            /* Reducido de 4rem 2rem */
+            text-align: center;
+            background-color: #000;
+        }
+
+        #project-2d {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+            padding: 1.5rem;
+            /* Reducido de 2rem */
+        }
+
+        /* Redondeo global para todas las imágenes del CV */
+        #project-2d img {
+            border-radius: 20px;
+            /* Aumentado */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        /* === NOMBRE + BOTÓN NARANJA CENTRADOS Y UNO DEBAJO DEL OTRO === */
+        .header-cv {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            /* Reducido de 3rem */
+        }
+
+        .header-cv h2 {
+            display: flex;
+            justify-content: center;
+            font-size: 2.2rem;
+            margin: 0 0 1rem 0;
+            text-align: center;
+        }
+
+        .title-gradient {
+            display: inline-block;
             color: #ffffff;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            text-align: center;
+        }
+
+
+
+        .dev-badge {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.95rem;
             font-weight: bold;
-            padding: 10px;
-            border: 3px ridge #ffffff;
-            margin-bottom: 20px;
+            background-color: #ff9800;
+            color: #000;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255, 152, 0, 0.3);
         }
 
-        .main-table {
-            width: 100%;
-            border: 4px outset #ffffff;
-            background-color: #d0d0d0;
-            padding: 20px;
+        .dev-badge:hover {
+            background-color: #ffb74d;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 152, 0, 0.4);
         }
-
-        .info-box {
-            border: 2px inset #ffffff;
-            padding: 15px;
-            margin-bottom: 20px;
-            box-shadow: 5px 5px 0px #808080;
-        }
-
-        /* Colores retro para las cajas */
-        .info-box:nth-of-type(1) {
-            background-color: #ffcccc;
-        }
-
-        /* Rosa suave */
-        .info-box:nth-of-type(2) {
-            background-color: #ccffcc;
-        }
-
-        /* Verde suave */
-        .info-box:nth-of-type(3) {
-            background-color: #ccccff;
-        }
-
-        /* Azul suave */
-        .info-box:nth-of-type(4) {
-            background-color: #ffffcc;
-        }
-
-        /* Amarillo suave */
-        .info-box:nth-of-type(5) {
-            background-color: #ffccff;
-        }
-
-        /* Magenta suave */
-        .info-box:nth-of-type(6) {
-            background-color: #ccffff;
-        }
-
-        /* Cian suave */
-        .info-box:nth-of-type(7) {
-            background-color: #e0e0e0;
-        }
-
-        /* Gris suave */
 
         .identity-box {
-            display: block;
-            text-align: center;
+            margin-top: 1rem;
+            flex-direction: row-reverse;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .colored-rectangle {
-            border: 5px double #ff0000;
-            padding: 10px;
-            display: inline-block;
-            background-color: #ffff00;
+        .identity-box .colored-rectangle {
+            width: 300px;
+            height: 300px;
+            border-radius: 75px;
+            background: transparent;
+            box-shadow: none;
         }
 
-        .colored-rectangle img {
-            width: 150px;
-            border: 2px solid #000;
+        .identity-box .colored-rectangle::after {
+            display: none;
         }
 
-        .info-text {
-            font-size: 14pt;
+        .identity-box .colored-rectangle img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 30px;
+        }
+
+        .identity-box .info-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .identity-box .name-item {
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .identity-box .dev-badge {
+            margin-top: 0.8rem;
+            width: fit-content;
         }
 
         .contact-item {
-            margin: 5px 0;
+            margin: 0;
+            font-size: 1rem;
         }
 
-        a {
-            color: #0000ff;
+        .contact-item a {
+            color: inherit;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.3s ease;
+            opacity: 0.9;
+        }
+
+        .contact-item a:hover {
+            opacity: 1;
             text-decoration: underline;
         }
 
-        a:visited {
-            color: #800080;
+        .contact-text {
+            font-weight: 500;
+            opacity: 0.9;
         }
 
-        a:hover {
-            color: #ff0000;
-            background-color: #ffff00;
-        }
-
-        .dev-badge {
-            background-color: #ff00ff;
-            color: #ffffff;
-            font-weight: bold;
-            padding: 5px 10px;
-            border: 3px outset #ffffff;
-            cursor: pointer;
+        .info-text a {
+            color: var(--color-link-hover);
             text-decoration: none;
-            display: inline-block;
-            margin-top: 10px;
+            font-weight: 600;
+            border-bottom: 1px dashed var(--color-link-hover);
+            transition: all 0.3s;
         }
 
-        .dev-badge:active {
-            border: 3px inset #ffffff;
+        .info-text a:hover {
+            color: var(--color-link);
+            border-bottom: 1px solid var(--color-link);
         }
 
         .white-line {
-            border: 3px ridge #ffffff;
-            margin: 20px 0;
+            border: none;
+            height: 2px;
+            width: 80%;
+            margin: 0.8rem auto;
+            /* Reducido de 1.5rem */
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.9), transparent);
         }
 
-        .blink {
-            animation: blinker 1s linear infinite;
-            color: #ff0000;
-            font-weight: bold;
+
+
+        /* ===========================
+           NUEVO DISEÑO INFO-BOX
+           =========================== */
+
+        .info-box {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            gap: 1.5rem;
+            margin: 0.8rem auto;
+            /* Reducido de 1.5rem */
+            max-width: var(--max-width);
+            text-align: left;
+            padding: 1.6rem 1.8rem;
+            border-radius: var(--card-radius);
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+            background-size: 115% auto;
+            /* Aumentado para más zoom */
+            background-position: center;
+            z-index: 1;
         }
 
-        @keyframes blinker {
-            50% {
-                opacity: 0;
+        .info-box::before {
+            content: "";
+            position: absolute;
+            inset: -15px;
+            /* Más margen para ocultar bordes */
+            background-image: inherit;
+            background-size: cover;
+            background-position: center;
+            filter: blur(5px) brightness(0.6);
+            /* Aumentado de 0.4 */
+            z-index: -1;
+            transform: scale(1.15);
+            /* Zoom inicial aumentado */
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        /* Efecto de brillo combinado en el hover */
+        .info-box:hover::before {
+            transform: scale(1.25);
+            filter: blur(3px) brightness(0.7);
+            /* Aumentado de 0.5 */
+        }
+
+        .info-box,
+        .info-box strong,
+        .info-box h3,
+        .info-box p,
+        .info-box li,
+        .info-box em {
+            color: #ffffff !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        .info-box.dark-text li::before {
+            background: radial-gradient(circle at 30% 0%, #000000, #30d588);
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Subtle dark overlay for better text contrast on very bright clouds */
+        .info-box::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.1);
+            /* Reducido de 0.2 */
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .info-box.dark-text::after {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .colored-rectangle {
+            position: relative;
+            flex-shrink: 0;
+            width: 60px;
+            height: 60px;
+            padding: 2px;
+            border-radius: 16px;
+            /* Aumentado */
+            background: conic-gradient(from 210deg,
+                    #30d588,
+                    #0073ff,
+                    #30d588);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 14px rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+            /* Asegura que el contenido respete el redondeo */
+        }
+
+        .colored-rectangle::after {
+            content: "";
+            position: absolute;
+            inset: 4px;
+            border-radius: 12px;
+            /* Coincidir con el padre */
+            background: radial-gradient(circle at 30% 0%, rgba(255, 255, 255, 0.15), transparent 55%),
+                #050505;
+        }
+
+        .colored-rectangle img,
+        .colored-rectangle i {
+            position: relative;
+            z-index: 1;
+        }
+
+        .colored-rectangle img {
+            width: 60%;
+            height: 60%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .colored-rectangle i {
+            font-size: 2rem;
+            color: #ffffff;
+        }
+
+        .info-text {
+            position: relative;
+            z-index: 1;
+            flex-grow: 1;
+            font-size: var(--font-medium);
+            color: #eee;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        .info-text strong {
+            display: block;
+            font-size: 1.15rem;
+            margin-bottom: 0.6rem;
+            color: #ffffff;
+            letter-spacing: 0.02em;
+        }
+
+        .info-text>strong {
+            text-transform: uppercase;
+            font-size: 1.05rem;
+            letter-spacing: 0.12em;
+            opacity: 0.92;
+        }
+
+        .info-text h3 {
+            font-size: 1.02rem;
+            margin: 0.8rem 0 0.25rem 0;
+            color: #e3e3e3;
+        }
+
+        .info-text em {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            font-style: normal;
+            opacity: 0.92;
+        }
+
+        .info-text p {
+            margin-top: 0.5rem;
+            margin-bottom: 0.4rem;
+            color: #dddddd;
+        }
+
+        .info-text ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 0.5rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .info-text li {
+            margin-bottom: 0.35rem;
+            padding-left: 1.2em;
+            position: relative;
+            font-size: 0.95rem;
+            color: #d5d5d5;
+        }
+
+        .info-text li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.55em;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 0%, #ffffff, #30d588);
+            box-shadow: 0 0 6px rgba(48, 213, 136, 0.8);
+        }
+
+        .info-text li strong {
+            display: inline;
+            font-size: 0.96rem;
+            color: #ffffff;
+        }
+
+
+
+        @media (max-width: 600px) {
+            header#top-header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1.2rem;
+                gap: 0.6rem;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 0.3rem 0.6rem 0.3rem 0;
+                font-size: 0.95rem;
+            }
+
+            section {
+                padding: 2.5rem 0.5rem;
+            }
+
+            .header-cv h2 {
+                font-size: 1.9rem;
+            }
+
+            .info-box {
+                flex-direction: column;
+                text-align: left;
+                gap: 1rem;
+                padding: 1.3rem 1.2rem;
+            }
+
+            .colored-rectangle {
+                width: 68px;
+                height: 68px;
+                margin-bottom: 0.3rem;
+            }
+
+            .info-text {
+                font-size: 0.95rem;
+            }
+
+            .info-text strong {
+                text-align: left;
+            }
+
+            .info-text h3 {
+                text-align: left;
+            }
+
+            .info-text ul {
+                text-align: left;
+                margin: 0.2rem 0;
+            }
+
+            .white-line {
+                width: 90%;
             }
         }
 
-        .visitor-counter {
-            background-color: #000;
-            color: #0f0;
-            font-family: 'Courier New', Courier, monospace;
-            padding: 5px;
-            border: 2px solid #808080;
-            display: inline-block;
-            margin-top: 20px;
-        }
+        @media print {
+            :root {
+                --font-medium: 0.85rem !important;
+                --font-small: 0.75rem !important;
+                --card-radius: 12px !important;
+            }
 
-        .construction {
-            text-align: center;
-            margin: 20px 0;
-        }
+            /* === RESET TOTAL PARA CONSISTENCIA MULTIPLATAFORMA === */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                box-sizing: border-box !important;
+                text-shadow: none !important;
+                filter: none !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                animation: none !important;
+                -webkit-animation: none !important;
+                transition: none !important;
+                transform: none !important;
+            }
 
-        .construction img {
-            width: 50px;
-        }
+            @page {
+                size: A4;
+                margin: 0;
+            }
 
-        /* Hide modern elements */
-        .fas,
-        .fab,
-        .far {
-            color: #ff4500;
-        }
+            html,
+            body {
+                width: 100% !important;
+                height: auto !important;
+                /* Forzar altura automática */
+                margin: 0 !important;
+                padding: 0 !important;
+                background-color: #000 !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
 
-        img {
-            border: 3px solid #000;
-            margin: 10px;
-        }
+            body {
+                padding: 0 !important;
+                /* Eliminado padding que creaba hueco */
+                font-size: 0.85rem !important;
+            }
 
-        h2 {
-            background-color: #000080;
-            color: #ffffff;
-            padding: 5px;
-            border: 2px outset #ffffff;
-        }
+            section,
+            #project-2d {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                text-align: left !important;
+                display: block !important;
+                min-height: auto !important;
+            }
 
-        .guestbook {
-            border: 4px double #00ff00;
-            background-color: #000;
-            color: #00ff00;
-            padding: 10px;
-            margin-top: 20px;
-            font-family: 'Courier New', Courier, monospace;
-            display: inline-block;
+            .hero,
+            .hero img {
+                display: none !important;
+                height: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .header-cv {
+                display: none !important;
+            }
+
+            .header-cv h2 {
+                text-align: center !important;
+                width: 100% !important;
+                margin: 0.5rem 0 !important;
+                /* Minimizar hueco */
+                display: block !important;
+            }
+
+            .info-box {
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: flex-start !important;
+                gap: 0.8rem !important;
+                margin: 0.1rem 0 !important;
+                /* Espaciado mínimo */
+                page-break-inside: auto !important;
+                break-inside: auto !important;
+                /* Permitir salto si es muy grande */
+                width: 100% !important;
+                border-radius: 10px !important;
+                padding: 0.8rem 1rem !important;
+                /* Más pequeño */
+                background-color: rgba(15, 15, 15, 0.7) !important;
+                background-image: var(--bg-image) !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                border: 1px solid rgba(255, 255, 255, 0.1) !important;
+                box-shadow: none !important;
+                position: relative !important;
+                overflow: hidden !important;
+                background-size: 115% auto !important;
+                background-position: center !important;
+            }
+
+            .info-box::before {
+                content: "" !important;
+                position: absolute !important;
+                inset: -10px !important;
+                background-image: var(--bg-image) !important;
+                background-size: cover !important;
+                background-position: center !important;
+                filter: blur(5px) brightness(0.6) !important;
+                /* Aumentado de 0.4 */
+                z-index: -1 !important;
+                display: block !important;
+                transform: scale(1.15) !important;
+            }
+
+            .info-box::after {
+                content: "" !important;
+                position: absolute !important;
+                inset: 0 !important;
+                background: rgba(0, 0, 0, 0.1) !important;
+                /* Reducido de 0.2 */
+                z-index: 0 !important;
+                display: block !important;
+            }
+
+            .info-box,
+            .info-box strong,
+            .info-box h3,
+            .info-box p,
+            .info-box li {
+                color: #ffffff !important;
+                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8) !important;
+                filter: none !important;
+            }
+
+            .colored-rectangle {
+                width: 50px !important;
+                height: 50px !important;
+                border-radius: 8px !important;
+            }
+
+            .info-text strong {
+                font-size: 0.95rem !important;
+                margin-bottom: 0.3rem !important;
+            }
+
+            .info-text p {
+                line-height: 1.4 !important;
+            }
+
+            .identity-box {
+                display: flex !important;
+                flex-direction: row-reverse !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                gap: 0.8rem !important;
+                margin: 0.2rem 0 !important;
+                page-break-inside: avoid;
+            }
+
+            .identity-box .colored-rectangle {
+                width: 180px !important;
+                height: 180px !important;
+                margin-bottom: 0 !important;
+            }
+
+            .identity-box .name-item {
+                font-size: 1.15rem !important;
+                margin-bottom: 0.2rem !important;
+            }
+
+            .identity-box .info-text {
+                gap: 0.1rem !important;
+            }
+
+            .header-cv,
+            .dev-badge {
+                display: none !important;
+            }
+
+            .title-gradient {
+                display: none !important;
+            }
+
+            .white-line {
+                width: 100% !important;
+                height: 1px !important;
+                /* Más fina */
+                background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.6), transparent) !important;
+                margin: 0.1rem 0 !important;
+                /* Espaciado mínimo */
+                opacity: 0.8 !important;
+                border: none !important;
+            }
+
+            .dev-badge {
+                display: none !important;
+            }
+
+            a {
+                color: #0073ff !important;
+                text-decoration: none !important;
+            }
         }
     </style>
 </head>
 
 
 <body>
-
-
-
 
     <section id="project-2d">
         <div class="info-box identity-box">
@@ -271,6 +751,7 @@
                     en el grado.
                     <strong>La primera versión pública de ChatGPT de OpenAI salió el 30 de noviembre de 2022.</strong>
                 </p>
+                <img src="Raúl Díaz.png" alt="Raúl Díaz" style="max-width:90%; height:auto;">
                 <p>
                     Antes de que existiera ChatGPT como interfaz abierta, OpenAI ofrecía acceso a sus modelos mediante
                     una plataforma de prueba basada en API, pero no era pública:
@@ -339,6 +820,7 @@
                         href="https://rockyvideoeditor.neocities.org/">https://rockyvideoeditor.neocities.org/</a><br>
 
                 </p>
+                <img src="rockyvideo.png" alt="Raúl Díaz" style="max-width:80%; height:auto;">
                 <p>
                     Editor de video opensource Hecho en Python y en c++17 (Funcional pero en desarrollo)
                 </p>
@@ -347,7 +829,7 @@
                     <strong>xmb.py</strong>
                     <a href="https://github.com/rdr-retro/xmb.py">https://github.com/rdr-retro/xmb.pyl</a>
 
-                    <br>
+                    <img src="xmb.png" alt="xmb.py" style="max-width:80%; height:auto;"> <br>
                     xmb.py es un sistema de menú inspirado en la interfaz XMB de PlayStation, implementado en Python
                     usando Pygame.
                     Está diseñado para manejar múltiples categorías, submenús, archivos y reproducción de música con
@@ -360,6 +842,7 @@
                     <a
                         href="https://github.com/rdr-retro/Super-terminal">https://github.com/rdr-retro/Super-terminal</a>
                     <br>
+                    <img src="terminal.png" alt="terminal" style="max-width:30%; height:auto;"> <br>
                     Creada en c. La aplicación permite ejecutar comandos del sistema y visualizar su salida en una
                     interfaz gráfica, además de mostrar el uso de CPU y RAM en tiempo real.
                 </p>
@@ -490,7 +973,24 @@
     </section>
 
     <script>
-        // Javascript de imágenes aleatorias eliminado para mantener colores sólidos
+        document.addEventListener('DOMContentLoaded', () => {
+            const boxes = document.querySelectorAll('.info-box');
+            const images = ['3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.png', '10.png'];
+
+            // Shuffle images
+            const shuffledImages = images.sort(() => 0.5 - Math.random());
+
+            boxes.forEach((box, index) => {
+                const imgUrl = shuffledImages[index % shuffledImages.length];
+                const bgValue = `url('${imgUrl}')`;
+                box.style.backgroundImage = bgValue;
+                box.style.setProperty('--bg-image', bgValue); // Sincronizar con variable CSS
+
+
+
+                // Contrast logic removed as per user request (always white)
+            });
+        });
     </script>
 </body>
 
